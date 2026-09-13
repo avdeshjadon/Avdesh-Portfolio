@@ -370,12 +370,15 @@
 .p3 {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 6;
   color: #fff;
   pointer-events: none;
 }
 
-.isLocked .p3 {
+.isLocked .p3,
+.doors,
+.door,
+.detail {
   pointer-events: auto;
 }
 
@@ -695,13 +698,13 @@
 
 .detail {
   position: absolute;
-  inset: 7svh clamp(20px, 4vw, 76px) 5svh;
-  z-index: 6;
+  inset: 5svh clamp(16px, 3.5vw, 64px) 4svh;
+  z-index: 25;
   visibility: hidden;
   opacity: 0;
   transform: scale(0.32);
   border: 1px solid rgba(255, 80, 50, 0.35);
-  border-radius: 5px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow:
     0 40px 120px -30px rgba(0, 0, 0, 0.75),
@@ -724,6 +727,21 @@
 .detailWho {
   background: #f2efec;
   color: #101010;
+}
+
+.detailWhat {
+  background: #110605;
+  color: #fff;
+  border-color: rgba(255, 75, 45, 0.45);
+}
+
+.detailWhat .attr,
+.detailWhat .eyebrowD {
+  color: #ff523d;
+}
+
+.detailWhat .head {
+  color: #ffffff;
 }
 
 .detailThink {
@@ -771,8 +789,11 @@
 
 .viewCopy {
   align-self: center;
-  padding: 6svh clamp(24px, 4vw, 70px);
+  padding: 4.5svh clamp(20px, 3.5vw, 60px);
   min-width: 0;
+  max-height: 86svh;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .viewMedia {
@@ -813,30 +834,115 @@
   line-height: 1.12;
 }
 
-.attr {
+.roleSub {
   margin: 0 0 1.2em;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #c93527;
 }
 
-.detailThink .attr,
-.detailThink .eyebrowD {
-  color: rgba(255, 235, 228, 0.75);
+.detailThink .roleSub {
+  color: rgba(255, 120, 100, 0.95);
+}
+
+.detailWhat .roleSub {
+  color: rgba(255, 185, 175, 0.95);
 }
 
 .dText {
   margin: 0;
-  max-width: 46ch;
-  font-size: clamp(13px, 1.9svh, 17px);
-  line-height: 1.7;
+  max-width: 52ch;
+  font-size: clamp(13px, 1.8svh, 16px);
+  line-height: 1.65;
+  opacity: 0.9;
+}
+
+.dTextSecondary {
+  margin: 1.2svh 0 0;
+  max-width: 52ch;
+  font-size: clamp(12.5px, 1.7svh, 15px);
+  line-height: 1.6;
   opacity: 0.85;
 }
 
-.detailThink .dText {
+.detailThink .dText,
+.detailThink .dTextSecondary {
   color: #f4efec;
+}
+
+.detailWhat .dText,
+.detailWhat .dTextSecondary {
+  color: #f7edea;
+}
+
+.detailMetaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 16px;
+  margin: 2svh 0 0;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.detailThink .detailMetaGrid,
+.detailWhat .detailMetaGrid {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metaLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.metaVal {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.craftList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 1.8svh 0 0;
+  max-height: 38svh;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;
+}
+
+.craftItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 12px;
+  border-left: 2px solid var(--about-accent);
+}
+
+.craftItem strong {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.craftItem span {
+  font-size: 11.5px;
+  line-height: 1.45;
+  opacity: 0.85;
 }
 
 .tags {

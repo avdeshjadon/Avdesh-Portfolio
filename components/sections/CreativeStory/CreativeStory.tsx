@@ -55,7 +55,7 @@ const DOORS = [
   },
 ] as const;
 
-type DoorId = "who" | "think";
+type DoorId = "who" | "what" | "think";
 
 const S2_RANGE_DESK = 2.4;
 const S2_RANGE_MOBILE = 1.8;
@@ -353,7 +353,7 @@ export default function CreativeStory() {
         c.style.opacity = cornersIn.toFixed(3);
       });
 
-      const locked = pt > 0.985;
+      const locked = pt > 0.65;
       if (!locked) {
         if (abTitle) {
           const te = easeInOut(sub(pt, 0.55, 0.8));
@@ -382,10 +382,11 @@ export default function CreativeStory() {
             b.style.opacity = "";
           });
           if (abFoot) abFoot.style.opacity = "";
-        } else if (lastOpenRef.current) {
-          setOpen(null);
-          lastOpenRef.current = null;
         }
+      }
+      if (lastOpenRef.current && pt < 0.45) {
+        setOpen(null);
+        lastOpenRef.current = null;
       }
 
       const framed = easeInOut(sub(pt, 0.02, 0.17));
@@ -517,10 +518,6 @@ export default function CreativeStory() {
   };
 
   const onDoor = (key: string) => {
-    if (key === "what") {
-      triggerWorks();
-      return;
-    }
     openDoor(key as DoorId);
   };
 
@@ -740,7 +737,11 @@ export default function CreativeStory() {
             <div
               ref={detailRef}
               className={`${styles.detail} ${styles.detailOpen} ${
-                open === "think" ? styles.detailThink : styles.detailWho
+                open === "think"
+                  ? styles.detailThink
+                  : open === "what"
+                  ? styles.detailWhat
+                  : styles.detailWho
               }`}
               role="region"
               aria-label="About details"
@@ -764,6 +765,7 @@ export default function CreativeStory() {
                 </svg>
               </button>
 
+              {/* 01 — WHO I AM */}
               <div
                 className={`${styles.view} ${
                   open === "who" ? styles.viewActive : ""
@@ -772,27 +774,107 @@ export default function CreativeStory() {
               >
                 <div className={styles.viewCopy}>
                   <p className={styles.eyebrowD}>01 — Who I Am</p>
-                  <h3 className={styles.head}>Avdesh</h3>
-                  <p className={styles.dText}>
-                    Aesthetic software developer — building clean code and
-                    digital solutions.
+                  <h3 className={styles.head}>Avdesh Jadon</h3>
+                  <p className={styles.roleSub}>
+                    Full Stack Developer &amp; Software Tester
                   </p>
+                  <p className={styles.dText}>
+                    I am a final-year engineering student dedicated to building scalable, high-performance web applications and rock-solid software systems.
+                  </p>
+                  <p className={styles.dTextSecondary}>
+                    My skill set bridges aesthetic, responsive frontend engineering with reliable backend architecture and comprehensive QA pipelines — from writing clean TypeScript and modern React components to database design and automated end-to-end testing.
+                  </p>
+                  <div className={styles.detailMetaGrid}>
+                    <div className={styles.metaItem}>
+                      <span className={styles.metaLabel}>Status</span>
+                      <span className={styles.metaVal}>Final Year B.Tech (2023–2027)</span>
+                    </div>
+                    <div className={styles.metaItem}>
+                      <span className={styles.metaLabel}>Hometown</span>
+                      <span className={styles.metaVal}>Agra → College, India</span>
+                    </div>
+                    <div className={styles.metaItem}>
+                      <span className={styles.metaLabel}>Core Focus</span>
+                      <span className={styles.metaVal}>Full Stack &amp; Automation QA</span>
+                    </div>
+                    <div className={styles.metaItem}>
+                      <span className={styles.metaLabel}>Problem Solving</span>
+                      <span className={styles.metaVal}>500+ LeetCode &amp; GFG Problems</span>
+                    </div>
+                  </div>
                   <ul className={styles.tags}>
-                    <li>Web</li>
-                    <li>App</li>
-                    <li>Code</li>
+                    <li>Full Stack</li>
+                    <li>Software QA</li>
+                    <li>React &amp; Next.js</li>
+                    <li>Node.js</li>
+                    <li>TypeScript</li>
+                    <li>Java &amp; Spring Boot</li>
                   </ul>
                 </div>
                 <div className={styles.viewMedia}>
                   <img
                     src="/about/hero-portrait.jpg"
-                    alt="Portrait of Avdesh"
+                    alt="Portrait of Avdesh Jadon"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
               </div>
 
+              {/* 02 — WHAT I DO */}
+              <div
+                className={`${styles.view} ${
+                  open === "what" ? styles.viewActive : ""
+                }`}
+                data-ab="what"
+              >
+                <div className={styles.viewCopy}>
+                  <p className={styles.eyebrowD}>02 — What I Do</p>
+                  <h3 className={styles.head}>Craft &amp; Build</h3>
+                  <p className={styles.roleSub}>
+                    Web Systems · API Architecture · Quality Engineering
+                  </p>
+                  <p className={styles.dText}>
+                    I design, build, test, and deploy production-grade software applications from end to end:
+                  </p>
+                  <div className={styles.craftList}>
+                    <div className={styles.craftItem}>
+                      <strong>01. Full Stack Web Applications</strong>
+                      <span>Crafting modern, accessible web apps using Next.js, React, TypeScript, Node.js, and Tailwind CSS with fluid animations and responsive layouts.</span>
+                    </div>
+                    <div className={styles.craftItem}>
+                      <strong>02. Software Testing &amp; Automation QA</strong>
+                      <span>Writing automated E2E tests with Playwright &amp; Jest, designing comprehensive test cases, API contract testing, and performance testing with JMeter.</span>
+                    </div>
+                    <div className={styles.craftItem}>
+                      <strong>03. Backend Architecture &amp; Database Design</strong>
+                      <span>Designing robust RESTful APIs, relational databases (PostgreSQL, MySQL), MongoDB schemas, and secure role-based auth.</span>
+                    </div>
+                    <div className={styles.craftItem}>
+                      <strong>04. DevOps &amp; Production Deployments</strong>
+                      <span>Dockerizing applications, setting up automated CI/CD workflows, and managing 10+ live deployments on AWS EC2, Vercel, and cloud infrastructure.</span>
+                    </div>
+                  </div>
+                  <ul className={styles.tags}>
+                    <li>Next.js</li>
+                    <li>React</li>
+                    <li>Playwright</li>
+                    <li>Jest &amp; JUnit</li>
+                    <li>REST APIs</li>
+                    <li>Docker &amp; AWS</li>
+                  </ul>
+                </div>
+                <div className={styles.viewMedia}>
+                  <img
+                    src="/about/aircraft.jpg"
+                    alt="Craft and Engineering"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+
+              {/* 03 — HOW I THINK */}
               <div
                 className={`${styles.view} ${
                   open === "think" ? styles.viewActive : ""
@@ -802,18 +884,42 @@ export default function CreativeStory() {
                 <div className={styles.viewCopy}>
                   <p className={styles.eyebrowD}>03 — How I Think</p>
                   <h3 className={`${styles.head} ${styles.headQuote}`}>
-                    &ldquo;The grid system is an aid, not a guarantee.&rdquo;
+                    &ldquo;Code is how I think — shipping with reliability is how I aim it.&rdquo;
                   </h3>
-                  <p className={styles.attr}>&mdash; Josef Müller-Brockmann</p>
+                  <p className={styles.roleSub}>Engineering Philosophy &amp; Standards</p>
                   <p className={styles.dText}>
-                    Idea &middot; Build &middot; Develop &middot; Deploy
-                    &middot; Impact.
+                    Every product I build is guided by core engineering principles that guarantee both velocity and resilience:
                   </p>
+                  <div className={styles.craftList}>
+                    <div className={styles.craftItem}>
+                      <strong>1. Effortless User Simplicity</strong>
+                      <span>Great software hides complex edge cases behind intuitive, obvious user interfaces. If an interface feels confusing, the architecture needs refinement.</span>
+                    </div>
+                    <div className={styles.craftItem}>
+                      <strong>2. Reliability Through Testing</strong>
+                      <span>Untested code is broken code waiting to surprise you. Testing is not an afterthought; it is built into the architecture from day one.</span>
+                    </div>
+                    <div className={styles.craftItem}>
+                      <strong>3. Clean, Maintainable Architecture</strong>
+                      <span>Writing modular, self-documenting code with clear boundaries ensures any engineer can step in, understand, and extend the system with confidence.</span>
+                    </div>
+                    <div className={styles.craftItem}>
+                      <strong>4. End-to-End Ownership</strong>
+                      <span>Taking full responsibility for the entire journey — from the initial idea and schema design to automated tests, deployment, and live monitoring.</span>
+                    </div>
+                  </div>
+                  <ul className={styles.tags}>
+                    <li>Reliability First</li>
+                    <li>Clean Code</li>
+                    <li>Test-Driven</li>
+                    <li>End-to-End Ownership</li>
+                    <li>Scalable Systems</li>
+                  </ul>
                 </div>
                 <div className={styles.viewMedia}>
                   <img
                     src="/about/portrait.jpg"
-                    alt="Josef Müller-Brockmann"
+                    alt="Engineering Philosophy"
                     loading="lazy"
                     decoding="async"
                   />
