@@ -40,7 +40,6 @@ export default function Loader() {
 
       const chars = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.char}`));
       const dot = el.querySelector<HTMLElement>(`.${styles.dot}`);
-      const ring = el.querySelector<HTMLElement>(`.${styles.ring}`);
       const tag = el.querySelector<HTMLElement>(`.${styles.tag}`);
       const corners = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.cornerSlot}`));
       const cornerInners = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.cornerInner}`));
@@ -50,12 +49,6 @@ export default function Loader() {
         { yPercent: 118, rotate: 4 },
         { yPercent: 0, rotate: 0, duration: 1, stagger: 0.065, ease: "expo.out" }
       )
-        .fromTo(
-          ring,
-          { autoAlpha: 0, scale: 0.7 },
-          { autoAlpha: 1, scale: 1, rotate: 360, duration: 0.95, ease: "power2.out" },
-          0
-        )
         .fromTo(dot, { scale: 0.15 }, { scale: 1.2, duration: 0.65, ease: "back.out(2.5)" }, 0.9)
         .fromTo(tag, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "expo.out" }, 1.5)
         .fromTo(corners, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, stagger: 0.06 }, 1.7)
@@ -66,7 +59,6 @@ export default function Loader() {
           1.7
         )
         .to(chars, { scale: 1.025, duration: 0.55, ease: "power2.inOut", yoyo: true, repeat: 1 }, 2.35)
-        .to(ring, { autoAlpha: 0, duration: 0.45, ease: "power2.inOut" }, 2.7)
         .to(el, { scale: 1.04, opacity: 0, duration: 1.2, ease: "power3.inOut" }, 3.3);
 
       const now = tl.duration();
@@ -100,7 +92,6 @@ export default function Loader() {
 
   return (
     <div className={`${styles.overlay} av-loader`} ref={rootRef} aria-hidden="true">
-      <span className={styles.ring} />
       <div className={styles.frame}>
         <span className={`${styles.cornerSlot} ${styles.cTL}`}><span className={styles.cornerInner} /></span>
         <span className={`${styles.cornerSlot} ${styles.cTR}`}><span className={styles.cornerInner} /></span>

@@ -12,21 +12,6 @@
   overflow: hidden;
 }
 
-.ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(360px, 76vw);
-  aspect-ratio: 1;
-  margin: calc(min(360px, 76vw) / -2) 0 0 calc(min(360px, 76vw) / -2);
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  border-top-color: var(--accent);
-  border-right-color: rgba(255, 46, 15, 0.3);
-  opacity: 0;
-  pointer-events: none;
-}
-
 .frame {
   position: absolute;
   inset: 26px;
