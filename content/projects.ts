@@ -13,8 +13,6 @@ export type Study = {
   note?: string;
 };
 
-export type StudyFr = Partial<Study>;
-
 export type Cover = {
   bg: string; 
   ink: "light" | "dark";
@@ -42,14 +40,6 @@ export type Project = {
   repo?: string;
   award?: string;
   study: Study;
-
-  fr?: {
-    title?: string;
-    oneLiner?: string;
-    contribution?: string;
-    tags?: string[];
-    study?: StudyFr;
-  };
 };
 
 export const PROJECTS: Project[] = [
@@ -67,61 +57,6 @@ export const PROJECTS: Project[] = [
 
     cover: { bg: "#E9F2FC", ink: "dark", src: "/images/companies/heeding.png", aspect: 1199 / 330 },
     site: { url: "https://www.myheeding.com/en", label: "myheeding.com" },
-    fr: {
-      title: "Heeding — Marketplace de carburants durables",
-      oneLiner: "Construire la marketplace B2B de carburants durables pour la transition énergétique européenne — frontend React/Next.js, API Node.js et des flux de conformité automatisés qui rendent invisible une réglementation lourde.",
-      contribution:
-        "Build full stack — trois parcours acheteurs, un système de composants cohérent, testé de bout en bout.",
-      tags: ["React", "Next.js", "Climate-Tech"],
-      study: {
-        role: "Développeur full stack",
-        timeline: "Mai – oct. 2026 · en cours",
-        context:
-          "Heeding est une plateforme propulsée par l’IA qui relie acheteurs de carburant, producteurs et fournisseurs de matières premières — mise en relation intelligente des offres, traçabilité au lot avec Proof of Sustainability vérifiable, conformité automatisée et reporting CO₂ du puits à la roue, sur six secteurs et trois modes d’achat.",
-        problem:
-          "Acheter du carburant durable conforme, c’est des semaines de paperasse entre FuelEU, ReFuelEU, RED III et TIRUERT — pour trois types d’acheteurs aux parcours totalement différents. Le problème d’ingénierie : rendre la conformité invisible.",
-        process: [
-          {
-            title: "Cartographier le parcours de chaque acheteur",
-            body: "Entretiens et ateliers de segmentation avec transporteurs, fournisseurs de carburant et acheteurs publics ; chacun a eu sa propre carte de décision plutôt qu’un persona moyen.",
-          },
-          {
-            title: "Des fonctionnalités avec un KPI attaché",
-            body: "Chaque flux entre au backlog avec une intention de conversion explicite — ce que l’utilisateur doit décider ici, et comment on le mesure.",
-          },
-          {
-            title: "De l’ingénierie dans un système gouverné",
-            body: "Composants React partagés et modèles typés co-possédés avec le Product Owner, pour que la vélocité ne coûte jamais la cohérence.",
-          },
-          {
-            title: "Mesurer, puis itérer",
-            body: "Tunnels acquisition → activation → rétention instrumentés sous GA4 et revus chaque semaine ; les enseignements repartaient directement dans le backlog.",
-          },
-        ],
-        decisions: [
-          {
-            title: "La conformité se génère, elle ne se demande pas",
-            why: "Les utilisateurs ne remplissent pas de formulaires réglementaires — la plateforme produit les documents FuelEU/RED III/TIRUERT comme le reçu d’un achat normal. La partie la plus effrayante du domaine devient un non-événement.",
-          },
-          {
-            title: "Trois modes d’achat, un seul modèle mental",
-            why: "Spot, Récurrent et Appel d’offres partagent le même squelette comparer-décider-suivre : apprendre une voie les enseigne toutes les trois.",
-          },
-          {
-            title: "Deux minutes d’essai avant tout engagement",
-            why: "Le Diagnostic Flash donne une estimation d’économies et d’émissions sans inscription — la valeur avant l’identité, la séquence de confiance B2B en miniature.",
-          },
-        ],
-        outcomes: [
-          "Points de preuve plateforme : 80 % de temps gagné sur la gestion carburant · 100 % de traçabilité (métriques produit)",
-          "Des parcours bout en bout livrés pour les trois segments d’acheteurs",
-          "Le produit vise plus d’un milliard de tonnes de CO₂ évitées d’ici 2050",
-        ],
-        reflection:
-          "La complexité d’un domaine est un cadeau pour un développeur : quand la réglementation est la friction du concurrent, la clarté devient le produit.",
-        note: "Visuels sélectionnés uniquement — travail client ; parcours complets présentés lors d’un échange portfolio.",
-      },
-    },
     study: {
       role: "Full Stack Developer (Next.js / Node.js)",
       timeline: "May – Oct 2026 · ongoing",
@@ -185,51 +120,6 @@ export const PROJECTS: Project[] = [
 
     cover: { bg: "#F0EBFD", ink: "dark", src: "/images/companies/unbias.png", aspect: 685 / 226 },
     award: "🏆 1st Place",
-    fr: {
-      title: "LockAI — Assistant IA hors-ligne",
-      oneLiner: "Un assistant IA hors-ligne, priorisant la confidentialité, construit de bout en bout en un sprint — trois prototypes fonctionnels, un workflow d’inférence embarqué et un pitch basé sur la démo, lauréat du hackathon.",
-      contribution:
-        "Workflow IA embarqué et trois prototypes fonctionnels — un pitch que le jury pouvait cliquer.",
-      tags: ["TypeScript", "React", "IA embarquée"],
-      study: {
-        role: "Ingénieur full stack — IA",
-        timeline: "Mars 2026 · sprint intensif",
-        context:
-          "UNBIAS Innovation Hackathon, cohorte ALPHA. Un sprint pour construire et défendre une entreprise IA de bout en bout — concept, architecture, produit, pitch.",
-        problem:
-          "Les gens veulent l’aide de l’IA sur leurs informations les plus sensibles — exactement celles qu’ils n’enverraient jamais dans le cloud. Comment construire un assistant dont la confidentialité se *ressent*, au lieu de se proclamer ?",
-        process: [
-          {
-            title: "Le build avant le pitch",
-            body: "Workflow d’inférence embarqué, logique de monétisation et cadre financier à trois ans d’abord — pour que chaque décision technique ait une raison commerciale d’exister.",
-          },
-          {
-            title: "Un modèle d’interaction pour la confiance",
-            body: "Une agentivité offline-first où l’état local est toujours visible : ce qui reste sur l’appareil est le message le plus fort du produit.",
-          },
-          {
-            title: "Trois prototypes, une seule histoire",
-            body: "Site concept, démo de workflow IA et implémentation commerciale — construits en direct, pour que le jury clique au lieu d’imaginer.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Le zéro-cloud comme état visible, pas comme note de bas de page",
-            why: "Les promesses de confidentialité sont du papier peint ; un indicateur permanent d’exécution locale rend la promesse inspectable à tout moment.",
-          },
-          {
-            title: "Un pitch qui démontre",
-            why: "Dérouler l’architecture, le parcours utilisateur et l’économie unitaire en direct à l’écran a transformé une affirmation en preuve.",
-          },
-        ],
-        outcomes: [
-          "🏆 1re place — Sophia Antipolis Innovation Hackathon",
-          "Trois sites prototypes fonctionnels livrés pendant le sprint",
-        ],
-        reflection:
-          "La contrainte est un accélérateur : avec des jours au lieu de mois, seules les décisions qui servent l’histoire survivent.",
-      },
-    },
     study: {
       role: "Full Stack Engineer — AI",
       timeline: "March 2026 · intensive sprint",
@@ -281,51 +171,6 @@ export const PROJECTS: Project[] = [
       "Data pipeline + KPI hierarchy and comparison-first views — pricing data into decisions.",
     coverLabel: "PRICE INTELLIGENCE",
     cover: { bg: "#0E1F38", ink: "light", mark: "KPI" },
-    fr: {
-      title: "Intelligence tarifaire de la chaîne logistique",
-      oneLiner: "Transformer des données complexes en décisions — un tableau de bord d’intelligence tarifaire que les profils non techniques utilisent vraiment, alimenté par des API REST.",
-      contribution:
-        "Pipeline de données + hiérarchie de KPI et vues comparatives — la donnée devient décision.",
-      tags: ["Power BI", "API REST", "Ingénierie de données"],
-      study: {
-        role: "Développeur data & analyste BI",
-        timeline: "2025 · projet portfolio",
-        context:
-          "Un tableau de bord analytique en temps réel qui suit et compare les prix produits entre pays pour soutenir la planification logistique et la stratégie tarifaire — construit sous Power BI sur des API REST.",
-        problem:
-          "La donnée existait ; les décisions non. La comparaison de prix multi-pays vivait dans des tableurs que seul un analyste pouvait aimer — le problème d’ingénierie était de rendre l’intelligence marché lisible pour des planificateurs non techniques.",
-        process: [
-          {
-            title: "La hiérarchie de KPI avant les visuels",
-            body: "Définir ce qu’un planificateur doit savoir en 5 secondes, 30 secondes et 5 minutes — les trois altitudes du tableau de bord — avant de choisir le moindre graphique.",
-          },
-          {
-            title: "Filtrage progressif",
-            body: "Des filtres multi-dimensionnels qui resserrent de la région au produit sans jamais perdre le contexte de comparaison.",
-          },
-          {
-            title: "Des encodages pour balayer, pas pour étudier",
-            body: "Comparaisons en barres alignées et en écarts, jamais en camemberts ; anomalies remontées d’avance plutôt que cherchées.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Des tuiles avant des tableaux",
-            why: "La réponse en 5 secondes vit dans les tuiles de KPI ; la preuve vit en dessous. La plupart des sessions n’ouvrent jamais le tableau — et c’est précisément le cas de succès.",
-          },
-          {
-            title: "La comparaison comme vue par défaut",
-            why: "Personne n’ouvre un outil de prix pour voir un seul prix. Le premier écran répond à « où est-ce moins cher, et de combien ? »",
-          },
-        ],
-        outcomes: [
-          "Un fouillis tarifaire multi-sources devenu des décisions au premier coup d’œil",
-          "Des visualisations interactives utilisables par des gens qui n’écriront jamais une requête",
-        ],
-        reflection:
-          "Le dashboarding est un exercice d’honnêteté : chaque tuile sert une décision ou en cache une.",
-      },
-    },
     study: {
       role: "Data Engineer & BI Developer",
       timeline: "2025 · portfolio project",
@@ -377,43 +222,6 @@ export const PROJECTS: Project[] = [
       "Edge cases validated, verdicts rewritten in human language.",
     coverLabel: "AI TRUST · QA",
     cover: { bg: "#EAF0F8", ink: "dark", src: "/images/companies/oigetit.jpg", aspect: 1 },
-    fr: {
-      title: "Oigetit — Valider la confiance en l’IA",
-      oneLiner: "Rendre expliquable un filtre anti-désinformation — la confiance validée aux frontières du modèle.",
-      contribution:
-        "Cas limites validés, verdicts réécrits en langage humain.",
-      tags: ["IA responsable", "QA", "Validation"],
-      study: {
-        role: "Analyste IA avec humain dans la boucle",
-        timeline: "Janv. – mai 2025 · à distance (Los Gatos, USA)",
-        context:
-          "Oigetit filtre les fausses informations avec un moteur de scoring IA. J’étais dans la boucle — validation des prédictions, chasse aux cas limites, et traduction de la machine pour les humains qu’elle sert.",
-        problem:
-          "Un modèle juste que personne ne comprend est un modèle auquel on ne fait pas confiance. Le travail avait deux faces : rendre l’IA plus juste, et rendre sa justesse lisible.",
-        process: [
-          {
-            title: "Valider aux frontières",
-            body: "Reconnaissance systématique de motifs dans les erreurs de classification — ironie, vérités partielles, blanchiment de sources — réinjectée pour renforcer le pipeline.",
-          },
-          {
-            title: "Traduire le moteur",
-            body: "Réécriture de la façon dont le moteur de vérification s’explique : un langage simplifié, orienté utilisateur, sur les raisons d’un score.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Des explications dans la langue du lecteur",
-            why: "« Confiance : 0,82 » ne convainc personne ; « plusieurs sources indépendantes confirment l’affirmation centrale », si.",
-          },
-        ],
-        outcomes: [
-          "Précision de classification améliorée par l’identification de motifs récurrents",
-          "Contribution aux initiatives d’IA responsable et digne de confiance",
-        ],
-        reflection:
-          "Les produits IA sont des produits de confiance. L’interface entre un modèle et une personne vaut exactement ce que vaut son explication.",
-      },
-    },
     study: {
       role: "Human-in-the-Loop AI Analyst",
       timeline: "Jan – May 2025 · remote (Los Gatos, USA)",
@@ -457,44 +265,6 @@ export const PROJECTS: Project[] = [
       "Template-level fixes across a client portfolio — one fix, hundreds of pages.",
     coverLabel: "GROWTH & CRO",
     cover: { bg: "#FF6A00", ink: "light", mark: "+35%" },
-    fr: {
-      title: "Performance web du portefeuille",
-      oneLiner: "+35 % de croissance organique sur un portefeuille client — des décisions guidées par la mesure.",
-      contribution:
-        "Corrections au niveau des gabarits — une correction, des centaines de pages.",
-      tags: ["CRO", "Analytics", "Web"],
-      study: {
-        role: "SEO & performance web",
-        timeline: "Janv. – avr. 2025 · Site Web & Co, Montpellier",
-        context:
-          "Le portefeuille de sites clients B2B et B2C d’une agence digitale, audité et optimisé avec Google Analytics, Search Console et la recherche de mots-clés.",
-        problem:
-          "De beaux sites que personne ne trouvait, des gabarits qui perdaient du trafic — l’écart entre l’allure des pages et leur performance était invisible pour leurs propriétaires.",
-        process: [
-          {
-            title: "Auditer ce qui se positionne réellement",
-            body: "Audits de performance web et SEO sur tout le portefeuille ; les gabarits les plus fréquentés ont vu leur architecture de métadonnées et leur maillage interne refaits en premier.",
-          },
-          {
-            title: "Corriger au niveau du gabarit",
-            body: "Une correction de gabarit se propage à des centaines de pages — l’effet de levier bat le perfectionnisme page par page.",
-          },
-          {
-            title: "Rapporter pour que le client agisse",
-            body: "Des tableaux de bord mensuels traduisant l’analytics en prochaines actions, pas en graphiques.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Le SEO technique avant le SEO éditorial",
-            why: "Le contenu ne sauve pas un gabarit que les moteurs peinent à analyser ; les fondations d’abord.",
-          },
-        ],
-        outcomes: ["+35 % de trafic organique sur le portefeuille géré"],
-        reflection:
-          "Le travail de croissance m’a donné l’habitude que j’apporte à chaque build : livrer, mesurer, et laisser les chiffres argumenter.",
-      },
-    },
     study: {
       role: "SEO & Web Performance",
       timeline: "Jan – Apr 2025 · Site Web & Co, Montpellier",
@@ -546,46 +316,6 @@ export const PROJECTS: Project[] = [
       focus: "center 26%", 
     },
     repo: "https://github.com/avdeshjadon/AVENGERS-DOOMSDAY-",
-    fr: {
-      title: "Avengers: Doomsday — Cinéma piloté au scroll",
-      oneLiner:
-        "Une expérience web cinématique inspirée de Marvel où le scroll dirige tout — vidéo, 3D et récit sur six sections chorégraphiées.",
-      contribution:
-        "Six scènes chorégraphiées au scroll, un Doom 3D, un scrubbing vidéo exact.",
-      tags: ["Three.js", "GSAP", "Dév créatif"],
-      study: {
-        role: "Développement full stack — solo",
-        timeline: "Juillet 2026",
-        context:
-          "Une expérience cinématique pilotée au scroll, inspirée des trailers Marvel Studios : six sections chorégraphiées, de l’orage d’ouverture à une frise MCU finale, construites comme un concept de fan à visée pédagogique.",
-        problem:
-          "L’énergie d’un trailer sur le web, c’est d’habitude une vidéo en autoplay et de l’espoir. L’expérience : la position de scroll peut-elle diriger tout le film — chaque image, chaque mouvement 3D, chaque panneau — sans aucune navigation classique ?",
-        process: [
-          {
-            title: "Le scroll comme timeline",
-            body: "Scrubbing vidéo image par image synchronisé au scroll, avec un encodage all-intra pour que la recherche de frame soit instantanée dans les deux sens.",
-          },
-          {
-            title: "Une pièce maîtresse procédurale",
-            body: "Un Doctor Doom 3D en React Three Fiber, des cartes de personnages en orbite autour du modèle, et une atmosphère en GLSL — particules, brouillard volumétrique, éclairs.",
-          },
-          {
-            title: "La performance comme fonctionnalité",
-            body: "Une architecture à signaux sans re-render garde React hors de la boucle de rendu ; le scroll pilote directement les uniforms.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Aucun bouton lecture, nulle part",
-            why: "Le scroll du visiteur est la tête de lecture — s’engager sur une seule entrée rend l’expérience lisible instantanément.",
-          },
-        ],
-        outcomes: ["24 étoiles et 7 forks sur GitHub", "Six sections cinématiques, entièrement dirigées au scroll"],
-        reflection:
-          "Ces expériences sous contrainte sont ma salle d’entraînement à l’interaction — le travail produit est là où cette discipline se dépense.",
-        note: "Concept de fan non officiel — sans affiliation avec Marvel.",
-      },
-    },
     study: {
       role: "Full Stack & Engineering — solo",
       timeline: "July 2026",
@@ -638,45 +368,6 @@ export const PROJECTS: Project[] = [
       focus: "center 34%", 
     },
     repo: "https://github.com/avdeshjadon/GoT",
-    fr: {
-      title: "Game of Thrones — Une expérience cinématique",
-      oneLiner:
-        "Un hommage cinématique piloté au scroll qui a trouvé son public — 20,5 K likes, 3 597 commentaires et 7 035 partages sur un reel.",
-      contribution:
-        "Un cinéma au scroll image par image — 20,5 K likes et 7 K partages.",
-      tags: ["Scrubbing vidéo", "GSAP", "Vite"],
-      study: {
-        role: "Développement full stack — solo",
-        timeline: "Juillet 2026",
-        context:
-          "Un site cinématique piloté au scroll : un prologue qui coule vers un héros en parallaxe, des vidéos de chapitres pour Jon Snow et Daenerys, et une atmosphère de particules, de brume et de dragons.",
-        problem:
-          "La vidéo sur le web est passive. L’objectif : un cinéma que l’on conduit — un scrubbing image par image, en avant comme en arrière, au rythme de l’attention du lecteur.",
-        process: [
-          {
-            title: "Un moteur de scrubbing sur canvas",
-            body: "Les vidéos de chapitres sont décodées vers un canvas, avec des assets optimisés par ffmpeg, pour qu’à toute vitesse de scroll on retombe sur une image nette.",
-          },
-          {
-            title: "Des paliers de performance",
-            body: "La détection des capacités de l’appareil sert une atmosphère allégée au matériel modeste ; le mouvement réduit reçoit un chemin calme.",
-          },
-        ],
-        decisions: [
-          {
-            title: "L’atmosphère en couches, jamais aplatie",
-            why: "Brume, braises et dragons vivent en couches séparées au-dessus du film — la scène reste nette à toutes les tailles d’écran.",
-          },
-        ],
-        outcomes: [
-          "20,5 K likes · 3 597 commentaires · 7 035 partages sur le reel de lancement",
-          "4 étoiles sur GitHub",
-        ],
-        reflection:
-          "Le reel m’a plus appris sur l’accroche et le rythme que n’importe quel tableau de bord — le public est le critique honnête.",
-        note: "Concept de fan non officiel — sans affiliation avec les ayants droit.",
-      },
-    },
     study: {
       role: "Full Stack & Engineering — solo",
       timeline: "July 2026",
@@ -722,46 +413,6 @@ export const PROJECTS: Project[] = [
     coverLabel: "BAAHUBALI",
     cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/bahubali-cover.jpg", variant: "photo" },
     repo: "https://github.com/avdeshjadon/Bahubali",
-    fr: {
-      title: "Baahubali — Une légende ne meurt jamais",
-      oneLiner:
-        "Quatre chapitres de cinéma piloté au scroll, avec lumière procédurale et son synthétisé — 56 K vues sur le reel de lancement.",
-      contribution:
-        "Quatre chapitres où le scroll porte l’émotion — 56 K vues en un reel.",
-      tags: ["Next.js", "Web Audio", "GSAP"],
-      study: {
-        role: "Développement full stack — solo",
-        timeline: "Juillet 2026",
-        context:
-          "Un hommage interactif à Baahubali en quatre chapitres — The Hero, The Duel, The Prophecy, The Finale — chacun une scène dirigée au scroll, avec sa propre météo visuelle.",
-        problem:
-          "Le brief que je me suis donné : le scroll doit contrôler l’émotion, pas seulement l’animation — le rythme, la lumière et le son portés par un seul geste.",
-        process: [
-          {
-            title: "L’image sous contrôle du geste",
-            body: "Un contrôle image par image des séquences vidéo, pour que la scène avance exactement au rythme du visiteur.",
-          },
-          {
-            title: "Des effets fabriqués, pas filmés",
-            body: "Éclairs, lumière volumétrique, brume et braises générés procéduralement sur canvas accéléré GPU, par-dessus le film.",
-          },
-          {
-            title: "Un paysage sonore synthétisé",
-            body: "Les ambiances naissent de la Web Audio API — aucune piste audio embarquée, le son est calculé en direct.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Un export 100 % statique",
-            why: "Tout le film tient dans un site statique rendu côté client — aucune infrastructure à entretenir pour une pièce de portfolio.",
-          },
-        ],
-        outcomes: ["56 K vues sur le reel de lancement", "3 étoiles et 2 forks sur GitHub"],
-        reflection:
-          "L’émotion se conçoit : quand le rythme, la lumière et le son suivent la main du visiteur, l’écran cesse d’être un écran.",
-        note: "Hommage de fan non officiel — sans affiliation avec les ayants droit.",
-      },
-    },
     study: {
       role: "Full Stack & Engineering — solo",
       timeline: "July 2026",
@@ -815,42 +466,6 @@ export const PROJECTS: Project[] = [
     },
     repo: "https://github.com/avdeshjadon/Ghost-Rider-",
     site: { url: "https://ghost-rider-orpin.vercel.app", label: "Live site" },
-    fr: {
-      title: "Ghost Rider — Spirit of Vengeance",
-      oneLiner:
-        "Un film surnaturel que l’on touche — six chapitres de cinéma dirigé au scroll, avec un feu infernal procédural en WebGL.",
-      contribution:
-        "Six chapitres, des shaders de feu procédural, une poursuite au scroll.",
-      tags: ["WebGL", "GLSL", "Dév créatif"],
-      study: {
-        role: "Développement full stack — solo",
-        timeline: "Août 2026",
-        context:
-          "Une expérience cinématique en six chapitres : l’Éveil et son feu procédural, une poursuite de 16 secondes dirigée au scroll, une vitrine de moto en 3D, un mur cinématique interactif à colonnes infinies.",
-        problem:
-          "Une bande-annonce se regarde. Celle-ci devait se conduire — le visiteur tient le rythme du film, chapitre après chapitre.",
-        process: [
-          {
-            title: "Le feu écrit en shaders",
-            body: "Le feu infernal et l’atmosphère naissent de shaders de bruit procédural en GLSL — rien n’est pré-rendu, tout réagit.",
-          },
-          {
-            title: "Un encodage pensé pour le scrub",
-            body: "Vidéo H.264 all-intra pour que la recherche d’image soit instantanée, orchestrée par des timelines GSAP.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Des chapitres, pas des sections",
-            why: "Nommer les blocs « Chapitre I, II, III » impose une grammaire narrative — le visiteur lit un film, pas une page.",
-          },
-        ],
-        outcomes: ["Déployé et en ligne sur Vercel", "Six chapitres, du hero au mur d’archives"],
-        reflection:
-          "Le WebGL n’est pas un effet : c’est une matière. Quand la lumière est calculée, la scène respire avec le visiteur.",
-        note: "Concept de fan non officiel — sans affiliation avec les ayants droit.",
-      },
-    },
     study: {
       role: "Full Stack & Engineering — solo",
       timeline: "August 2026",
@@ -899,45 +514,6 @@ export const PROJECTS: Project[] = [
       focus: "center 45%", 
     },
     repo: "https://github.com/avdeshjadon/HABU-",
-    fr: {
-      title: "HABU — Exosquelette des grands fonds",
-      oneLiner:
-        "Une page de lancement pour un exosquelette sous-marin — une intro de jeu AAA croisée avec le storytelling produit d’Apple.",
-      contribution:
-        "Du storytelling produit en un scroll — inspection, specs, empilement.",
-      tags: ["Next.js", "GSAP", "3D & animation"],
-      study: {
-        role: "Développement full stack — solo",
-        timeline: "Juillet 2026",
-        context:
-          "Une page d’atterrissage cinématique, en un seul scroll, pour un exosquelette fictif des grands fonds — entièrement pilotée par la vidéo, avec une section d’inspection produit interactive.",
-        problem:
-          "Les pages produit alignent des caractéristiques. Celle-ci devait faire ressentir l’objet avant de l’expliquer — la fiche technique arrive après l’émotion.",
-        process: [
-          {
-            title: "Une architecture en piles de scènes",
-            body: "Des scènes collantes qui s’empilent en film, pour que les transitions de phase coulent au lieu de se succéder.",
-          },
-          {
-            title: "L’inspection comme moment produit",
-            body: "Un rig de caméra et des panneaux de spécifications laissent le visiteur tourner autour de l’objet à son rythme.",
-          },
-          {
-            title: "Une lecture vidéo au scroll, amortie",
-            body: "Un lissage inertiel sur le scrubbing pour que la vidéo suive la main sans à-coups.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Des hotspots accessibles",
-            why: "Les points chauds de l’interface restent atteignables au clavier et respectent le mouvement réduit — le spectacle n’exclut personne.",
-          },
-        ],
-        outcomes: ["Sept des huit sections prévues terminées", "Un pied de page fonctionnel avec hotspots interactifs"],
-        reflection:
-          "Le storytelling produit, c’est du séquencement : montrer, laisser ressentir, puis seulement expliquer.",
-      },
-    },
     study: {
       role: "Full Stack & Engineering — solo",
       timeline: "July 2026",
@@ -983,45 +559,6 @@ export const PROJECTS: Project[] = [
     coverLabel: "VISTARAIL",
     cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/vistarail-cover.jpg", variant: "photo" },
     repo: "https://github.com/avdeshjadon/vistaRail",
-    fr: {
-      title: "VistaRail — Le train de nuit, imaginé",
-      oneLiner:
-        "Une marque de rail panoramique de luxe conçue de bout en bout — héros vidéo cinématique, interface de verre et un mouvement qui vend une sensation, pas un billet.",
-      contribution:
-        "Une marque ferroviaire de luxe imaginée de bout en bout — verre et parallaxe.",
-      tags: ["Concept de marque", "Next.js", "Framer Motion"],
-      study: {
-        role: "Développement full stack — solo",
-        timeline: "Juillet 2026",
-        context:
-          "Une marque conceptuelle de voyage ferroviaire nocturne — « découvrir la beauté qui s’éveille après le coucher du soleil » — conçue et construite comme une expérience d’atterrissage complète.",
-        problem:
-          "Les sites de voyage vendent des billets ; celui-ci devait vendre une sensation. Chaque élément — la vidéo, le verre, le mouvement — travaille d’abord pour l’atmosphère.",
-        process: [
-          {
-            title: "La vidéo intouchée au centre",
-            body: "Le héros vidéo est diffusé plein cadre, sans recadrage ni ré-encodage — la pièce maîtresse reste exactement telle qu’elle a été créée.",
-          },
-          {
-            title: "Un système d’interface en verre",
-            body: "Composants glassmorphism réutilisables sur Tailwind, avec parallaxe au pointeur et à l’orientation de l’appareil.",
-          },
-          {
-            title: "Le timing centralisé",
-            body: "Toutes les durées et courbes d’animation vivent dans une seule configuration — un endroit unique pour accorder la sensation.",
-          },
-        ],
-        decisions: [
-          {
-            title: "L’accessibilité dès le départ",
-            why: "Mouvement réduit respecté et navigation clavier soignée — l’atmosphère n’est jamais une barrière.",
-          },
-        ],
-        outcomes: ["4 étoiles et 2 forks sur GitHub", "Un système jour/nuit prévu dans l’architecture"],
-        reflection:
-          "Le branding est de l’ingénierie de mouvement au ralenti : la sensation d’une marque, c’est le timing de ses mouvements.",
-      },
-    },
     study: {
       role: "Full Stack & Engineering — solo",
       timeline: "July 2026",
@@ -1068,45 +605,6 @@ export const PROJECTS: Project[] = [
     cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/reverie-cover.jpg", variant: "photo" },
     site: { url: "https://musical-tanuki-680d11.netlify.app", label: "Live site" },
     repo: "https://github.com/avdeshjadon/R-VERIE-A-Waking-Dream",
-    fr: {
-      title: "Rêverie — Un rêve éveillé",
-      oneLiner:
-        "Un concept cinématique original — lumière, immobilité et mouvement éditorial — conçu, construit et en ligne.",
-      contribution:
-        "Un rêve original, en ligne — scroll cinématique, verre, sur le web.",
-      tags: ["Ingénierie créative", "Next.js", "Framer Motion"],
-      study: {
-        role: "Ingénierie créative — solo",
-        timeline: "Juillet 2026",
-        context:
-          "« Là où l’ordinaire devient doré » — une rêverie originale d’une seule page à travers la lumière et l’immobilité : héros, éditorial, récit, galerie, appel.",
-        problem:
-          "Pas de franchise, pas de brief — le concept seul peut-il tenir un scroll sur une page entière ?",
-        process: [
-          {
-            title: "Le film sous le verre",
-            body: "Des arrière-plans vidéo plein écran sous des voiles de verre — la lumière du film traverse chaque composant.",
-          },
-          {
-            title: "Une typographie éditoriale",
-            body: "Cormorant Garamond et Inter auto-hébergées — la voix sérif du rêve, la voix droite du réel.",
-          },
-          {
-            title: "Un mouvement au rythme du souffle",
-            body: "Révélations et parallaxe sur Lenis + Framer Motion, réglées lentes — le calme est la signature.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Statique et léger",
-            why: "Un export entièrement statique, ~155 kB de JS au premier chargement — le rêve n’a pas besoin de serveur.",
-          },
-        ],
-        outcomes: ["Déployé et en ligne sur Netlify", "Le seul concept 100 % original de la série — aucune licence, aucune béquille"],
-        reflection:
-          "Sans propriété intellectuelle sur laquelle s’appuyer, chaque décision est à nu — c’est la pièce qui me ressemble le plus.",
-      },
-    },
     study: {
       role: "Creative Engineering — solo",
       timeline: "July 2026",
@@ -1151,51 +649,6 @@ export const PROJECTS: Project[] = [
       "The human process mapped, the robot work automated away — and inspectable.",
     coverLabel: "AUTOMATION SYSTEM",
     cover: { bg: "#101a12", ink: "light", mark: "FLOW" },
-    fr: {
-      title: "Système d’automatisation supply chain & ventes-marketing",
-      oneLiner: "Automatiser le produit invisible — des workflows de bout en bout qui retirent le travail manuel de tout le tunnel.",
-      contribution:
-        "Processus humain cartographié, travail de robot automatisé — et inspectable.",
-      tags: ["Automatisation", "Systèmes", "n8n"],
-      study: {
-        role: "Ingénieur automatisation & systèmes",
-        timeline: "2025 · projet portfolio",
-        context:
-          "Une automatisation de bout en bout sur les ventes, le marketing et les opérations — pipelines de génération de leads, mises à jour CRM, tableaux de bord de reporting et flux de distribution de contenu, sur n8n, Zapier et des intégrations REST.",
-        problem:
-          "Un tunnel plein de gens compétents faisant un travail de robot : copier des leads, mettre à jour des champs, assembler le même rapport hebdomadaire. Le problème relevait de l’ingénierie de systèmes — où le jugement humain apporte-t-il vraiment de la valeur, et que doit-on faire disparaître ?",
-        process: [
-          {
-            title: "Cartographier d’abord le processus humain",
-            body: "Avant toute automatisation, le workflow existant a été cartographié de bout en bout — chaque passation, temps d’attente et copier-coller identifié comme candidat.",
-          },
-          {
-            title: "Automatiser les passations, garder le jugement",
-            body: "Les flux ont été dessinés autour des points de décision : les machines déplacent l’information entre les décisions ; les humains les prennent.",
-          },
-          {
-            title: "Concevoir les états d’échec",
-            body: "Chaque flux a reçu un état observable et un chemin d’échec compréhensible par un responsable non technique — une automatisation qu’on ne peut pas inspecter est une automatisation à laquelle on ne peut pas se fier.",
-          },
-        ],
-        decisions: [
-          {
-            title: "Invisible jusqu’à la panne — puis bruyant",
-            why: "Le succès, c’est le silence ; les échecs alertent avec du contexte. L’inverse — succès bruyant, échec silencieux — est la façon dont meurent les automatisations.",
-          },
-          {
-            title: "Des flux documentés en schémas, pas en code",
-            why: "Le système ne survit à son auteur que si la personne suivante sait le lire.",
-          },
-        ],
-        outcomes: [
-          "Effort manuel nettement réduit sur l’ensemble du tunnel",
-          "Génération de leads, hygiène CRM, reporting et distribution automatisés et autonomes",
-        ],
-        reflection:
-          "La meilleure interface pour un travail répétitif est l’absence d’interface — mais bien construire ce « rien » demande la même rigueur que construire des écrans.",
-      },
-    },
     study: {
       role: "Automation & Systems Engineer",
       timeline: "2025 · portfolio project",
@@ -1247,45 +700,6 @@ export const PROJECTS: Project[] = [
       "Concept and cinematic build — the quiet frame, not the fight.",
     coverLabel: "SPIDER-MAN",
     cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/spiderman-cover.jpg", variant: "photo" },
-    fr: {
-      title: "Spider-Man — Le pouvoir derrière le masque",
-      oneLiner:
-        "Une expérience cinématique de fan sur la personne sous le costume — pour voir jusqu’où la retenue porte une licence d’action.",
-      contribution:
-        "Concept et build cinématique — le calme, pas le combat.",
-      tags: ["Web cinématique", "Concept", "Visuel"],
-      study: {
-        role: "Ingénierie créative — solo",
-        timeline: "Juin 2026",
-        context:
-          "Une expérience cinématique de fan construite autour d’une seule idée : « le pouvoir derrière le masque » — le masque déchiré, le visage en dessous, l’humain avant le héros.",
-        problem:
-          "Les licences d’action se vendent par le mouvement. L’exercice inverse : est-ce qu’un seul plan fixe, tenu et bien cadré, porte plus loin qu’une séquence de combat ?",
-        process: [
-          {
-            title: "Une image, tenue",
-            body: "Le plan central — regard caméra, masque déchiré — reste immobile ; toute la mise en scène travaille autour de lui plutôt que par-dessus.",
-          },
-          {
-            title: "Une typographie qui chuchote",
-            body: "Un titrage fin, très espacé, posé bas dans le cadre : le texte accompagne l’image au lieu de la concurrencer.",
-          },
-        ],
-        decisions: [
-          {
-            title: "La retenue comme parti pris",
-            why: "Sur une propriété bâtie sur le spectacle, le silence est le choix le plus remarquable — et le plus difficile à tenir.",
-          },
-        ],
-        outcomes: [
-          "Une pièce visuelle qui tient sur une seule idée de mise en scène",
-          "L’exercice de retenue qui a nourri les projets cinématiques suivants",
-        ],
-        reflection:
-          "Savoir ce qu’on retire est une compétence de conception — ce projet ne parle que de ça.",
-        note: "Concept de fan non officiel — sans affiliation avec les ayants droit. Pièce visuelle : aucun dépôt public.",
-      },
-    },
     study: {
       role: "Creative Engineering — solo",
       timeline: "June 2026",

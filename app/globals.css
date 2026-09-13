@@ -71,13 +71,9 @@ img {
   display: block;
 }
 
-html.av-loading body {
-  visibility: hidden;
-  overflow: hidden;
-}
-
-html.av-loading .av-loader {
-  visibility: visible;
+html.av-boot header {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .finalFrame {

@@ -7,9 +7,9 @@ export const PERSON = {
   name: "Avdesh Jadon",
   jobTitle: "Software Developer & Software Tester",
   email: "avdeshjadon.dev@gmail.com",
-  location: "NIT Jalandhar, Punjab, India",
+  location: "Punjab, India",
   hometown: "Agra, India",
-  university: "National Institute of Technology, Jalandhar",
+  university: "Educational Institution",
   passoutYear: "2027",
 
   sameAs: [

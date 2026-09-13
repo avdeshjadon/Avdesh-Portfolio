@@ -7,6 +7,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { sceneScrub } from "@/lib/scene";
 import styles from "./TunnelIntro.module.css";
 import { useLang } from "@/lib/i18n";
+import { getLenis } from "@/lib/lenis";
 
 const TUNNEL_WIDTH = 2;
 const TUNNEL_HEIGHT = 1.8;
@@ -42,7 +43,9 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const zoomWrapRef = useRef<HTMLDivElement>(null);
   const [webglOk, setWebglOk] = useState(true);
+  const [loaderActive, setLoaderActive] = useState(true);
   const { t } = useLang();
 
   useEffect(() => {
@@ -392,6 +395,91 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
     };
     startLoop();
 
+    const getLoaderScale = () => {
+      const w = Math.max(1, frame.clientWidth);
+      const h = Math.max(1, frame.clientHeight);
+      const family = getComputedStyle(document.body).fontFamily || "Inter, sans-serif";
+      let heroSize = h * 0.62;
+      const m = document.createElement("canvas");
+      const ctx = m.getContext("2d");
+      if (ctx) {
+        ctx.font = `900 ${heroSize}px ${family}`;
+        if ("letterSpacing" in ctx) {
+          (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing = "-0.04em";
+        }
+        const measured = ctx.measureText(text).width;
+        heroSize = Math.min(heroSize, (heroSize * (w * 0.94)) / Math.max(1, measured));
+      }
+      const targetLoaderFontSize = Math.max(36, Math.min(76, w * 0.067));
+      const scale = targetLoaderFontSize / Math.max(1, heroSize);
+      return { scale, targetLoaderFontSize };
+    };
+
+    let introTl: gsap.core.Timeline | null = null;
+    const zoomWrap = zoomWrapRef.current;
+
+    if (!reduced && zoomWrap) {
+      document.body.style.overflow = "hidden";
+      getLenis()?.stop();
+
+      const { scale: initialScale, targetLoaderFontSize } = getLoaderScale();
+      gsap.set(zoomWrap, { scale: initialScale, transformOrigin: "center center", autoAlpha: 1 });
+
+      const tag = rootEl.querySelector<HTMLElement>(`.${styles.loaderTag}`);
+      if (tag) {
+        tag.style.top = `calc(50% + ${Math.round(targetLoaderFontSize * 0.65 + 18)}px)`;
+      }
+
+      const navEl = document.querySelector("header");
+      if (navEl) gsap.set(navEl, { autoAlpha: 0 });
+      if (hintEl) gsap.set(hintEl, { autoAlpha: 0, y: 16 });
+      if (progressWrap) gsap.set(progressWrap, { autoAlpha: 0, y: 16 });
+
+      const cornerInners = Array.from(rootEl.querySelectorAll<HTMLElement>(`.${styles.cornerInner}`));
+      const corners = Array.from(rootEl.querySelectorAll<HTMLElement>(`.${styles.cornerSlot}`));
+
+      introTl = gsap.timeline({
+        onComplete: () => {
+          document.body.style.overflow = "";
+          document.documentElement.classList.remove("av-boot");
+          getLenis()?.start();
+          setLoaderActive(false);
+          introTl = null;
+        },
+      });
+
+      introTl
+        .fromTo(cornerInners, { scaleX: 0, scaleY: 0 }, { scaleX: 1, scaleY: 1, duration: 0.55, ease: "expo.out" }, 0.2)
+        .fromTo(corners, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.45, stagger: 0.06 }, 0.2)
+        .fromTo(tag, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "expo.out" }, 0.4)
+        .fromTo(
+          zoomWrap,
+          { autoAlpha: 0, scale: initialScale * 0.8 },
+          { autoAlpha: 1, scale: initialScale, duration: 0.8, ease: "expo.out" },
+          0.1
+        )
+        /* Phase 2: The Continuous Zoom — EXACT SAME SINGLE TEXT zooming to 1.0 */
+        .to(
+          zoomWrap,
+          {
+            scale: 1,
+            duration: 1.5,
+            ease: "power3.inOut",
+          },
+          2.4
+        )
+        .to(tag, { autoAlpha: 0, y: 24, duration: 0.55, ease: "power2.in" }, 2.4)
+        .to(corners, { autoAlpha: 0, duration: 0.5, ease: "power2.in" }, 2.4)
+        .add(() => {
+          document.documentElement.classList.remove("av-boot");
+        }, 3.3)
+        .to(navEl, { autoAlpha: 1, duration: 0.65, ease: "power2.out" }, 3.3)
+        .to([hintEl, progressWrap], { autoAlpha: 1, y: 0, duration: 0.65, ease: "power2.out" }, 3.5);
+    } else {
+      document.documentElement.classList.remove("av-boot");
+      setLoaderActive(false);
+    }
+
     const st = ScrollTrigger.create({
       ...sceneScrub(rootEl),
       scrub: 0.6,
@@ -420,6 +508,9 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
     return () => {
       alive = false;
       stopLoop();
+      introTl?.kill();
+      document.body.style.overflow = "";
+      getLenis()?.start();
       st.kill();
       ro.disconnect();
       frame.removeEventListener("pointermove", onPointerMove);
@@ -443,18 +534,31 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
   return (
     <section className={styles.intro} id="intro" ref={rootRef}>
       <div className={styles.frame} ref={frameRef}>
-        {webglOk ? (
-          <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
-        ) : (
-          <span className={styles.fallback}>{text}</span>
-        )}
+        <div className={styles.zoomWrap} ref={zoomWrapRef}>
+          {webglOk ? (
+            <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
+          ) : (
+            <span className={styles.fallback}>{text}</span>
+          )}
+        </div>
         <h1 className={styles.srOnly}>{text} — Full Stack Developer &amp; Software Tester</h1>
 
         <p className={styles.hint} aria-hidden="true">
           {t("intro.scroll")}
         </p>
 
-        {}
+        {loaderActive && (
+          <div className={styles.loaderUi}>
+            <div className={styles.loaderCorners}>
+              <span className={`${styles.cornerSlot} ${styles.cTL}`}><span className={styles.cornerInner} /></span>
+              <span className={`${styles.cornerSlot} ${styles.cTR}`}><span className={styles.cornerInner} /></span>
+              <span className={`${styles.cornerSlot} ${styles.cBL}`}><span className={styles.cornerInner} /></span>
+              <span className={`${styles.cornerSlot} ${styles.cBR}`}><span className={styles.cornerInner} /></span>
+            </div>
+            <p className={styles.loaderTag}>Software Developer &amp; Software Tester</p>
+          </div>
+        )}
+
         <div className={styles.progress} aria-hidden="true">
           <span className={styles.stageNow}>01</span>
           <span className={styles.progLine}>

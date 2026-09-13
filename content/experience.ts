@@ -1,6 +1,5 @@
 /* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 
-
 export type Role = {
   company: string;
   role: string;
@@ -11,19 +10,14 @@ export type Role = {
   achievements: string[];
   outcome: string;
   skills: string[];
-
   color: string;
   fg: "light" | "dark";
-
   logo?: {
     src: string;
     variant: "tile" | "plate";
     aspect: number;
-
     placement?: "right" | "below";
   };
-
-  fr?: { role?: string; summary?: string; outcome?: string; achievements?: string[] };
 };
 
 export const ROLES: Role[] = [
@@ -44,23 +38,11 @@ export const ROLES: Role[] = [
     skills: ["React", "Next.js", "TypeScript", "Node.js", "Jest", "Playwright"],
     color: "#0072E3",
     fg: "light",
-
     logo: {
       src: "/images/companies/heeding.png",
       variant: "plate",
       aspect: 1199 / 330,
       placement: "right",
-    },
-    fr: {
-      role: "Développeur full stack",
-      summary:
-        "Construction de la marketplace de carburants durables de bout en bout — interface React/Next.js, API Node.js et les tests derrière les parcours de conformité, traçabilité et tarification.",
-      outcome: "Produit visant 1 Md+ de tonnes de CO₂ évitées d’ici 2050",
-      achievements: [
-        "Interface de la marketplace développée en React/Next.js — parcours des transporteurs, fournisseurs et acheteurs publics, chacun lié à un KPI de conversion",
-        "API TypeScript/Node.js et pipelines de données pour la traçabilité des lots, les Proof of Sustainability et les documents de conformité automatisés",
-        "Tests unitaires et de bout en bout (Jest, Playwright) ; tunnels GA4 instrumentés nourrissant le backlog chaque semaine",
-      ],
     },
   },
   {
@@ -80,23 +62,11 @@ export const ROLES: Role[] = [
     skills: ["TypeScript", "React", "On-device AI", "Prototyping", "HTML/CSS"],
     color: "#6D3BF5",
     fg: "light",
-
     logo: {
       src: "/images/companies/unbias.png",
       variant: "plate",
       aspect: 685 / 226,
       placement: "below",
-    },
-    fr: {
-      role: "Ingénieur full stack — IA (hackathon)",
-      summary:
-        "Assistant IA hors-ligne, priorisant la confidentialité, construit de bout en bout en un sprint — workflow d’inférence embarqué, trois prototypes fonctionnels et un pitch basé sur la démo.",
-      outcome: "🏆 1re place — LockAI, IA sécurisée hors-ligne",
-      achievements: [
-        "Workflow d’inférence embarqué conçu et construit — aucune dépendance au cloud",
-        "Trois sites prototypes fonctionnels démontrant le concept, le workflow IA et le cadre commercial",
-        "Architecture, parcours utilisateur et économie unitaire présentés en direct au jury",
-      ],
     },
   },
   {
@@ -115,18 +85,7 @@ export const ROLES: Role[] = [
     skills: ["Process Mapping", "Power BI", "Data Modelling", "Stakeholders"],
     color: "#FFFFFF",
     fg: "dark",
-
     logo: { src: "/images/companies/vraise.jpg", variant: "tile", aspect: 1 },
-    fr: {
-      role: "Analyste données & processus",
-      summary:
-        "Cartographie des flux logistiques entre les opérations, la finance, l’IT et les partenaires 3PL externes ; modélisation des données de processus et identification des inefficacités.",
-      outcome: "+12 % d’efficacité sur le flux logistique de bout en bout",
-      achievements: [
-        "Cartographie des processus, analyse des écarts et des causes racines pour révéler les inefficacités",
-        "Tableaux de bord du comité de pilotage construits sous Power BI, rendant la santé opérationnelle lisible d’un coup d’œil",
-      ],
-    },
   },
   {
     company: "Oigetit.ai",
@@ -144,18 +103,7 @@ export const ROLES: Role[] = [
     skills: ["Test Design", "Data Validation", "Responsible AI", "Regression Testing"],
     color: "#FF2E0F",
     fg: "light",
-
     logo: { src: "/images/companies/oigetit.jpg", variant: "tile", aspect: 1 },
-    fr: {
-      role: "Analyste QA & validation de données",
-      summary:
-        "Validation des classifications d’un filtre anti-désinformation, chasse aux cas limites dans le pipeline et rédaction de tests et d’explications destinées aux utilisateurs pour ses verdicts.",
-      outcome: "Précision de classification de l’IA améliorée",
-      achievements: [
-        "Reconnaissance de motifs, validation des données et identification des cas limites dans le pipeline IA",
-        "Conception de contrôles de validation et réécriture des verdicts en langage simplifié, orienté utilisateur",
-      ],
-    },
   },
   {
     company: "Site Web & Co",
@@ -173,22 +121,12 @@ export const ROLES: Role[] = [
     skills: ["Analytics", "Web Performance", "SEO", "Technical SEO"],
     color: "#FF6A00",
     fg: "light",
-    fr: {
-      role: "Développeur web — SEO & performance",
-      summary:
-        "Audit et optimisation d’expériences web sur un portefeuille de clients B2B/B2C — des correctifs de code au niveau des gabarits, guidés par la mesure.",
-      outcome: "+35 % de trafic organique sur le portefeuille",
-      achievements: [
-        "SEO technique et on-page ; refonte de l’architecture des métadonnées et du maillage interne des gabarits les plus consultés",
-        "Tableaux de bord de performance et recommandations de croissance pour les clients",
-      ],
-    },
   },
   {
     company: "Sage Finance",
     role: "Operations & Business Development Lead",
     type: "Full-time",
-    location: "Telangana, India",
+    location: "India",
     period: "Sep 2022 – Aug 2024",
     summary:
       "Owned sales strategy and client acquisition for a financial-consulting practice — where my instincts about customers were forged.",
@@ -200,27 +138,16 @@ export const ROLES: Role[] = [
     skills: ["Strategy", "Segmentation", "Pipeline", "Leadership"],
     color: "#FFB200",
     fg: "dark",
-
     logo: { src: "/images/companies/sage.jpg", variant: "tile", aspect: 1 },
-    fr: {
-      role: "Responsable opérations & développement commercial",
-      summary:
-        "Pilotage de la stratégie commerciale et de l’acquisition client d’un cabinet de conseil financier — là où s’est forgé mon instinct client.",
-      outcome: "20 000 $+ de ventes en une semaine → promu responsable marketing",
-      achievements: [
-        "Création du playbook inbound-to-close adopté par toute l’équipe commerciale",
-        "Analyse de marché, segmentation client et gestion du pipeline face aux KPI suivis",
-      ],
-    },
   },
   {
     company: "Tutorac",
     role: "Business Development Executive",
     type: "Full-time",
-    location: "Telangana, India",
+    location: "India",
     period: "Nov 2021 – Aug 2022",
     summary:
-      "Go-to-market and retention analysis for a subscription e-learning platform across the South-Indian market.",
+      "Go-to-market and retention analysis for a subscription e-learning platform across the Indian market.",
     achievements: [
       "Analysed subscription trends and customer feedback to support retention",
       "Expanded the client portfolio through outbound and partnership channels",
@@ -229,17 +156,6 @@ export const ROLES: Role[] = [
     skills: ["Go-to-Market", "Growth", "Retention"],
     color: "#171429",
     fg: "light",
-
     logo: { src: "/images/companies/tutorac.jpg", variant: "tile", aspect: 1 },
-    fr: {
-      role: "Chargé de développement commercial",
-      summary:
-        "Go-to-market et analyse de rétention pour une plateforme d’e-learning par abonnement sur le marché sud-indien.",
-      outcome: "50 000 $+ de ventes d’abonnements en un mois",
-      achievements: [
-        "Analyse des tendances d’abonnement et des retours clients pour soutenir la rétention",
-        "Élargissement du portefeuille clients via des canaux outbound et partenariats",
-      ],
-    },
   },
 ];

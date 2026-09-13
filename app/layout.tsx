@@ -32,7 +32,7 @@ const anton = Anton({
 });
 
 const DESCRIPTION =
-  "Software Developer & Software Tester at NIT Jalandhar — building full-stack web apps, automation and end-to-end QA with React, Next.js, Node and TypeScript.";
+  "Software Developer & Software Tester — building full-stack web apps, automation and end-to-end QA with React, Next.js, Node and TypeScript.";
 
 const IMAGE = {
   url: `${SITE_URL}/about/hero-portrait.jpg`,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     "Software Developer",
     "Software Tester",
     "Full Stack Developer",
-    "NIT Jalandhar",
+    "College",
     "Agra",
     "QA",
     "React",
@@ -87,7 +87,7 @@ const personJsonLd = {
   email: `mailto:${PERSON.email}`,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "NIT Jalandhar, Punjab",
+    addressLocality: "Punjab, India",
     addressCountry: "IN",
   },
   alumniOf: {
@@ -113,10 +113,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`av-loading ${inter.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable}`}
+      className={`av-boot ${inter.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable}`}
     >
       <body>
-        <Loader />
         <LanguageProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </LanguageProvider>

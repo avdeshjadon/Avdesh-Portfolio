@@ -1,6 +1,5 @@
 /* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 
-
 export type Chapter = {
   id: string;
   year: string;
@@ -8,112 +7,56 @@ export type Chapter = {
   place: string;
   story: string;
   bridge: string;
-  fr?: { title?: string; place?: string; story?: string; bridge?: string };
 };
 
 export const CHAPTERS: Chapter[] = [
   {
     id: "roots",
-    year: "2021",
-    title: "Roots",
-    place: "Telangana, India",
-    story:
-      "Where the story starts. Southern India — the fixed point everything after it gets measured against: seven roles, two countries, and one deliberate change of craft.",
-    bridge: "It started with a sales target, not a stack.",
-    fr: {
-      title: "Racines",
-      place: "Telangana, Inde",
-      story:
-        "Là où l’histoire commence. Le sud de l’Inde — le point fixe auquel tout se mesure ensuite : sept postes, deux pays, et un changement de métier assumé.",
-      bridge: "Cela a commencé par un objectif de vente, pas par une stack.",
-    },
-  },
-  {
-    id: "customers",
-    year: "2022",
-    title: "Customers first, code much later",
-    place: "Tutorac → Sage Finance · Telangana",
-    story:
-      "Business development for a subscription e-learning platform: reading why people renewed, why they left, and what actually moved a portfolio. $50K+ in subscriptions in a single month. By September I had moved to Sage Finance.",
-    bridge:
-      "Two years of asking customers questions before I ever wrote a feature — still the part of my process I trust most.",
-    fr: {
-      title: "Les clients d’abord, le code bien plus tard",
-      place: "Tutorac → Sage Finance · Telangana",
-      story:
-        "Développement commercial pour une plateforme d’e-learning par abonnement : comprendre pourquoi on renouvelle, pourquoi on part, ce qui fait vraiment bouger un portefeuille. Plus de 50 000 $ d’abonnements en un mois. En septembre, je rejoignais Sage Finance.",
-      bridge:
-        "Deux ans à interroger des clients avant d’écrire la moindre fonctionnalité — c’est resté la partie de mon processus en laquelle j’ai le plus confiance.",
-    },
-  },
-  {
-    id: "playbook",
     year: "2023",
-    title: "Writing the playbook",
-    place: "Sage Finance · Telangana, India",
+    title: "Roots & The First Spark",
+    place: "Agra, India",
     story:
-      "A full year owning sales strategy and client acquisition: market analysis, segmentation, pipeline against tracked KPIs. I wrote the inbound-to-close playbook the wider sales team adopted, and a $20K+ week turned into a promotion to Marketing Team Lead.",
-    bridge:
-      "That playbook was the first time I designed a system instead of working inside one. I wanted to learn how to build them properly.",
-    fr: {
-      title: "Écrire le playbook",
-      place: "Sage Finance · Telangana, Inde",
-      story:
-        "Une année entière à piloter la stratégie commerciale et l’acquisition client : analyse de marché, segmentation, pipeline face aux KPI suivis. J’ai écrit le playbook inbound-to-close adopté par toute l’équipe, et une semaine à plus de 20 000 $ est devenue une promotion au marketing.",
-      bridge:
-        "Ce playbook a été la première fois que je concevais un système au lieu de travailler dedans. Restait à apprendre à les construire.",
-    },
+      "Where the journey began. Growing up in Agra with a relentless curiosity about how computers and digital systems function beneath the surface. Leaving for college wasn't just about an engineering degree — it was a deliberate choice to learn how to write software, solve logic puzzles, and build tools from scratch.",
+    bridge: "Every developer starts with curiosity and an empty editor.",
   },
   {
-    id: "france",
+    id: "foundations",
+    year: "2023",
+    title: "First Code, Clones & Browser Tools",
+    place: "College Campus",
+    story:
+      "Stepping onto campus and diving deep into HTML5, CSS3, and JavaScript. To master layout mechanics and responsive UI, I built pixel-accurate clones of Spotify and Twitter. Alongside, I built Webin — a custom Chrome productivity extension that overlays a smart bookmark interface across any webpage with customizable keyboard shortcuts.",
+    bridge:
+      "Cloning taught me visual hierarchy. Building browser tools taught me how users actually interact.",
+  },
+  {
+    id: "logic-tools",
     year: "2024",
-    title: "Starting over, in French",
-    place: "Montpellier Business School · France",
+    title: "Logic, State & Algorithmic Foundations",
+    place: "College",
     story:
-      "August closed the India chapter. September opened an MSc in International Business at Montpellier Business School — new country, new language, and the formal training my instincts had been running without.",
-    bridge: "Business school handed me the vocabulary. The next year handed me the craft.",
-    fr: {
-      title: "Tout recommencer, en français",
-      place: "Montpellier Business School · France",
-      story:
-        "Août a refermé le chapitre indien. Septembre a ouvert un MSc International Business à Montpellier Business School — nouveau pays, nouvelle langue, et la formation qui manquait à des intuitions déjà en marche.",
-      bridge: "L’école m’a donné le vocabulaire. L’année suivante m’a donné le métier.",
-    },
+      "Moving beyond static layouts to state machines and algorithmic problem solving. Built interactive web tools including a comprehensive Calculator while strengthening core CS fundamentals — Java, OOP, DBMS, Operating Systems, Computer Networks, and solving 500+ problems across LeetCode and GeeksforGeeks.",
+    bridge:
+      "Code stopped being just syntax and became about thinking in edge cases, efficiency, and clean structure.",
   },
   {
-    id: "three-rooms",
+    id: "libranova",
     year: "2025",
-    title: "Three rooms, one question",
-    place: "Montpellier · Los Gatos (remote) · Paris",
+    title: "Engineering Systems — LibraNova LMS",
+    place: "College",
     story:
-      "Three roles in one year. Web performance and SEO at Site Web & Co — 35% organic growth, won by fixing templates rather than pages. Human-in-the-loop AI at Oigetit — validating a misinformation engine and teaching it to explain itself. Process and data analysis at V Raise in Paris — 12% efficiency across logistics workflows.",
+      "Stepping up to full-stack system architecture with LibraNova LMS — a complete Library Management System. Designed normalized relational database schemas, role-based authentication (Admin vs. Student), catalog search, book issue/return workflows, automated fine tracking, and end-to-end integration tests to guarantee reliability.",
     bridge:
-      "Measurement, trust and systems: three different rooms, all asking how you make something complex feel obvious. That question has a job title.",
-    fr: {
-      title: "Trois terrains, une seule question",
-      place: "Montpellier · Los Gatos (à distance) · Paris",
-      story:
-        "Trois postes en un an. Performance web et SEO chez Site Web & Co — +35 % de trafic organique, gagnés en corrigeant les gabarits plutôt que les pages. IA « human-in-the-loop » chez Oigetit — valider un moteur anti-désinformation et lui apprendre à s’expliquer. Analyse de processus et de données chez V Raise à Paris — +12 % d’efficacité sur les flux logistiques.",
-      bridge:
-        "Mesure, confiance, systèmes : trois terrains différents, une même question — comment rendre le complexe évident ? Cette question a un intitulé de poste.",
-    },
+      "Building full-stack taught me that good software is defined by its tests and database integrity as much as its UI.",
   },
   {
-    id: "product",
+    id: "dragolink",
     year: "2026",
-    title: "The job it was heading toward",
-    place: "Sophia Antipolis, France",
+    title: "Production Scale — DragoLink",
+    place: "College",
     story:
-      "March: first place at the UNBIAS hackathon with LockAI, a privacy-first offline AI assistant — three working prototypes, an on-device AI workflow and a demo-first pitch in one sprint. May: I joined Heeding as a full stack developer, building the sustainable-fuel marketplace aimed at a billion tonnes of avoided CO₂.",
+      "Final-year capstone engineering: architecting DragoLink — a modern link management and analytics platform. Engineered dynamic UTM routing, click-stream telemetry, device/geo analytics, and URL redirection pipelines backed by automated test suites and cloud deployment.",
     bridge:
-      "Selling taught me customers. Analysis taught me systems. Engineering is where the two finally do the same job.",
-    fr: {
-      title: "Le métier vers lequel tout allait",
-      place: "Sophia Antipolis, France",
-      story:
-        "Mars : première place au hackathon UNBIAS avec LockAI, un assistant IA hors-ligne axé confidentialité — trois prototypes fonctionnels, un workflow IA embarqué et un pitch basé sur la démo en un sprint. Mai : je rejoignais Heeding comme développeur full stack, pour construire la marketplace de carburants durables visant un milliard de tonnes de CO₂ évitées.",
-      bridge:
-        "La vente m’a appris les clients. L’analyse m’a appris les systèmes. L’ingénierie est l’endroit où les deux font enfin le même travail.",
-    },
+      "From a curious student in Agra to an engineer building scalable, tested software ready for production.",
   },
 ];
