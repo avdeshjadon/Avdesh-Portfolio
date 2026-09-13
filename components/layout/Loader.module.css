@@ -92,7 +92,7 @@
   gap: 1px;
   font-size: clamp(36px, 6.7vw, 76px);
   font-weight: 900;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   line-height: 1.15;
   color: var(--ink);
   user-select: none;

@@ -52,7 +52,21 @@ export default function Loader() {
         if (!name) return 6;
         const fs = parseFloat(getComputedStyle(name).fontSize);
         if (!fs) return 6;
-        return (window.innerHeight * 0.62) / fs;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const family = getComputedStyle(document.body).fontFamily;
+        let target = vh * 0.62;
+        const ctx = document.createElement("canvas").getContext("2d");
+        if (ctx) {
+          ctx.font = `900 ${target}px ${family}`;
+          if ("letterSpacing" in ctx) {
+            (ctx as CanvasRenderingContext2D & { letterSpacing: string }).letterSpacing =
+              "-0.04em";
+          }
+          const measured = ctx.measureText("AVDESH").width;
+          if (measured > 0) target = Math.min(target, (target * (vw * 0.94)) / measured);
+        }
+        return target / fs;
       })();
 
       tl.fromTo(
@@ -69,15 +83,17 @@ export default function Loader() {
           { scaleX: 1, scaleY: 1, duration: 0.5, ease: "expo.out" },
           1.7
         )
+        .to(dot, { autoAlpha: 0, duration: 0.4 }, 2.9)
         .to(
           name,
-          { scale: zoomScale, autoAlpha: 0, duration: 1.4, ease: "power2.inOut" },
+          { scale: zoomScale, duration: 0.9, ease: "power2.inOut" },
           2.9
         )
         .to(tag, { autoAlpha: 0, y: -18, duration: 0.7, ease: "power2.in" }, 2.9)
         .to(corners, { autoAlpha: 0, duration: 0.5 }, 2.9)
-        .add(() => unhide(), 3.2)
-        .to(el, { autoAlpha: 0, duration: 1.0, ease: "power2.inOut" }, 3.2);
+        .add(() => unhide(), 3.8)
+        .to(name, { autoAlpha: 0, duration: 0.6, ease: "power1.inOut" }, 3.8)
+        .to(el, { autoAlpha: 0, duration: 0.6, ease: "power1.inOut" }, 3.8);
 
       const now = tl.duration();
       const extra = MIN_SHOW_MS / 1000 - now;
