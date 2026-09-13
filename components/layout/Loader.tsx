@@ -7,7 +7,7 @@ import styles from "./Loader.module.css";
 
 const LETTERS = ["A", "V", "D", "E", "S", "H"];
 
-const MIN_SHOW_MS = 4500;
+const MIN_SHOW_MS = 4400;
 
 export default function Loader() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -16,8 +16,11 @@ export default function Loader() {
   useEffect(() => {
     let tl: gsap.core.Timeline | null = null;
 
-    const reveal = () => {
+    const unhide = () => {
       document.documentElement.classList.remove("av-loading");
+    };
+    const finish = () => {
+      unhide();
       setGone(true);
     };
 
@@ -25,7 +28,7 @@ export default function Loader() {
 
     const run = () => {
       if (!el) {
-        reveal();
+        finish();
         return;
       }
       if (el.dataset.avBoot) return;
@@ -34,7 +37,7 @@ export default function Loader() {
       tl = gsap.timeline({
         onComplete: () => {
           tl = null;
-          reveal();
+          finish();
         },
       });
 
@@ -43,13 +46,21 @@ export default function Loader() {
       const tag = el.querySelector<HTMLElement>(`.${styles.tag}`);
       const corners = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.cornerSlot}`));
       const cornerInners = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.cornerInner}`));
+      const name = el.querySelector<HTMLElement>(`.${styles.name}`);
+
+      const zoomScale = (() => {
+        if (!name) return 6;
+        const fs = parseFloat(getComputedStyle(name).fontSize);
+        if (!fs) return 6;
+        return (window.innerHeight * 0.62) / fs;
+      })();
 
       tl.fromTo(
         chars,
-        { yPercent: 118, rotate: 4 },
+        { yPercent: 115, rotate: 2 },
         { yPercent: 0, rotate: 0, duration: 1, stagger: 0.065, ease: "expo.out" }
       )
-        .fromTo(dot, { scale: 0.15 }, { scale: 1.2, duration: 0.65, ease: "back.out(2.5)" }, 0.9)
+        .fromTo(dot, { scale: 0.15 }, { scale: 1.2, duration: 0.65, ease: "back.out(2.5)" }, 0.85)
         .fromTo(tag, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "expo.out" }, 1.5)
         .fromTo(corners, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, stagger: 0.06 }, 1.7)
         .fromTo(
@@ -58,8 +69,15 @@ export default function Loader() {
           { scaleX: 1, scaleY: 1, duration: 0.5, ease: "expo.out" },
           1.7
         )
-        .to(chars, { scale: 1.025, duration: 0.55, ease: "power2.inOut", yoyo: true, repeat: 1 }, 2.35)
-        .to(el, { scale: 1.04, opacity: 0, duration: 1.2, ease: "power3.inOut" }, 3.3);
+        .to(
+          name,
+          { scale: zoomScale, autoAlpha: 0, duration: 1.4, ease: "power2.inOut" },
+          2.9
+        )
+        .to(tag, { autoAlpha: 0, y: -18, duration: 0.7, ease: "power2.in" }, 2.9)
+        .to(corners, { autoAlpha: 0, duration: 0.5 }, 2.9)
+        .add(() => unhide(), 3.2)
+        .to(el, { autoAlpha: 0, duration: 1.0, ease: "power2.inOut" }, 3.2);
 
       const now = tl.duration();
       const extra = MIN_SHOW_MS / 1000 - now;
@@ -67,7 +85,7 @@ export default function Loader() {
     };
 
     if (prefersReducedMotion()) {
-      const t = setTimeout(reveal, 2400);
+      const t = setTimeout(finish, 2400);
       return () => clearTimeout(t);
     }
 
@@ -79,7 +97,7 @@ export default function Loader() {
       }),
     ]).then(() => run());
 
-    const safety = setTimeout(reveal, 6500);
+    const safety = setTimeout(finish, 6500);
 
     return () => {
       if (t1) clearTimeout(t1);
@@ -98,6 +116,7 @@ export default function Loader() {
         <span className={`${styles.cornerSlot} ${styles.cBL}`}><span className={styles.cornerInner} /></span>
         <span className={`${styles.cornerSlot} ${styles.cBR}`}><span className={styles.cornerInner} /></span>
       </div>
+
       <div className={styles.inner}>
         <p className={styles.name}>
           {LETTERS.map((ch) => (
