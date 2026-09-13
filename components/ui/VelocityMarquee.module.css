@@ -1,0 +1,71 @@
+/* ============ VelocityMarquee — editorial skill bands ============ */
+
+.marquee {
+  position: relative;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.row {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  will-change: transform;
+}
+
+.copy {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.item {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.solidText,
+.outlineText {
+  font-weight: 900;
+  font-size: clamp(26px, 3.4vw, 46px);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  text-transform: none;
+}
+.solidText {
+  color: var(--ink);
+}
+.outlineText {
+  color: transparent;
+  -webkit-text-stroke: 1.4px #1f1f22;
+}
+
+.sep {
+  color: var(--accent);
+  font-size: 0.5em;
+  margin: 0 26px;
+  align-self: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    transform: none !important;
+  }
+}

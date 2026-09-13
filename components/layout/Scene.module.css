@@ -1,0 +1,103 @@
+/* ============ SCENE — stacked full-screen frames ============
+   Holds are siblings inside <main>, which is their sticky containing block.
+   Nothing between <main> and a hold may set overflow, transform, filter or
+   perspective — any of those would create a new containing block and the
+   stack would collapse back to ordinary scrolling. */
+
+.hold {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  /* Opaque: a rising scene must fully occlude the one behind it. */
+  background: var(--bg, #fff);
+  /* keeps a section's internal z-indexes from escaping into the scene stack */
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* the section fills its frame */
+.hold > * {
+  height: 100%;
+}
+
+/* pure scroll distance for a scene's interior — paints nothing */
+.runway {
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ============ MOBILE ============
+   A stacked-scene model needs scenes that ARE one screen. On a phone most
+   sections fall back to tall scrolling layouts (Experience becomes seven
+   stacked boards, Credentials five panels), and a 100svh frame with
+   overflow:hidden simply destroys everything below the fold.
+
+   So below the desktop breakpoint a scene releases: the hold goes static and
+   grows to its content, and its runway collapses. The page becomes an
+   ordinary, complete, scrollable document — which is the correct responsive
+   answer, not a scaled-down stack.
+
+   Scenes that genuinely ARE one screen on a phone (the tunnel, the journey,
+   the drift wall) opt out with `.keepFrame` and keep the cinematic hold. */
+@media (max-width: 1000px) {
+  .hold {
+    position: static;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    isolation: auto;
+  }
+  .hold > * {
+    height: auto;
+  }
+  .runway {
+    display: none;
+  }
+
+  /* full-screen-on-mobile scenes keep their frame */
+  .keepFrame {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .keepFrame > * {
+    height: 100%;
+  }
+  .keepRunway {
+    display: block;
+  }
+}
+
+/* ============ REDUCED MOTION ============
+   Sections that are scroll-driven fall back to a static, fully-written-out
+   layout when motion is reduced — the Journey prints all six chapters, the
+   Gallery prints its wall. Those layouts are thousands of pixels tall, so a
+   held 100svh frame with overflow:hidden would show only the first screen of
+   each and leave the rest permanently unreachable, while the runway scrolled
+   past as blank viewports.
+
+   So with reduced motion the entire stack releases: every scene becomes an
+   ordinary block, every runway collapses, and the page is a plain complete
+   document. A cinematic stack is a motion effect, and this is exactly the
+   user who asked not to have one. */
+@media (prefers-reduced-motion: reduce) {
+  .hold,
+  .keepFrame {
+    position: static;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    isolation: auto;
+  }
+  .hold > *,
+  .keepFrame > * {
+    height: auto;
+  }
+  .runway,
+  .keepRunway {
+    display: none;
+  }
+}

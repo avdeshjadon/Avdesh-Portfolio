@@ -1,0 +1,165 @@
+/* ============ Button — site-wide interaction standard ============ */
+
+.btn {
+  --btn-bg: var(--accent);
+  --btn-fg: #ffffff;
+  --btn-fill: var(--ink);
+  --btn-fill-fg: #ffffff;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-weight: 700;
+  overflow: hidden;
+  isolation: isolate;
+  white-space: nowrap;
+  will-change: transform;
+  transition: border-color 0.3s ease;
+}
+.btn:active {
+  scale: 0.97;
+}
+
+/* circular fill — grows from the pill's bottom edge */
+.fill {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 220%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--btn-fill);
+  transform: translate(-50%, 0) scale(0);
+  transition: transform 0.55s var(--ease-out-expo);
+  z-index: 0;
+}
+.btn:hover .fill {
+  transform: translate(-50%, -50%) scale(1);
+}
+/* touch has no hover — the tap drives the same fill, same timing */
+@media (hover: none) {
+  .btn:active .fill {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .btn:active .labelStack {
+    transform: translateY(-50%);
+  }
+}
+
+/* rolling label */
+.labelWrap {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 1.4em;
+  overflow: hidden;
+}
+.labelStack {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.btn:hover .labelStack {
+  transform: translateY(-50%);
+}
+.label {
+  display: block;
+  line-height: 1.4;
+}
+.labelClone {
+  color: var(--btn-fill-fg);
+}
+
+/* leading node (play glyph, icon, …) */
+.lead {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72em;
+  transition: color 0.35s ease;
+}
+.btn:hover .lead {
+  color: var(--btn-fill-fg);
+}
+
+/* trailing arrow in a soft circle — rotates on hover */
+.arrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7em;
+  height: 1.7em;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 0.85em;
+  transition: transform 0.45s var(--ease-out-expo), background 0.35s ease, color 0.35s ease;
+}
+.btn:hover .arrow {
+  transform: rotate(-45deg);
+  color: var(--btn-fill-fg);
+}
+
+/* ---------- variants ---------- */
+.primary {
+  --btn-bg: var(--accent);
+  --btn-fg: #fff;
+  --btn-fill: var(--ink);
+  --btn-fill-fg: #fff;
+}
+.dark {
+  --btn-bg: var(--ink);
+  --btn-fg: #fff;
+  --btn-fill: var(--accent);
+  --btn-fill-fg: #fff;
+}
+.ghost {
+  --btn-bg: #fff;
+  --btn-fg: var(--ink);
+  --btn-fill: var(--ink);
+  --btn-fill-fg: #fff;
+  border: 1.5px solid #e4e4e6;
+}
+.ghost:hover {
+  border-color: var(--ink);
+}
+.ghost .arrow {
+  background: rgba(20, 20, 20, 0.07);
+}
+
+/* ---------- sizes ---------- */
+.sm {
+  font-size: 12.5px;
+  padding: 9px 18px;
+}
+.md {
+  font-size: 13px;
+  padding: 11px 20px;
+}
+
+/* ---------- accessibility & touch ---------- */
+.btn:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fill,
+  .labelStack,
+  .arrow {
+    transition: none;
+  }
+  .btn:hover .fill {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+/* NOTE: there is deliberately no `@media (hover: none) { .fill { display: none } }`
+   here. That rule used to exist and silently defeated the tap-driven fill
+   above — worse, the label still rolled to its white clone, so a pressed
+   ghost button rendered white text on a fill that never appeared. Touch gets
+   the same fill as hover, driven by :active. */

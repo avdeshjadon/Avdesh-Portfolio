@@ -1,0 +1,280 @@
+/* ============ NAV — floating capsule, scroll-aware ============ */
+
+.wrap {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.7s var(--ease-out-expo);
+}
+
+/* CORRECTION 01 — the header is now present from the very first viewport,
+   including over the opening tunnel. It is never hidden or duplicated. */
+
+.cap {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: min(860px, 100%);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 10px 10px 24px;
+  box-shadow: 0 10px 34px -10px rgba(20, 20, 20, 0.08);
+  transition: box-shadow 0.35s ease, padding 0.35s ease, background 0.35s ease;
+}
+.scrolled .cap {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 44px -12px rgba(20, 20, 20, 0.14);
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+  transition: letter-spacing 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.logo:hover {
+  letter-spacing: 0.01em;
+}
+/* the red period is the brand mark — it does the PillNav logo-spin's job:
+   a small, springy acknowledgement on hover */
+.logo i {
+  font-style: normal;
+  color: var(--accent);
+  display: inline-block;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.logo:hover i {
+  transform: translateY(-4px) scale(1.15);
+}
+
+/* --- links with roll-over micro-interaction --- */
+.links {
+  display: flex;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+/* pill links — same interaction standard as Button: circle fill + label roll */
+.links a {
+  position: relative;
+  padding: 7px 15px;
+  border-radius: 999px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.3s ease;
+}
+.links a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  /* geometry and timing matched to the Connect social buttons, so the
+     header speaks exactly the same interaction language */
+  width: 240%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translate(-50%, 0) scale(0);
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  z-index: -1;
+}
+.links a:hover::before,
+.links a:focus-visible::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+/* the current section stays a quiet weight change — the black fill is
+   reserved for hover/touch, as requested */
+.links a.on {
+  color: var(--ink);
+  font-weight: 700;
+}
+.roll {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.25em;
+  line-height: 1.25;
+}
+.roll span {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.links a:hover .roll span,
+.links a:focus-visible .roll span {
+  transform: translateY(-100%);
+}
+.roll span:last-child {
+  color: #fff;
+}
+/* Touch devices never fire :hover, so the fill is driven by the tap itself
+   instead of being switched off — same animation, same timing. */
+@media (hover: none) {
+  .links a:active::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .links a:active .roll span {
+    transform: translateY(-100%);
+  }
+}
+
+/* --- right cluster --- */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+/* ============ MOBILE NAVIGATION ============
+   The pill can't carry four links plus the toggle at phone widths, so below
+   900px the links move into a drawer behind a menu button. Previously they
+   were simply `display: none` — the header had no navigation at all. */
+
+.burger {
+  display: none;
+  position: relative;
+  /* 44px: the minimum comfortable touch target */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--ink);
+  flex: 0 0 auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.burger span {
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: #fff;
+  transition: transform 0.4s var(--ease-out-expo), opacity 0.25s ease;
+}
+.burger span:first-child {
+  transform: translate(-50%, -3.5px);
+}
+.burger span:last-child {
+  transform: translate(-50%, 3.5px);
+}
+.burgerOpen span:first-child {
+  transform: translate(-50%, 0) rotate(45deg);
+}
+.burgerOpen span:last-child {
+  transform: translate(-50%, 0) rotate(-45deg);
+}
+
+/* the drawer itself */
+.sheet {
+  pointer-events: auto;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px -18px rgba(20, 20, 20, 0.22);
+  padding: 8px;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.985);
+  transform-origin: 50% 0;
+  transition: opacity 0.32s ease, transform 0.42s var(--ease-out-expo);
+}
+.sheetOpen {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.sheet nav {
+  display: flex;
+  flex-direction: column;
+}
+.sheet a {
+  /* a generous touch target — 52px, comfortably over the 44px minimum */
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink-2);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sheet a:active {
+  background: var(--ink);
+  color: #fff;
+}
+.sheetOn {
+  color: var(--ink);
+  background: rgba(20, 20, 20, 0.05);
+}
+
+/* tap-anywhere-to-close, behind the drawer */
+.scrim {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(20, 20, 20, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  cursor: default;
+}
+.scrimOn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .links {
+    display: none;
+  }
+  .wrap {
+    top: 12px;
+    padding: 0 14px;
+  }
+  .cap {
+    width: 100%;
+    gap: 12px;
+    padding: 8px 8px 8px 18px;
+  }
+  .logo {
+    font-size: 17px;
+  }
+  .right {
+    gap: 10px;
+  }
+  .burger {
+    display: block;
+  }
+  .scrim {
+    display: block;
+  }
+  .sheet {
+    left: 14px;
+    right: 14px;
+  }
+}
+
+/* the drawer is a mobile affordance only */
+@media (min-width: 901px) {
+  .sheet {
+    display: none;
+  }
+}

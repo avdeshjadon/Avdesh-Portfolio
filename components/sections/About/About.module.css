@@ -1,0 +1,216 @@
+/* ============ ABOUT — storytelling section ============ */
+
+.about {
+  position: relative;
+  background: #fff;
+}
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 120px 44px 130px;
+}
+
+/* ---------- header ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 26px;
+}
+.eyebrow span {
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.eyebrow::after {
+  content: "";
+  flex: 0 0 34px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.h2 {
+  font-weight: 900;
+  font-size: clamp(36px, 4.6vw, 62px);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+/* ---------- grid: beats + side cards ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 72px;
+  margin-top: 64px;
+}
+
+.beats {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+.beat {
+  display: flex;
+  gap: 22px;
+}
+.beatN {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+  padding-top: 7px;
+  min-width: 26px;
+}
+.beat h3 {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 10px;
+}
+.beat p {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 560px;
+}
+.beat p b {
+  font-weight: 700;
+}
+
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.sideCard {
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid rgba(20, 20, 20, 0.04);
+  box-shadow: var(--shadow);
+  will-change: transform;
+}
+.imgCard {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ph);
+  color: var(--ink-3);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transform: rotate(2deg);
+}
+.philoCard {
+  padding: 32px 34px;
+  transform: rotate(-1.5deg);
+}
+.philoCard h4 {
+  font-family: var(--font-script), cursive;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--ink-2);
+  margin-bottom: 12px;
+}
+.philoCard ul {
+  list-style: none;
+}
+.philoCard li {
+  display: flex;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 11px 0;
+  border-bottom: 1px solid #f3f3f4;
+}
+.philoCard li:last-child {
+  border: none;
+}
+.philoCard li span {
+  color: var(--accent);
+}
+
+/* ---------- metrics band ---------- */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-top: 84px;
+}
+.metric {
+  border-top: 2px solid var(--ink);
+  padding-top: 20px;
+}
+.metricNum {
+  display: flex;
+  align-items: baseline;
+  font-size: clamp(34px, 3.6vw, 50px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.metricNum i {
+  font-style: normal;
+  color: var(--accent);
+}
+.metricStatic {
+  font-weight: 900;
+}
+.metricLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-3);
+  margin-top: 10px;
+  line-height: 1.45;
+  max-width: 220px;
+}
+
+/* ---------- education + next ---------- */
+.edu {
+  margin-top: 56px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+.edu b {
+  color: var(--ink);
+}
+.next {
+  margin-top: 34px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1100px) {
+  .wrap {
+    padding: 90px 24px 100px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 34px 24px;
+    margin-top: 64px;
+  }
+}
+
+@media (max-width: 560px) {
+  .beat p {
+    font-size: 17px;
+  }
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+}

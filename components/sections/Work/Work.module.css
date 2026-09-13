@@ -1,0 +1,363 @@
+/* ============ FEATURED WORK — curved project track ============ */
+
+.work {
+  position: relative;
+  background: #fcfcfc;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 96px 0 0;
+}
+
+/* ---------- header ---------- */
+.header {
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 22px;
+}
+.eyebrow span {
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.eyebrow::after {
+  content: "";
+  flex: 0 0 34px;
+  height: 1px;
+  background: var(--accent);
+}
+.headRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+.h2 {
+  font-weight: 900;
+  font-size: clamp(34px, 4.4vw, 58px);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+}
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.lede {
+  max-width: 360px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* ---------- stage & cards ---------- */
+.stage {
+  flex: 1;
+  position: relative;
+  perspective: 1500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 480px;
+}
+.track {
+  position: relative;
+  width: 100%;
+  height: 470px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+.card {
+  position: absolute;
+  width: 300px;
+  will-change: transform, opacity;
+}
+.inner {
+  display: block;
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid rgba(20, 20, 20, 0.05);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: translate 0.35s var(--ease-out-expo), box-shadow 0.35s ease;
+}
+.inner:hover {
+  translate: 0 -10px;
+  box-shadow: 0 60px 130px -24px rgba(20, 20, 20, 0.24), 0 10px 32px rgba(20, 20, 20, 0.08);
+}
+
+.cover {
+  position: relative;
+  height: 258px; /* trimmed to make room for the contribution line */
+  background: var(--ph);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  overflow: hidden;
+}
+.award {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #fff;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink);
+  box-shadow: 0 8px 20px rgba(20, 20, 20, 0.1);
+}
+
+/* his own capture of the built site — fills the cover */
+.coverPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* verified brand mark centred on its brand ground */
+.coverBrand {
+  width: min(66%, 200px);
+  height: auto;
+  object-fit: contain;
+}
+/* typographic cover for projects with no supplied asset yet */
+.coverMark {
+  font-weight: 900;
+  font-size: clamp(44px, 4.2vw, 60px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+/* verified brand destination — sibling of the card link (never nested) */
+.siteChip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(20, 20, 20, 0.08);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.35s var(--ease-out-expo),
+    background 0.25s ease, color 0.25s ease;
+}
+.siteChip i {
+  font-style: normal;
+  color: var(--accent);
+  transition: color 0.25s ease;
+}
+.card:hover .siteChip,
+.siteChip:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.siteChip:hover {
+  background: var(--ink);
+  color: #fff;
+}
+.siteChip:hover i {
+  color: #fff;
+}
+/* touch devices have no hover — the chip is simply always present */
+@media (hover: none) {
+  .siteChip {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.meta {
+  padding: 18px 20px 20px;
+}
+.meta h3 {
+  font-size: 16.5px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--ink);
+}
+/* the card's one-line "what I did" — clamped so FR length can't break the arc */
+.contribution {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tags {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  margin-top: 7px;
+}
+.metaFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+.year {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--accent);
+}
+.open {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.35s var(--ease-out-expo);
+}
+.open i {
+  font-style: normal;
+  color: var(--accent);
+}
+.inner:hover .open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---------- foot: counter · dots · hint ---------- */
+.foot {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 24px;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 18px 44px 26px;
+}
+.count {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+  justify-self: start;
+}
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-self: center;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e1e1e3;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.dotOn {
+  background: var(--accent);
+  transform: scale(1.25);
+}
+.hint {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--ink-3);
+  justify-self: end;
+}
+
+/* ============ Touch / small screens / reduced motion: native snap row ======
+   The reduced-motion clause is load-bearing and must mirror the JS gate in
+   Work.tsx exactly. The desktop arc only runs under
+   `(min-width: 1101px) and (prefers-reduced-motion: no-preference)`, and the
+   fallback branch positions nothing — so a reduced-motion viewport WIDER than
+   1100px used to get the base `position: absolute` cards with no JS ever
+   spreading them: all 14 stacked in one pile at the centre of the track, with
+   only the topmost reachable. */
+@media (max-width: 1100px), (prefers-reduced-motion: reduce) {
+  .work {
+    min-height: 0;
+    padding: 80px 0 0;
+  }
+  .header {
+    padding: 0 24px;
+  }
+  .stage {
+    perspective: none;
+    min-height: 0;
+    display: block;
+    margin-top: 40px;
+  }
+  .track {
+    position: static;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 6px 24px 26px;
+    scrollbar-width: none;
+  }
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+  .card {
+    position: static;
+    flex: 0 0 82vw;
+    max-width: 320px;
+    scroll-snap-align: center;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .cover {
+    height: 240px;
+  }
+  .foot {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 6px 24px 30px;
+  }
+  /* The dots track the arc's active card, and the arc doesn't run here — the
+     snap row is scrolled by thumb. Left visible they sat frozen on card one
+     forever, so they go with the counter and the hint. */
+  .count,
+  .hint,
+  .dots {
+    display: none;
+  }
+}

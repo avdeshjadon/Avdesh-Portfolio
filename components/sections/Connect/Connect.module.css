@@ -1,0 +1,293 @@
+/* ============ LET'S CONNECT — the closing chapter ============ */
+
+.connect {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  padding: 130px 0 0;
+}
+
+.head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 4;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.eyebrow span {
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.h2 {
+  margin-top: 18px;
+  font-weight: 900;
+  font-size: clamp(42px, 6.4vw, 92px);
+  letter-spacing: -0.035em;
+  line-height: 1.0;
+}
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.lede {
+  margin: 20px auto 0;
+  max-width: 480px;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.cta {
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- curved memory arc ---------- */
+.arc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 72px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+.panel {
+  flex: 0 0 auto;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+.panelInner {
+  position: relative;
+  width: 218px;
+  height: 300px;
+  border-radius: 22px;
+  background: var(--ph);
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 70px -22px rgba(20, 20, 20, 0.2);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s ease,
+    border-color 0.4s ease, filter 0.4s ease;
+  filter: saturate(0.94);
+  will-change: transform;
+}
+.panel:nth-child(1) .panelInner,
+.panel:nth-child(5) .panelInner {
+  height: 340px;
+  border-radius: 90px 90px 26px 26px;
+}
+.panel:hover .panelInner {
+  transform: translateZ(46px) scale(1.04);
+  filter: saturate(1) brightness(1.02);
+  border-color: rgba(255, 46, 15, 0.28);
+  box-shadow: 0 44px 96px -24px rgba(20, 20, 20, 0.3), 0 0 0 5px rgba(255, 46, 15, 0.06);
+}
+/* photo panels: the image fills the frame at its own aspect ratio (cover
+   crops, never stretches) and keeps its true colour — no desaturation at
+   rest, so the photograph reads exactly as supplied. */
+.hasPhoto {
+  filter: none;
+  background: #101012;
+}
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.panel:hover .hasPhoto {
+  filter: brightness(1.03);
+}
+
+.ph {
+  color: #cfcfd3;
+  font-size: 22px;
+}
+.pLabel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+
+/* ---------- social cards ---------- */
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 76px auto 0;
+  padding: 0 24px;
+  position: relative;
+  z-index: 4;
+}
+.social {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 28px -12px rgba(20, 20, 20, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  isolation: isolate;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-2);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+/* same interaction standard as nav links & Button: circle fill + label roll */
+.social::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 240%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translate(-50%, 0) scale(0);
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+  z-index: -1;
+}
+.social:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(20, 20, 20, 0.06);
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--ink);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.social:hover .glyph {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+/* official brand marks (LinkedIn / GitHub / Instagram) — currentColor SVGs,
+   so the circle-fill hover inverts them exactly like the text glyphs */
+.glyph svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+.roll {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.3em;
+  line-height: 1.3;
+}
+.roll span {
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.social:hover .roll span {
+  transform: translateY(-100%);
+}
+.roll span:last-child {
+  color: #fff;
+}
+.arrow {
+  font-size: 12px;
+  transition: transform 0.4s var(--ease-out-expo), color 0.3s ease;
+}
+.social:hover .arrow {
+  transform: translate(2px, -2px);
+  color: #fff;
+}
+
+/* ---------- footer ---------- */
+.footer {
+  margin-top: 96px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 26px 44px 30px;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.footer b {
+  color: var(--ink);
+}
+.top {
+  font-weight: 800;
+  color: var(--ink-2);
+  transition: color 0.25s ease;
+}
+.top:hover {
+  color: var(--accent);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1080px) {
+  .panelInner {
+    width: 172px;
+    height: 240px;
+  }
+  .panel:nth-child(1) .panelInner,
+  .panel:nth-child(5) .panelInner {
+    height: 268px;
+  }
+}
+/* Promoted from 820px: five 172px panels plus four 26px gaps need ~964px, so
+   between 821 and 963px the outer two were cropped by the viewport edge. The
+   arc drops to three panels for the whole mobile range instead. */
+@media (max-width: 1000px) {
+  .connect {
+    padding-top: 100px;
+  }
+  .arc {
+    gap: 16px;
+    margin-top: 56px;
+  }
+  .panel:nth-child(1),
+  .panel:nth-child(5) {
+    display: none;
+  }
+  .panelInner {
+    width: min(30vw, 168px);
+    height: 220px;
+  }
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px;
+  }
+}

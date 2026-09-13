@@ -1,0 +1,488 @@
+/* ============ CREDENTIALS — pitch-deck cascade ============
+   Colour relationships, panel geometry, typography scale and composition
+   taken from the supplied reference: warm light-grey ground, 16:10 slide
+   panels in a near-black / white / vermilion rhythm, tiny mono section
+   numbers, oversized condensed titles, ghosted metric numerals. */
+
+.certs {
+  position: relative;
+  /* the reference ground: warm light grey, subtly darker toward the bottom */
+  background: linear-gradient(163deg, #ededee 0%, #e4e4e6 52%, #d9d9dc 100%);
+  overflow: hidden;
+  padding: 96px 0;
+}
+.deckMode {
+  height: 100svh;
+  min-height: 640px;
+  padding: 46px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- section heading: the section names itself ---------- */
+.head {
+  position: relative;
+  z-index: 6;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 44px;
+  text-align: center;
+  pointer-events: none;
+  flex: 0 0 auto;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #6f6f75;
+}
+.eyebrow span {
+  color: var(--accent);
+}
+.h2 {
+  margin-top: 12px;
+  font-weight: 900;
+  font-size: clamp(38px, 6vw, 84px);
+  letter-spacing: -0.04em;
+  line-height: 0.94;
+  text-transform: uppercase;
+  color: #141414;
+}
+.lede {
+  margin: 14px auto 0;
+  max-width: 620px;
+  font-size: clamp(13.5px, 1.15vw, 16px);
+  line-height: 1.55;
+  color: #5c5c63;
+  text-wrap: pretty;
+}
+
+/* Short viewports: the heading gives room back to the credential panel
+   rather than squeezing the panel's own content. */
+@media (max-height: 800px) {
+  .deckMode {
+    padding-top: 30px;
+  }
+  .h2 {
+    margin-top: 8px;
+    font-size: clamp(30px, 4.6vh, 52px);
+  }
+  .lede {
+    margin-top: 9px;
+    font-size: 13px;
+    max-width: 520px;
+  }
+  /* the heading now costs less, so the panel reclaims that height.
+     `.deckMode` prefix keeps this ahead of the base .stage rule below. */
+  .deckMode .stage {
+    --panel-w: clamp(340px, min(58vw, calc((100vh - 270px) * 1.6)), 980px);
+  }
+  /* and the panel's own rhythm tightens so the record still fits */
+  .band {
+    height: 40px;
+  }
+  .issuerRow {
+    margin-bottom: 8px;
+  }
+  .record {
+    margin-bottom: 10px;
+    padding-bottom: 9px;
+  }
+  .skills li {
+    padding: 2px 0;
+  }
+}
+@media (max-height: 680px) {
+  .lede {
+    display: none; /* the heading alone still names the section */
+  }
+  .deckMode .stage {
+    --panel-w: clamp(340px, min(58vw, calc((100vh - 215px) * 1.6)), 980px);
+  }
+}
+
+/* ---------- the cascade ---------- */
+.stageWrap {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  perspective: 2000px;
+  perspective-origin: 50% 44%;
+}
+.stage {
+  position: relative;
+  /* the stage IS the focused panel; the others recede behind its centre */
+  --panel-w: clamp(340px, min(58vw, calc((100vh - 430px) * 1.6)), 980px);
+  width: var(--panel-w);
+  height: calc(var(--panel-w) * 0.625);
+  transform-style: preserve-3d;
+  /* square to the viewer — no stage tilt, no warped perspective */
+  will-change: transform;
+}
+
+/* clean rectangular credential panels, straight edges, subtle radius */
+.panel {
+  position: absolute;
+  inset: 0; /* every panel fills the stage; the motion moves it from there */
+  border-radius: 10px;
+  backface-visibility: hidden;
+  padding: 0 clamp(26px, 3vw, 44px) clamp(22px, 2.6vh, 34px);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  box-shadow: 0 34px 70px -28px rgba(20, 20, 20, 0.42);
+  overflow: hidden;
+}
+
+/* the reference's three panel tones */
+.dark {
+  background: #17171a;
+  color: #ffffff;
+}
+.light {
+  background: #ffffff;
+  color: #141414;
+}
+.red {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* ---------- identity band: stays in the exposed upper area ---------- */
+.band {
+  flex: 0 0 auto;
+  height: 50px;
+  /* panels are square now, so the band can run the full width */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+/* "CERTIFICATION" — states plainly what the panel is */
+.kind {
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  opacity: 0.62;
+}
+
+/* ---------- issuer: the largest thing after the title ---------- */
+.issuerRow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: clamp(10px, 1.4vh, 18px);
+}
+/* official marks always sit on a light plate so brand colours stay true
+   on dark and light panels alike */
+.logoPlate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(32px, 4.4vh, 44px);
+  padding: 0 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(20, 20, 20, 0.14);
+}
+.logoPlate img {
+  height: clamp(15px, 2.1vh, 21px);
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.issuerName {
+  font-size: clamp(15px, 1.7vw, 24px);
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.no {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  opacity: 0.55;
+}
+.org {
+  opacity: 0.78;
+}
+/* issuing organisation — the line that makes a panel read as a credential */
+.issuer {
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  opacity: 0.9;
+}
+.status {
+  margin-left: auto;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  opacity: 0.45;
+}
+.ok {
+  opacity: 0.85;
+  color: #2e9e5b;
+}
+
+/* credential record — the fields a real certificate carries */
+.record {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, auto));
+  gap: 0 clamp(16px, 2.2vw, 34px);
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 16%, transparent);
+}
+.record dt {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-bottom: 3px;
+}
+.record dd {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  opacity: 0.92;
+  white-space: nowrap;
+}
+.verifyLink {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* the certification's own name */
+.title {
+  font-size: clamp(22px, 3vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+
+/* ---------- detail: focused panel only ---------- */
+.detail {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 48px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.36s ease, transform 0.5s var(--ease-out-expo);
+  pointer-events: none;
+  min-height: 0;
+  overflow: hidden;
+}
+.on .detail {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.12s;
+}
+
+/* ghosted metric numeral, as on the reference's metrics slides */
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metricValue {
+  font-size: clamp(28px, 3.6vw, 56px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  opacity: 0.22;
+}
+.metricLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* small right-hand text column, reference-style */
+.cols {
+  max-width: 46%;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.colLbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.45;
+  margin-bottom: 7px;
+}
+.skills {
+  list-style: none;
+}
+.skills li {
+  padding: 4px 0;
+  border-bottom: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 16%, transparent);
+  opacity: 0.86;
+}
+.skills li:last-child {
+  border-bottom: none;
+}
+.year {
+  margin-top: 9px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  opacity: 0.42;
+}
+.muted {
+  opacity: 0.6;
+  margin-top: 10px;
+}
+.cols p + p {
+  margin-top: 8px;
+}
+
+/* ---------- brand panel: giant wordmark, as in the reference ---------- */
+.wordmark {
+  margin-top: auto;
+  font-size: clamp(56px, 9vw, 150px);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.8;
+  color: rgba(255, 255, 255, 0.34);
+  transform: translateX(-2%);
+  user-select: none;
+}
+.vert {
+  position: absolute;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: right center;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+/* ---------- foot strip, mirroring the reference's deck footer ---------- */
+.foot {
+  position: relative;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 14px 44px 22px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  color: #6f6f75;
+}
+.count {
+  justify-self: center;
+  font-variant-numeric: tabular-nums;
+  color: #141414;
+}
+.brandFoot b {
+  color: var(--accent);
+  margin-right: 8px;
+}
+.footLbl {
+  justify-self: end;
+}
+
+/* ============ responsive ============ */
+@media (max-width: 1000px) {
+  .certs {
+    padding: 80px 0;
+  }
+  .head,
+  .foot {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .stageWrap {
+    display: block;
+    perspective: none;
+    margin-top: 28px;
+  }
+  .stage {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 24px;
+    --panel-w: 100%;
+  }
+  /* The band is one nowrap row (number · CERTIFICATION · status) that needs
+     ~360px. Inside a phone-width panel it was clipped, taking the
+     verification status off the right edge of every credential. Let it wrap
+     and give it room. */
+  .band {
+    height: auto;
+    min-height: 40px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding-top: 4px;
+  }
+  .status {
+    margin-left: 0;
+  }
+  .panel {
+    position: relative !important;
+    height: auto;
+    min-height: 260px;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    padding: 0 24px 24px;
+  }
+  .detail {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .cols {
+    max-width: none;
+  }
+  .wordmark {
+    font-size: 64px;
+  }
+  .vert {
+    display: none;
+  }
+  .foot {
+    display: none;
+  }
+}

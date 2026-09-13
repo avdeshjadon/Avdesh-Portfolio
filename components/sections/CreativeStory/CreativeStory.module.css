@@ -1,0 +1,1320 @@
+/* ============ THE CREATIVE STORY — one pinned chapter ============
+   Ported verbatim from the software-Developer project, Sections 02 + 03, as
+   ONE scrubbed Scene. The stage holds every layer of the journey so they can
+   hand off to each other at the pixel:
+
+   · PHASE A — My Creative Hunch: the editorial composition scrubs in
+     (title lines rise out of their masks, meta fades, labels pop from the
+     centroid). Scroll progress 0→1 over s2Range.
+   · PHASE B — the puzzle: the composed piece is cloned into tile fragments
+     that scatter while a "player window" draws a border, shrinks and fades;
+     the About Me chapter (three doors) assembles behind the departing pieces
+     inside the dark void, then locks interactive. Progress over trRange.
+
+   Every layer below is `visibility:hidden / opacity:0` until the scrub calls
+   for it, so the last thing rendered in this file is always the right one. */
+
+.section {
+  --s2-bg: #fefefe;
+  --s3-void: radial-gradient(120% 90% at 50% 10%, #2c0805 0%, #150302 52%, #080101 100%);
+  --about-accent: #d3382b;
+  --u: min(calc(min(100vw, 1800px) / 100), 1.639svh);
+
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: var(--s2-bg);
+  color: #111;
+}
+
+/* ══════════════════════ PHASE A · the composition ══════════════════════ */
+
+.stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--s2-bg);
+  color: #111;
+  isolation: isolate;
+}
+
+.comp {
+  position: relative;
+  width: calc(var(--u) * 100);
+  height: calc(var(--u) * 61);
+  z-index: 3;
+}
+
+/* brand */
+.brand {
+  position: absolute;
+  top: calc(var(--u) * 7.3);
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-size: calc(var(--u) * 2.35);
+  letter-spacing: -0.015em;
+  color: #0c0c0c;
+}
+
+.brandCreative {
+  font-style: italic;
+}
+
+.brandHunch {
+  font-family: var(--font-ui), Inter, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fe2e08;
+  margin-left: calc(var(--u) * 0.45);
+  font-size: calc(var(--u) * 2.2);
+}
+
+/* sides */
+.side {
+  position: absolute;
+  top: calc(var(--u) * 12.3);
+  padding-left: calc(var(--u) * 0.95);
+  border-left: 2px solid #131313;
+}
+
+.sideL {
+  left: calc(var(--u) * 10.2);
+}
+
+.sideR {
+  left: calc(var(--u) * 75.5);
+}
+
+.side p {
+  margin: 0 0 calc(var(--u) * 0.42);
+  font-size: max(calc(var(--u) * 1.06), 10px);
+  line-height: 1.45;
+  color: #262524;
+  white-space: nowrap;
+}
+
+.side strong {
+  font-weight: 700;
+  color: #111;
+}
+
+/* the giant editorial title */
+.title {
+  position: absolute;
+  top: calc(var(--u) * 10.6);
+  left: 0;
+  right: 0;
+  margin: 0;
+  font-family: var(--font-display), "Archivo", Inter, sans-serif;
+  font-weight: 400;
+  font-size: calc(var(--u) * 12.85);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-align: center;
+  color: #171114;
+  z-index: 4;
+  transition: opacity 0.5s var(--ease-soft);
+}
+
+.mask1,
+.mask2,
+.mask3 {
+  display: block;
+  overflow: hidden;
+}
+
+.mask1 {
+  transform: translateX(calc(var(--u) * -0.6));
+}
+.mask2 {
+  margin-top: calc(var(--u) * -0.79);
+  transform: translateX(calc(var(--u) * 1.77));
+}
+.mask3 {
+  margin-top: calc(var(--u) * 0.89);
+  transform: translateX(calc(var(--u) * 0.57));
+}
+
+.line1,
+.line2,
+.line3 {
+  display: block;
+}
+
+.line2,
+.line3 {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.line2 {
+  gap: calc(var(--u) * 7.77);
+}
+.line3 {
+  gap: 0;
+}
+
+.wordWhere,
+.wordCode,
+.wordMeets,
+.wordCreative,
+.wordThinking {
+  display: inline-block;
+  transform-origin: 50% 50%;
+}
+
+.wordWhere {
+  transform: scaleX(0.967);
+}
+.wordCode {
+  color: #e62709;
+  transform: scaleX(0.951);
+}
+.wordMeets {
+  color: #fe8502;
+  transform: scaleX(0.831);
+}
+.wordCreative {
+  color: #7b0809;
+  transform: scaleX(0.888);
+}
+.wordThinking {
+  color: #373738;
+  transform: scaleX(0.863);
+  margin-left: calc(var(--u) * -0.64);
+}
+
+/* labels */
+.labels {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.lp {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.posAi {
+  left: calc(var(--u) * 48.4);
+  top: calc(var(--u) * 28.4);
+}
+.posSys {
+  left: calc(var(--u) * 52.35);
+  top: calc(var(--u) * 31.45);
+}
+.posWeb {
+  left: calc(var(--u) * 46.4);
+  top: calc(var(--u) * 34.1);
+}
+.posApi {
+  left: calc(var(--u) * 52.65);
+  top: calc(var(--u) * 35.4);
+}
+.posAuto {
+  left: calc(var(--u) * 48.75);
+  top: calc(var(--u) * 37.9);
+}
+
+.label {
+  display: inline-block;
+  padding: calc(var(--u) * 0.62) calc(var(--u) * 1.05) calc(var(--u) * 0.68);
+  border-radius: calc(var(--u) * 0.68);
+  font-family: var(--font-ui), Inter, sans-serif;
+  font-weight: 700;
+  font-size: max(calc(var(--u) * 1.42), 11px);
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+  color: #101010;
+  box-shadow: 0 calc(var(--u) * 0.32) calc(var(--u) * 0.85) rgba(28, 14, 4, 0.22),
+    0 1px 2px rgba(28, 14, 4, 0.14);
+  transform: rotate(var(--r, 0deg));
+}
+
+.labelAi {
+  --r: -6deg;
+  background: #fecd12;
+}
+.labelSys {
+  --r: -3deg;
+  background: #ff4045;
+}
+.labelWeb {
+  --r: -4deg;
+  background: #fc7c04;
+}
+.labelApi {
+  --r: 3deg;
+  background: #1487fa;
+}
+.labelAuto {
+  --r: -2deg;
+  background: #06dffa;
+}
+
+/* rails */
+.rail {
+  position: absolute;
+  top: calc(50% - var(--u) * 3.35);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #141414;
+}
+
+.railL {
+  left: clamp(18px, 3.1%, 64px);
+}
+
+.railR {
+  right: clamp(18px, 3.1%, 64px);
+}
+
+.railDot {
+  width: calc(var(--u) * 0.42);
+  height: calc(var(--u) * 0.42);
+  min-width: 5px;
+  min-height: 5px;
+  border-radius: 50%;
+  background: #131313;
+}
+
+.railList {
+  margin: calc(var(--u) * 1.35) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: max(calc(var(--u) * 0.82), 10px);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.85;
+}
+
+.railLine {
+  width: 1.5px;
+  background: #131313;
+}
+
+.railLineA {
+  margin-top: calc(var(--u) * 1.3);
+  height: calc(var(--u) * 8.8);
+}
+
+.railLineB {
+  margin-top: calc(var(--u) * 8.3);
+  height: calc(var(--u) * 5);
+}
+
+/* section chrome (this portfolio's eyebrow, top-left) */
+.eyebrow {
+  position: absolute;
+  top: clamp(18px, 3.4vmin, 34px);
+  left: clamp(18px, 3%, 56px);
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.eyebrow span {
+  color: #fe2e08;
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════════════ PHASE B · transition layers ══════════════════════
+   Everything below stays hidden until .isTransitioning flips them on. */
+
+.atmo,
+.window,
+.p3 {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.isTransitioning .atmo,
+.isTransitioning .window,
+.isTransitioning .p3 {
+  visibility: visible;
+  opacity: 1;
+}
+
+.isTransitioning .comp {
+  visibility: hidden;
+}
+
+/* the void behind the window */
+.atmo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--s3-void);
+  color: #fff;
+}
+
+.credit {
+  position: absolute;
+  top: clamp(14px, 2.4vh, 26px);
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 235, 228, 0.55);
+}
+
+.creditL {
+  left: clamp(18px, 3.1%, 64px);
+}
+
+.creditR {
+  right: clamp(18px, 3.1%, 64px);
+}
+
+/* ── Section 03 · About Me (assembles behind the departing pieces) ── */
+.p3 {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: #fff;
+  pointer-events: none;
+}
+
+.isLocked .p3 {
+  pointer-events: auto;
+}
+
+.dim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: clamp(8px, 2vh, 26px);
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-display), "Archivo", Inter, sans-serif;
+  font-size: calc(var(--u) * 6);
+  line-height: 0.98;
+  text-transform: uppercase;
+  color: #5c0f07;
+  opacity: 0.55;
+}
+
+.dim span {
+  display: block;
+}
+
+.dim3 {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.9em;
+  letter-spacing: 0.06em;
+}
+
+.corner {
+  position: absolute;
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(216, 205, 202, 0.78);
+  opacity: 0;
+}
+
+.cornerL {
+  left: clamp(18px, 3.1%, 64px);
+}
+
+.cornerR {
+  right: clamp(18px, 3.1%, 64px);
+  color: rgba(255, 250, 248, 0.85);
+}
+
+.corner b {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* the About Me lockup: oversized title + three doors + footer */
+.abComp {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(24px, 4.5vw, 84px) 4.6svh;
+}
+
+.titleMask {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  margin-bottom: -1svh;
+}
+
+.abTitle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.12em;
+  margin: 0;
+  font-family: var(--font-display), "Archivo", Inter, sans-serif;
+  font-weight: 400;
+  font-size: clamp(46px, 13svh, 150px);
+  line-height: 0.98;
+  text-transform: uppercase;
+  color: #f4efec;
+  text-shadow: 0 6px 40px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.5s var(--ease-soft);
+}
+
+.titleScript {
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 0.58em;
+  color: var(--about-accent);
+}
+
+.doors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 1.6vw, 26px);
+  height: 51svh;
+}
+
+.doorPos {
+  position: relative;
+}
+
+.doorPos:nth-child(2) {
+  top: 3svh;
+}
+
+.doorPos:nth-child(3) {
+  top: -1.8svh;
+}
+
+.door {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  transition:
+    transform 0.55s var(--ease-cine),
+    opacity 0.55s var(--ease-soft),
+    filter 0.55s var(--ease-soft),
+    border-color 0.45s var(--ease-soft),
+    box-shadow 0.45s var(--ease-soft);
+}
+
+.door:hover {
+  border-color: rgba(255, 64, 38, 0.55);
+  box-shadow: 0 22px 60px -24px rgba(0, 0, 0, 0.7), 0 0 40px -14px rgba(200, 30, 15, 0.35);
+}
+
+.doorIn {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transition: transform 0.5s var(--ease-cine);
+}
+
+.door:hover .doorIn {
+  transform: translateY(-6px);
+}
+
+.themeWho {
+  background: #f2efec;
+  color: #101010;
+}
+
+.themeWhat {
+  background: radial-gradient(120% 135% at 20% 92%, #8e0502 0%, #4a0303 62%, #360202 100%);
+  color: #fff;
+}
+
+.themeThink {
+  background: #0c0a0a;
+  color: #fff;
+}
+
+.num {
+  position: absolute;
+  top: 2.2svh;
+  left: 2.2svh;
+  font-family: var(--font-display), "Archivo", Inter, sans-serif;
+  font-size: clamp(18px, 3.4svh, 36px);
+  line-height: 1;
+  color: var(--about-accent);
+}
+
+.themeWhat .num {
+  color: #fff;
+}
+
+.kicker {
+  position: absolute;
+  top: 2.4svh;
+  right: 2svh;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.img {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 24%;
+  width: 100%;
+  height: 42%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: grayscale(1) contrast(1.05);
+  transition: transform 0.6s var(--ease-cine);
+}
+
+.door:hover .img {
+  transform: scale(1.04);
+}
+
+.imgAir {
+  left: auto;
+  right: -8%;
+  top: auto;
+  bottom: 16%;
+  width: 88%;
+  height: auto;
+  object-fit: contain;
+  filter: none;
+  mix-blend-mode: multiply;
+}
+
+.themeThink .img {
+  filter: grayscale(1) contrast(1.08) brightness(0.92);
+}
+
+.boxTitle {
+  position: absolute;
+  left: 2.2svh;
+  bottom: 6svh;
+  font-family: var(--font-display), "Archivo", Inter, sans-serif;
+  font-size: clamp(24px, 4.6svh, 50px);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.doorLine {
+  position: absolute;
+  left: 2.2svh;
+  bottom: 4.6svh;
+  width: 4.5svh;
+  height: 2px;
+  background: var(--about-accent);
+  transform-origin: 0 50%;
+  transition: transform 0.45s var(--ease-cine);
+}
+
+.door:hover .doorLine {
+  transform: scaleX(1.9);
+}
+
+.sub {
+  position: absolute;
+  left: 2.2svh;
+  bottom: 2svh;
+  right: 5.5svh;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrow {
+  position: absolute;
+  right: 1.8svh;
+  bottom: 1.7svh;
+  opacity: 0.55;
+  transition: transform 0.45s var(--ease-cine), opacity 0.35s var(--ease-soft);
+}
+
+.arrow svg {
+  display: block;
+  width: 20px;
+  height: 14px;
+}
+
+.themeWho .arrow {
+  color: var(--about-accent);
+  opacity: 0.85;
+}
+
+.door:hover .arrow {
+  transform: translateX(5px);
+  opacity: 1;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3svh;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(233, 218, 213, 0.55);
+}
+
+/* expanded door state */
+.isExpanded .door:not(.isActive) {
+  transform: scale(0.94);
+  opacity: 0.15;
+  filter: blur(2px) grayscale(0.4);
+  pointer-events: none;
+}
+
+.isExpanded .door.isActive {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.isExpanded .abTitle {
+  opacity: 0.35;
+}
+
+.detail {
+  position: absolute;
+  inset: 7svh clamp(20px, 4vw, 76px) 5svh;
+  z-index: 6;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.32);
+  border: 1px solid rgba(255, 80, 50, 0.35);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 120px -30px rgba(0, 0, 0, 0.75),
+    0 0 70px -18px rgba(200, 30, 15, 0.35);
+  transition:
+    transform 0.65s var(--ease-cine),
+    opacity 0.45s var(--ease-soft),
+    visibility 0s linear 0.65s;
+}
+
+.detailOpen {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    transform 0.65s var(--ease-cine),
+    opacity 0.45s var(--ease-soft);
+}
+
+.detailWho {
+  background: #f2efec;
+  color: #101010;
+}
+
+.detailThink {
+  background: #0b0909;
+  color: #fff;
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 7;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(18, 12, 10, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.35s var(--ease-cine), background-color 0.3s var(--ease-soft);
+}
+
+.close:hover {
+  transform: scale(1.1);
+  background: rgba(30, 18, 14, 0.75);
+}
+
+.close svg {
+  width: 12px;
+  height: 12px;
+}
+
+.view {
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+
+.viewActive {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+}
+
+.viewCopy {
+  align-self: center;
+  padding: 6svh clamp(24px, 4vw, 70px);
+  min-width: 0;
+}
+
+.viewMedia {
+  position: relative;
+  overflow: hidden;
+}
+
+.viewMedia img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.eyebrowD {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--about-accent);
+}
+
+.head {
+  margin: 0.45em 0 0.4em;
+  font-family: var(--font-display), "Archivo", Inter, sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px, 7svh, 82px);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.headQuote {
+  text-transform: none;
+  font-size: clamp(24px, 4.6svh, 54px);
+  line-height: 1.12;
+}
+
+.attr {
+  margin: 0 0 1.2em;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c93527;
+}
+
+.detailThink .attr,
+.detailThink .eyebrowD {
+  color: rgba(255, 235, 228, 0.75);
+}
+
+.dText {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(13px, 1.9svh, 17px);
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.detailThink .dText {
+  color: #f4efec;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 2.4svh 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tags li {
+  padding: 6px 13px;
+  border: 1px solid currentColor;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.viewCopy > * {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 0.5s var(--ease-soft), transform 0.6s var(--ease-cine);
+}
+
+.detailOpen .viewActive .viewCopy > *:nth-child(1) {
+  transition-delay: 0.14s;
+}
+.detailOpen .viewActive .viewCopy > *:nth-child(2) {
+  transition-delay: 0.22s;
+}
+.detailOpen .viewActive .viewCopy > *:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.detailOpen .viewActive .viewCopy > *:nth-child(4) {
+  transition-delay: 0.38s;
+}
+
+.detailOpen .viewActive .viewCopy > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── the player window: ghosts the light composition, frames it, -----------------
+   and holds the tile fragments + the surviving label cluster ──────────────── */
+.window {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: var(--s3r, 0px);
+  transform-origin: 50% 72%;
+  will-change: transform;
+  box-shadow:
+    0 40px 120px -40px rgba(0, 0, 0, 0.7),
+    0 24px 80px -30px rgba(255, 40, 16, 0.28);
+}
+
+.ghost {
+  position: absolute;
+  inset: 0;
+  background: var(--s2-bg);
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid rgba(255, 34, 14, 0.85);
+  border-radius: var(--s3r, 0px);
+  box-shadow: inset 0 0 46px -20px rgba(255, 60, 25, 0.45);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.frags {
+  position: absolute;
+  inset: 0;
+}
+
+.frag {
+  position: absolute;
+  overflow: hidden;
+  background: var(--s2-bg);
+  box-shadow: 0 18px 50px -18px rgba(10, 4, 2, 0.35);
+  will-change: transform, opacity;
+}
+
+.fragContent {
+  position: absolute;
+}
+
+/* fragment clones always render the finished composition */
+.fragContent .line1,
+.fragContent .line2,
+.fragContent .line3 {
+  transform: none;
+}
+
+.fragContent .brand,
+.fragContent .side,
+.fragContent .rail,
+.fragContent .foot,
+.fragContent .corner {
+  opacity: 1;
+  transform: none;
+}
+
+.clusterInner .label {
+  opacity: 1;
+  filter: none;
+}
+
+.fragSeam {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(23, 17, 20, 0.4);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cluster {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.clusterInner {
+  position: absolute;
+}
+
+/* flash used when What I Do cuts to the Works chapter */
+.flash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #040202;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s ease;
+}
+
+.flashOn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ══════════════════════ Responsive ══════════════════════ */
+@media (max-width: 1000px) {
+  .stage {
+    place-items: stretch;
+  }
+
+  .comp {
+    width: 100vw;
+    height: auto;
+    min-height: 100%;
+    position: relative;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .brand {
+    position: static;
+    margin-top: 14svh;
+    font-size: 19px;
+  }
+  .brandHunch {
+    font-size: 18px;
+    margin-left: 4px;
+  }
+
+  .side {
+    position: static;
+    margin: 18px 20px 0;
+    border-left-width: 1.5px;
+    padding-left: 8px;
+  }
+  .sideL {
+    float: left;
+  }
+  .sideR {
+    float: right;
+  }
+  .side p {
+    font-size: 10.5px;
+    margin-bottom: 3px;
+  }
+
+  .title {
+    position: static;
+    clear: both;
+    margin-top: 26px;
+    font-size: 13.4vw;
+  }
+
+  .mask1 {
+    transform: none;
+  }
+  .mask2 {
+    transform: none;
+    margin-top: -0.06em;
+  }
+  .mask3 {
+    transform: none;
+    margin-top: 0.04em;
+  }
+  .line2 {
+    gap: 0.3em;
+  }
+  .line3 {
+    flex-wrap: wrap;
+    gap: 0.16em;
+    row-gap: 0;
+  }
+  .wordThinking {
+    margin-left: 0;
+  }
+
+  .labels {
+    position: absolute;
+    inset: 0;
+  }
+
+  .label {
+    font-size: 13px;
+    padding: 7px 12px 8px;
+    border-radius: 8px;
+  }
+
+  .posAi {
+    left: 42%;
+    top: 41%;
+  }
+  .posSys {
+    left: 56%;
+    top: 46%;
+  }
+  .posWeb {
+    left: 39%;
+    top: 51%;
+  }
+  .posApi {
+    left: 58%;
+    top: 56%;
+  }
+  .posAuto {
+    left: 48%;
+    top: 61%;
+  }
+
+  /* About Me */
+  .dim {
+    font-size: 8.6vw;
+  }
+
+  .credit,
+  .corner {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+  .creditR {
+    display: none;
+  }
+  .cornerR {
+    display: none;
+  }
+
+  .abComp {
+    padding: 0 16px 3svh;
+  }
+
+  .abTitle {
+    font-size: clamp(40px, 10svh, 84px);
+  }
+  .titleMask {
+    margin-bottom: -1.2svh;
+  }
+
+  .doors {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    gap: 10px;
+    height: 60svh;
+  }
+
+  .doorPos:nth-child(2),
+  .doorPos:nth-child(3) {
+    top: 0;
+  }
+
+  .num {
+    top: 12px;
+    left: 14px;
+    font-size: 18px;
+  }
+  .kicker {
+    top: 14px;
+    right: 12px;
+    font-size: 8px;
+  }
+
+  .img {
+    left: auto;
+    right: 0;
+    top: 0;
+    width: 44%;
+    height: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 22%);
+  }
+
+  .imgAir {
+    right: -8%;
+    top: auto;
+    bottom: -12%;
+    width: 62%;
+    height: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .boxTitle {
+    left: 14px;
+    bottom: 34px;
+    font-size: clamp(17px, 2.9svh, 26px);
+  }
+  .doorLine {
+    left: 14px;
+    bottom: 26px;
+    width: 26px;
+  }
+  .sub {
+    left: 14px;
+    bottom: 9px;
+    right: 46%;
+    font-size: 8.5px;
+  }
+  .arrow {
+    right: 10px;
+    bottom: 10px;
+  }
+  .arrow svg {
+    width: 16px;
+    height: 11px;
+  }
+
+  .foot {
+    margin-top: 2svh;
+    font-size: 8.5px;
+    letter-spacing: 0.12em;
+  }
+
+  .detail {
+    inset: 4svh 12px 3svh;
+  }
+  .viewActive {
+    grid-template-columns: 1fr;
+    grid-template-rows: 34% 1fr;
+  }
+  .viewMedia {
+    order: -1;
+  }
+  .viewCopy {
+    align-self: start;
+    padding: 3.4svh 20px;
+    overflow-y: auto;
+    max-height: 100%;
+  }
+  .head {
+    font-size: clamp(26px, 4.6svh, 44px);
+  }
+  .headQuote {
+    font-size: clamp(19px, 3.2svh, 30px);
+  }
+  .dText {
+    font-size: 13px;
+  }
+}
+
+/* ══════════════════════ Reduced motion ══════════════════════
+   Static flow: the composition completes, then About Me prints beneath it. */
+@media (prefers-reduced-motion: reduce) {
+  .section {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .stage {
+    position: static;
+    display: block;
+    height: auto;
+    overflow: visible;
+    isolation: auto;
+  }
+
+  .comp {
+    margin-inline: auto;
+  }
+
+  .window,
+  .atmo {
+    display: none;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .p3 {
+    position: relative;
+    inset: auto;
+    visibility: visible;
+    opacity: 1;
+    min-height: 100svh;
+    background: var(--s3-void);
+    pointer-events: auto;
+  }
+
+  .dim,
+  .corner {
+    opacity: 1 !important;
+  }
+
+  .title,
+  .abTitle,
+  .titleMask,
+  .door,
+  .doorIn,
+  .img,
+  .doorLine,
+  .arrow,
+  .detail,
+  .viewCopy > * {
+    transition: none !important;
+  }
+
+  .detail {
+    transform: none;
+  }
+
+  .isExpanded .door:not(.isActive) {
+    filter: none;
+    transform: none;
+    opacity: 0.3;
+  }
+}

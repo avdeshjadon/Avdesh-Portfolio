@@ -1,0 +1,292 @@
+/* ============ THE PEOPLE BEHIND THE WORK — DriftWall ============
+   The reference's spatial wall, rendered in the portfolio's own language:
+   white ground (not #060010), the site's type scale, and NO tile dimming —
+   depth reads through perspective, scale and a soft edge mask so every
+   photograph stays bright and true to its colour. */
+
+/* A full-screen frame: the title sits at the top of the composition and the
+   wall takes ALL remaining height, centred in the viewport. Previously this
+   section was taller than its frame, so the wall was pushed out of the
+   bottom of the scene and clipped — which is what read as "images in the
+   bottom-right with empty space above". */
+.gallery {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+  padding: clamp(48px, 7vh, 88px) 0 0;
+}
+
+/* ---------- heading ---------- */
+.head {
+  position: relative;
+  z-index: 4;
+  flex: 0 0 auto;
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.eyebrow span {
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+/* the section names itself, unmistakably and above everything else */
+.h2 {
+  margin-top: 16px;
+  font-weight: 900;
+  font-size: clamp(34px, 5vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--accent);
+}
+.lede {
+  margin-top: 16px;
+  font-size: clamp(14px, 1.15vw, 16px);
+  line-height: 1.6;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* Short viewports: the title gives room back to the wall, so the images stay
+   the hero of the frame instead of being squeezed into a strip. */
+@media (max-height: 820px) {
+  .gallery {
+    padding-top: clamp(34px, 5vh, 56px);
+  }
+  .h2 {
+    margin-top: 10px;
+    font-size: clamp(30px, 6vh, 52px);
+  }
+  .lede {
+    margin-top: 10px;
+    font-size: 13.5px;
+  }
+  .foot {
+    padding: 4px 44px 18px;
+  }
+}
+@media (max-height: 660px) {
+  .lede {
+    display: none;
+  }
+}
+
+/* ---------- the wall: perspective 1200, tilt 16°, turn -14° ---------- */
+.wallView {
+  position: relative;
+  /* takes every pixel the title and footer don't need — this is what makes
+     the wall the hero of the frame instead of a widget below the fold */
+  flex: 1;
+  min-height: 0;
+  margin-top: clamp(14px, 2.4vh, 30px);
+  /* a longer lens: the plane still has depth, but the projection no longer
+     magnifies the near side off the edge of the frame */
+  perspective: 2000px;
+  perspective-origin: 50% 44%;
+  overflow: hidden;
+}
+.wall {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* NARROWER than the frame on purpose. The 3D projection (rotateX + rotateY
+     under perspective) spreads the plane roughly 22% wider than its layout
+     width, so laying it out at ~84% lands the *projected* wall just inside
+     the viewport. The reference's oversized wall is exactly what sliced the
+     outer columns permanently. */
+  width: 88%;
+  height: 124%;
+  /* gentler turn for the same reason — a hard rotateY throws the outer
+     columns past the edge */
+  transform: translate(-50%, -48%) rotateX(11deg) rotateY(-5deg);
+  transform-style: preserve-3d;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 5), 1fr);
+  gap: clamp(16px, 1.6vw, 26px);
+  will-change: transform;
+}
+.col {
+  overflow: hidden;
+}
+.colInner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.4vw, 22px);
+  will-change: transform;
+}
+
+/* Each tile keeps its photograph's true ratio — never stretched, and the
+   varied heights give the wall its natural rhythm. */
+/* THE VISIBILITY RULE.
+   A tile's height is capped, and its width is derived from that cap and the
+   picture's own ratio — so height = width / ar can never exceed --tile-h,
+   and never exceeds the column either. Every photograph therefore fits
+   inside the wall's viewport with travel room to spare, and because the box
+   ratio equals the file's ratio, `cover` shows the WHOLE image uncropped.
+   Portrait pictures end up narrower than their column and sit centred;
+   that variation is what makes the wall read as curated. */
+.tile {
+  /* Keyed to the wall's OWN measured height (set from JS), not to vh — the
+     wall is now a flex child, so vh no longer describes it. 46% guarantees
+     every tile is comfortably whole inside the frame at any viewport. */
+  --tile-h: calc(var(--wall-h, 60vh) * 0.46);
+  position: relative;
+  width: min(100%, calc(var(--tile-h) * var(--ar)));
+  margin: 0 auto;
+  aspect-ratio: var(--ar);
+  border-radius: 14px; /* reference radius */
+  overflow: hidden;
+  background: var(--ph);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px -18px rgba(20, 20, 20, 0.22);
+  transform: translateZ(0);
+  transition: scale 0.5s var(--ease-out-expo), box-shadow 0.45s ease;
+  will-change: transform;
+}
+.tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%; /* faces sit high in these photographs */
+  display: block;
+  /* no filter, no grayscale, no dim — true to the original */
+}
+/* depth on hover: a lift toward the viewer, never a dim of its neighbours */
+.tile:hover {
+  scale: 1.045;
+  box-shadow: 0 34px 70px -22px rgba(20, 20, 20, 0.34);
+}
+
+/* the reference's `fade`, as a mask on the white ground rather than a dark
+   overlay — the wall dissolves into the page instead of being tinted */
+.fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* a light dissolve at the very edges only — it must not eat the outer
+     columns, which is what made images read as permanently half-cut */
+  background:
+    linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0) 12%,
+      rgba(255, 255, 255, 0) 88%, #fff 100%),
+    linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 5%,
+      rgba(255, 255, 255, 0) 95%, #fff 100%);
+}
+
+/* ---------- foot ---------- */
+.foot {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 6px 44px 30px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.count {
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+
+/* ---------- responsive: thin the wall, don't shrink it to mush ---------- */
+@media (max-width: 1399px) {
+  .wall {
+    --cols: 4;
+    width: 88%;
+  }
+}
+@media (max-width: 1099px) {
+  .wall {
+    --cols: 3;
+    /* less rotation here, so the projection spreads less and the wall can
+       be laid out wider */
+    width: 88%;
+    transform: translate(-50%, -48%) rotateX(11deg) rotateY(-6deg);
+  }
+  .wallView {
+  }
+  .tile {
+  }
+}
+@media (max-width: 699px) {
+  .gallery {
+    padding: 76px 0 0;
+  }
+  .wall {
+    --cols: 2;
+    /* almost flat on a phone: depth must never cost visibility */
+    width: 90%;
+    transform: translate(-50%, -48%) rotateX(8deg) rotateY(-3deg);
+  }
+  /* a proportionally wider dissolve — 5% of a phone is only ~19px, too
+     narrow to absorb the edge columns */
+  .fade {
+    background:
+      linear-gradient(to bottom, #fff 0%, rgba(255, 255, 255, 0) 12%,
+        rgba(255, 255, 255, 0) 88%, #fff 100%),
+      linear-gradient(to right, #fff 0%, rgba(255, 255, 255, 0) 11%,
+        rgba(255, 255, 255, 0) 89%, #fff 100%);
+  }
+  .wallView {
+    margin-top: 18px;
+  }
+  .tile {
+  }
+  .foot {
+    padding: 4px 24px 24px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    gap: 14px;
+  }
+  .hint {
+    text-align: right;
+  }
+}
+
+/* motion off: a calm, readable wall with no drift */
+@media (prefers-reduced-motion: reduce) {
+  .wall {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+  .wallView {
+    height: auto;
+    perspective: none;
+    padding: 0 24px 28px;
+  }
+  .fade {
+    display: none;
+  }
+}

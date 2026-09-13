@@ -1,0 +1,411 @@
+/* ============ JOURNEY v2 — light-cable tunnel ============
+   The tunnel is the stage; the chapters are the story travelling through it.
+   Everything animated here is opacity / transform only. */
+
+.journey {
+  position: relative;
+  background: #fff; /* white portfolio around; the tunnel owns its own dark */
+}
+
+.frame {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: #0a0a0c;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Keeps white type legible wherever the cables flare bright. Sits between
+   the canvas and the copy, and never intercepts pointer events. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    62% 54% at 50% 50%,
+    rgba(4, 4, 6, 0.8) 0%,
+    rgba(4, 4, 6, 0.58) 42%,
+    rgba(4, 4, 6, 0) 78%
+  );
+  pointer-events: none;
+}
+
+/* ---------- narrative layer ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ---------- the opening title ---------- */
+.intro {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(620px, 86vw);
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+.introLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.introLabel span {
+  color: var(--accent);
+}
+.introLede {
+  margin-top: 18px;
+  font-size: clamp(17px, 2.2vw, 26px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-wrap: balance;
+}
+.introHint {
+  margin-top: 22px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- a chapter ---------- */
+.chapter {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(700px, 88vw);
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(26px) scale(0.985);
+  filter: blur(2px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.75s var(--ease-out-expo),
+    filter 0.5s ease;
+}
+.on {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  filter: blur(0);
+}
+
+/* Year → Title → Place → Story → Transition.
+   Children carry the stagger; the delays only apply on the way in, so an
+   outgoing chapter clears the frame in one clean move. */
+.chYear,
+.chTitle,
+.chPlace,
+.chStory,
+.chBridge {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.8s var(--ease-out-expo);
+}
+.on .chYear,
+.on .chTitle,
+.on .chPlace,
+.on .chStory,
+.on .chBridge {
+  opacity: 1;
+  transform: translateY(0);
+}
+.on .chYear {
+  transition-delay: 0.02s;
+}
+.on .chTitle {
+  transition-delay: 0.1s;
+}
+.on .chPlace {
+  transition-delay: 0.16s;
+}
+.on .chStory {
+  transition-delay: 0.24s;
+}
+.on .chBridge {
+  transition-delay: 0.36s;
+}
+
+.chYear {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(40px, 6.4vw, 80px);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: #fff;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.55);
+}
+.chTitle {
+  margin-top: 14px;
+  font-weight: 800;
+  font-size: clamp(19px, 2.5vw, 32px);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #fff;
+  text-wrap: balance;
+}
+.chPlace {
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.chStory {
+  margin: 20px auto 0;
+  max-width: 56ch;
+  font-size: clamp(14.5px, 1.2vw, 17px);
+  line-height: 1.66;
+  color: rgba(255, 255, 255, 0.84);
+  text-wrap: pretty;
+}
+/* the hand-off into the next chapter — serif italic, the site's accent voice */
+.chBridge {
+  margin: 22px auto 0;
+  max-width: 48ch;
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(15.5px, 1.35vw, 20px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+  text-wrap: pretty;
+}
+.chBridge i {
+  font-style: normal;
+  color: var(--accent);
+  margin-right: 6px;
+}
+
+/* ---------- chapter rail ---------- */
+.rail {
+  position: absolute;
+  left: 50%;
+  bottom: 46px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.counter {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.42);
+  font-variant-numeric: tabular-nums;
+}
+.counterNow {
+  color: #fff;
+}
+.ticks {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.tick {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.45s ease, transform 0.45s ease;
+}
+.tickOn {
+  background: var(--accent);
+  transform: scaleY(1.6);
+}
+
+/* white returns at the climax */
+.whiteout {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- accessibility / no-motion / no-WebGL ---------- */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* the pin never runs in this mode, so the frame grows with the content */
+.frameStatic {
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+}
+.frameStatic .canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.staticStory {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(72px, 12vh, 132px) 24px clamp(72px, 12vh, 132px);
+  color: #fff;
+}
+.staticStory h2 {
+  font-weight: 900;
+  font-size: clamp(30px, 5vw, 48px);
+  letter-spacing: -0.03em;
+}
+.staticLede {
+  margin-top: 14px;
+  font-size: clamp(15px, 1.6vw, 19px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.76);
+}
+.staticStory ol {
+  list-style: none;
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 52px;
+}
+.staticYear {
+  display: block;
+  font-weight: 900;
+  font-size: clamp(30px, 4.4vw, 52px);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: #fff;
+}
+.staticStory h3 {
+  margin-top: 10px;
+  font-weight: 800;
+  font-size: clamp(17px, 2vw, 23px);
+  letter-spacing: -0.02em;
+}
+.staticPlace {
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.staticStory ol p:not(.staticPlace):not(.staticBridge) {
+  margin-top: 14px;
+  font-size: 15.5px;
+  line-height: 1.66;
+  color: rgba(255, 255, 255, 0.82);
+}
+.staticBridge {
+  margin-top: 14px;
+  padding-left: 16px;
+  border-left: 2px solid var(--accent);
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1024px) {
+  .chStory {
+    max-width: 52ch;
+  }
+  .rail {
+    bottom: 38px;
+  }
+}
+
+/* Promoted from 700px to the site's real mobile boundary: between 701 and
+   1000px the layout is already mobile, yet chapters were still animating a
+   blur filter over the live WebGL canvas. */
+@media (max-width: 1000px) {
+  .chapter {
+    width: 90vw;
+    /* blur costs more than it gives on mobile GPUs */
+    filter: none;
+    transition:
+      opacity 0.45s ease,
+      transform 0.65s var(--ease-out-expo);
+  }
+  .on {
+    filter: none;
+  }
+  .chYear {
+    font-size: clamp(38px, 13vw, 56px);
+  }
+  .chTitle {
+    margin-top: 10px;
+    font-size: clamp(18px, 5.2vw, 24px);
+  }
+  .chStory {
+    margin-top: 16px;
+    max-width: none;
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .chBridge {
+    margin-top: 18px;
+    max-width: none;
+    font-size: 16px;
+  }
+  .introLede {
+    font-size: clamp(17px, 5.4vw, 22px);
+  }
+  .rail {
+    bottom: 28px;
+    gap: 12px;
+  }
+  .tick {
+    width: 14px;
+  }
+}
+
+/* short landscape phones: the story must still fit above the rail */
+@media (max-height: 560px) {
+  .chYear {
+    font-size: clamp(30px, 7vh, 44px);
+  }
+  .chTitle {
+    margin-top: 8px;
+    font-size: clamp(16px, 4.6vh, 20px);
+  }
+  .chPlace {
+    margin-top: 8px;
+  }
+  .chStory {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .chBridge {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+  .introLede {
+    font-size: clamp(16px, 4.8vh, 21px);
+  }
+  .rail {
+    bottom: 14px;
+  }
+}

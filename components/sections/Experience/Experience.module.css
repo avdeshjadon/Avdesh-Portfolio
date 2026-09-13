@@ -1,0 +1,536 @@
+/* ============ EXPERIENCE — centred stacked panel composition ============
+   A curated stack of physical boards floating in the centre of a white
+   gallery. Boards are wide and short, sharp-edged, perspective-distorted. */
+
+.experience {
+  position: relative;
+  background: #fbfbfc;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: 96px 0;
+}
+.deckMode {
+  height: 100svh;
+  /* must not exceed the viewport, or the internal centring is computed
+     against a taller box and the stack sinks below the fold */
+  min-height: 600px;
+  /* kept tight so the stack lands near the true vertical centre */
+  padding: 76px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* the active board's colour, as air in the gallery */
+.tint {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: min(1200px, 118vw);
+  height: min(720px, 92vh);
+  border-radius: 50%;
+  background: rgba(0, 114, 227, 0.07);
+  filter: blur(80px);
+  transition: background 0.9s ease;
+  pointer-events: none;
+}
+
+/* ---------- header ---------- */
+.header {
+  position: relative;
+  z-index: 5;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 44px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.eyebrow span {
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.eyebrow::after {
+  content: "";
+  flex: 0 0 34px;
+  height: 1px;
+  background: var(--accent);
+}
+.h2 {
+  font-weight: 900;
+  font-size: clamp(24px, 2.7vw, 34px);
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  max-width: 520px;
+}
+.serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+/* ---------- the centred stage ---------- */
+.stageWrap {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  perspective: 1900px;
+  perspective-origin: 50% 46%;
+}
+.stage {
+  position: relative;
+  /* perspective magnifies the front board slightly, so the authored width is
+     set a little under the 65–80vw target to land inside it when rendered */
+  width: min(76vw, 1180px);
+  /* the active panel is a large content card; the waiting stack fills the
+     extra headroom above it */
+  /* 56vh on a normal desktop; on short viewports it yields to the space the
+     header, the receding stack and the foot actually need, so the whole
+     composition always fits without clipping */
+  --panel-h: clamp(280px, min(56vh, calc(100vh - 370px)), 620px);
+  height: calc(var(--panel-h) + 150px);
+  transform-style: preserve-3d;
+  transform: rotateX(6deg);
+  will-change: transform;
+}
+
+/* ---------- the boards: wide, short, sharp ---------- */
+.board {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0; /* active panel anchors here; the stack recedes upward from it */
+  height: var(--panel-h);
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(30px, 3.4vw, 54px) clamp(24px, 3vh, 40px);
+  border-radius: 6px; /* sharp boards, not rounded app cards */
+  color: #fff;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  box-shadow: 0 30px 64px -26px rgba(20, 20, 20, 0.34);
+}
+.dark {
+  color: var(--ink);
+}
+/* the white board needs a hairline so it reads as an object on white */
+.dark[style*="rgb(255, 255, 255)"],
+.board[style*="#FFFFFF"] {
+  box-shadow: 0 30px 64px -26px rgba(20, 20, 20, 0.22), inset 0 0 0 1px #ececee;
+}
+
+/* the exposed band — waiting boards reveal exactly this much (UP = 46px),
+   so all of their text is guaranteed visible and collision-free */
+.strip {
+  height: 50px;
+  flex: 0 0 50px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.year {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  opacity: 0.95;
+  white-space: nowrap;
+}
+.type {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.dark .type {
+  background: rgba(20, 20, 20, 0.1);
+}
+
+.company {
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0.92;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* full content — ACTIVE PANEL ONLY, below the strip. Nothing sits in front
+   of the active panel, so this text can never be collided with. */
+.detailCol {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto; /* content | company mark */
+  gap: clamp(20px, 3vw, 52px);
+  align-items: stretch;
+  /* placement adapts per company — dense panels drop the mark underneath */
+}
+.logoBelow {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: clamp(14px, 2vh, 24px);
+  min-height: 0;
+  overflow: hidden; /* content clips inside the panel, never spills past it */
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.36s ease, transform 0.5s var(--ease-out-expo);
+  pointer-events: none;
+}
+.on .detailCol {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.14s;
+}
+
+.contentCol {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ---------- company mark: right-side anchor ---------- */
+/* when the mark sits below, it aligns left and gets breathing room above,
+   reading as the panel's closing element rather than a sidebar */
+.logoBelow .logoCol {
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-top: clamp(10px, 1.6vh, 18px);
+  border-top: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 18%, transparent);
+}
+.logoCol {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* pushed forward on the panel's own Z axis, so it parallaxes naturally
+     with the 3D movement rather than being animated separately */
+  transform: translateZ(30px);
+  transform-style: preserve-3d;
+}
+.logoWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 16px 34px -14px rgba(20, 20, 20, 0.34);
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s ease;
+}
+.logoWrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* never distorts the supplied artwork */
+}
+.card:hover .logoWrap,
+.board:hover .logoWrap {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 24px 46px -14px rgba(20, 20, 20, 0.42);
+}
+
+/* logos that ship with their own background: shown as a clean tile */
+.tile {
+  width: clamp(88px, 9.5vw, 132px);
+  aspect-ratio: 1;
+  background: #fff;
+}
+
+/* transparent artwork: a light plate, width derived from its true aspect */
+.plate {
+  height: clamp(64px, 7vh, 92px);
+  width: calc(clamp(64px, 7vh, 92px) * var(--logo-aspect, 3));
+  max-width: min(300px, 26vw);
+  background: #fff;
+  padding: 0 clamp(12px, 1.4vw, 20px);
+  border-radius: 14px;
+}
+.plate img {
+  object-fit: contain;
+}
+
+/* no official file yet — typographic stand-in in the panel's own voice */
+.mono {
+  width: clamp(88px, 9.5vw, 132px);
+  aspect-ratio: 1;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+}
+.dark .mono {
+  background: rgba(20, 20, 20, 0.08);
+}
+.mono b {
+  font-size: clamp(15px, 1.5vw, 20px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-align: center;
+  padding: 0 10px;
+  line-height: 1.1;
+}
+
+.role {
+  font-size: clamp(26px, 3vw, 46px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  max-width: 20ch;
+}
+.loc {
+  margin-top: 10px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+/* two-column body — spacious, editorial */
+.body {
+  margin-top: auto;
+  padding-top: clamp(18px, 2.6vh, 30px);
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: clamp(24px, 3vw, 56px);
+  align-items: start;
+  border-top: 1px solid rgba(255, 255, 255, 0.26);
+  min-height: 0;
+}
+.dark .body {
+  border-top-color: rgba(20, 20, 20, 0.14);
+}
+.lbl {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.62;
+  margin-bottom: 8px;
+}
+.lblGap {
+  margin-top: clamp(14px, 2vh, 22px);
+}
+.summary {
+  font-size: clamp(14px, 1.05vw, 16.5px);
+  line-height: 1.55;
+  opacity: 0.96;
+}
+.list {
+  margin: 12px 0 0 17px;
+  font-size: clamp(12.5px, 0.92vw, 14px);
+  line-height: 1.5;
+  opacity: 0.86;
+}
+.list li {
+  margin-bottom: 6px;
+}
+.outcome {
+  font-size: clamp(15px, 1.25vw, 20px);
+  font-weight: 800;
+  line-height: 1.3;
+}
+.skills {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.skills i {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  white-space: nowrap;
+}
+.dark .skills i {
+  background: rgba(20, 20, 20, 0.09);
+}
+
+/* ---------- foot ---------- */
+.foot {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 26px;
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: 14px 44px 24px;
+}
+.count {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.nav {
+  display: flex;
+  gap: 4px 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.navItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #b9b9bf;
+  padding: 5px 2px;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+.navItem i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0.4;
+  box-shadow: inset 0 0 0 1px rgba(20, 20, 20, 0.12);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.navItem:hover {
+  color: var(--ink-2);
+}
+.navOn {
+  color: var(--ink);
+}
+.navOn i {
+  opacity: 1;
+  transform: scale(1.3);
+}
+.hintFoot {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+}
+
+/* Short DESKTOP viewports: the pinned board has less room, so the secondary
+   detail steps aside rather than being clipped — summary, impact and skills
+   remain. The min-width guard is essential: without it this matched every
+   phone (a 375x812 iPhone is under 820px tall) and hid the achievements on
+   mobile, where boards are auto-height in normal flow with room to spare. */
+@media (max-height: 820px) and (min-width: 1001px) {
+  .list {
+    display: none;
+  }
+}
+
+/* ============ responsive ============ */
+@media (max-width: 1280px) {
+  .stage {
+    width: 76vw;
+  }
+  .board {
+    padding: 0 30px;
+  }
+  .strip {
+    gap: 14px;
+  }
+}
+
+/* below the deck breakpoint: honest vertical boards, all content readable */
+@media (max-width: 1000px) {
+  .experience {
+    padding: 80px 0;
+  }
+  .header {
+    padding: 0 24px;
+  }
+  .stageWrap {
+    display: block;
+    perspective: none;
+    margin-top: 32px;
+  }
+  .stage {
+    position: static;
+    width: auto;
+    height: auto;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 24px;
+  }
+  .board {
+    position: relative !important;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin-top: 0;
+    height: auto;
+    gap: 14px;
+    padding: 24px 24px;
+    border-radius: 10px;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+  }
+  .strip {
+    height: auto;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    white-space: normal;
+    gap: 10px 14px;
+  }
+  .role {
+    font-size: 24px;
+    max-width: none;
+  }
+  .body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 18px;
+  }
+  /* mark moves above the copy so nothing is squeezed on narrow screens */
+  .detailCol {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .logoCol {
+    order: -1;
+    justify-content: flex-start;
+    transform: none;
+  }
+  .type {
+    margin-left: 0;
+  }
+  .detailCol {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .summary {
+    -webkit-line-clamp: unset;
+    display: block;
+  }
+  .foot {
+    display: none;
+  }
+}
