@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <linearGradient id="py-a" x1="18.9" y1="19.4" x2="79.9" y2="80.4" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#387EB8"/>
+    <stop offset="100%" stop-color="#366994"/>
+  </linearGradient>
+  <linearGradient id="py-b" x1="47.8" y1="48.3" x2="108.8" y2="109.3" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#FFE873"/>
+    <stop offset="100%" stop-color="#FFD43B"/>
+  </linearGradient>
+  <path fill="url(#py-a)" d="M63.5 6.5c-27.4 0-25.7 11.9-25.7 11.9l.03 12.3h26.2v3.7H27.1c-16.5 0-24 9.8-24 24.2 0 14.3 6.6 24 20.3 24h6.2v-11.8c0-8.9 7.6-15.9 16.5-15.9h25.8c7.2 0 13.1-6.1 13.1-13.4v-21c0-7.3-6.2-14-14.1-14H63.5zm-7.3 7.4a4.1 4.1 0 1 1 0 8.2 4.1 4.1 0 0 1 0-8.2z"/>
+  <path fill="url(#py-b)" d="M64.5 121.5c27.4 0 25.7-11.9 25.7-11.9l-.03-12.3H64v-3.7h36.9c16.5 0 24-9.8 24-24.2 0-14.3-6.6-24-20.3-24h-6.2v11.8c0 8.9-7.6 15.9-16.5 15.9H52.1c-7.2 0-13.1 6.1-13.1 13.4v21c0 7.3 6.2 14 14.1 14h11.4zm7.3-7.4a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2z"/>
+</svg>

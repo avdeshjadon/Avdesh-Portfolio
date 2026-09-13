@@ -34,10 +34,10 @@ const MARKS: Record<string, ReactNode> = {
 };
 
 const SOCIALS = [
-  { name: "LinkedIn", mark: "linkedin", href: "https://www.linkedin.com/in/avdesh-jadon-" },
+  { name: "LinkedIn", mark: "linkedin", href: "https://www.linkedin.com/in/avdeshjadon/" },
   { name: "GitHub", mark: "github", href: "https://github.com/avdeshjadon" },
-  { name: "Instagram", mark: "instagram", href: "https://www.instagram.com/itsavdeshjadon" },
-  { name: "Email", glyph: "@", href: "mailto:avdeshjadon.dev@gmail.com" },
+  { name: "Instagram", mark: "instagram", href: "https://www.instagram.com/__avdeshhere/" },
+  { name: "Email", glyph: "@", href: "mailto:theavdeshjadon@gmail.com" },
 ] as const;
 
 export default function Connect() {
@@ -134,7 +134,7 @@ export default function Connect() {
           {t("connect.lede")}
         </p>
         <div className={styles.cta}>
-          <Button href="mailto:avdeshjadon.dev@gmail.com" variant="primary" arrow>
+          <Button href="mailto:theavdeshjadon@gmail.com" variant="primary" arrow>
             {t("connect.cta")}
           </Button>
         </div>

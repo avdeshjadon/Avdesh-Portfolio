@@ -88,11 +88,11 @@ export const DICT: Record<string, string> = {
   "cert.introBody":
     "Continuous, applied learning across development, data, testing and AI — the technical base underneath the product work.",
   "cert.introNote":
-    "Five programmes · Coursera, LinkedIn Learning and hands-on portfolio projects.",
+    "Eight verified credentials · Oracle, IBM, Coursera, CSE Pathshala, and LPU Hack Quest.",
   "cert.eyebrow": "Credentials",
-  "cert.h2": "Credentials",
+  "cert.h2": "Certificates & Certifications",
   "cert.lede":
-    "Professional certifications and credentials earned throughout my development and technology journey.",
+    "Official industry certifications, university course certificates, and competitive technical credentials.",
   "cert.certified": "Certified",
   "cert.brandRole": "Full Stack Developer & Software Tester",
   "cert.issuerTBC": "Issuer — to confirm",

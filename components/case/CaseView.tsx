@@ -33,7 +33,7 @@ export default function CaseView({ slug }: { slug: string }) {
 
       <div className={styles.wrap}>
         {}
-        <header className={styles.hero}>
+        <section className={styles.hero}>
           <p className={styles.kicker}>
             {t("case.kicker")} · {project.year}
             {project.award ? ` · ${project.award}` : ""}
@@ -118,7 +118,7 @@ export default function CaseView({ slug }: { slug: string }) {
               ▢&nbsp;&nbsp;{project.coverLabel} — {t("case.cover")}
             </div>
           )}
-        </header>
+        </section>
 
         {}
         <section className={styles.section}>
@@ -132,13 +132,23 @@ export default function CaseView({ slug }: { slug: string }) {
           <p className={styles.problem}>{study.problem}</p>
         </section>
 
-        {}
+        {study.keyFeatures && study.keyFeatures.length > 0 && (
+          <section className={styles.section}>
+            <p className={styles.secLabel}>Key Features &amp; Capabilities</p>
+            <div className={styles.featuresGrid}>
+              {study.keyFeatures.map((feat, i) => (
+                <div className={styles.featCard} key={i}>
+                  <h3 className={styles.featTitle}>{feat.title}</h3>
+                  <p className={styles.featDesc}>{feat.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.process")}</p>
           <div className={styles.steps}>
-            {
-
-}
             {study.process.map((s, i) => (
               <div className={styles.step} key={i}>
                 <span className={styles.stepN}>0{i + 1}</span>
@@ -151,7 +161,6 @@ export default function CaseView({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.decisions")}</p>
           <div className={styles.decisions}>
@@ -164,7 +173,40 @@ export default function CaseView({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {}
+        {study.testingHighlights && study.testingHighlights.length > 0 && (
+          <section className={styles.section}>
+            <p className={styles.secLabel}>Software Testing &amp; QA Suite</p>
+            <div className={styles.qaGrid}>
+              {study.testingHighlights.map((testItem, i) => (
+                <div className={styles.qaItem} key={i}>
+                  <span className={styles.qaCheck}>✓</span>
+                  <p>{testItem}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {study.techStack && study.techStack.length > 0 && (
+          <section className={styles.section}>
+            <p className={styles.secLabel}>Technology Stack &amp; Tooling</p>
+            <div className={styles.stackGrid}>
+              {study.techStack.map((group, i) => (
+                <div className={styles.stackGroup} key={i}>
+                  <p className={styles.stackGroupLabel}>{group.category}</p>
+                  <div className={styles.stackTags}>
+                    {group.skills.map((skill, si) => (
+                      <span className={styles.stackTag} key={si}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.outcome")}</p>
           <div className={styles.outcomes}>
@@ -177,7 +219,6 @@ export default function CaseView({ slug }: { slug: string }) {
           {study.note && <p className={styles.note}>{study.note}</p>}
         </section>
 
-        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.reflection")}</p>
           <p className={styles.reflection}>&ldquo;{study.reflection}&rdquo;</p>

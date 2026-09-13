@@ -71,7 +71,7 @@ img {
   display: block;
 }
 
-html.av-boot header {
+html.av-boot #hero header {
   opacity: 0 !important;
   pointer-events: none !important;
 }

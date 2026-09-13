@@ -96,7 +96,7 @@ export default function DesignStack() {
 
       const cardW = compact
         ? 52
-        : gsap.utils.clamp(112, 168, Math.min(Rx, Ry) * 0.3);
+        : gsap.utils.clamp(126, 184, Math.min(Rx, Ry) * 0.32);
       stageEl.style.setProperty("--card-w", `${cardW}px`);
     };
 

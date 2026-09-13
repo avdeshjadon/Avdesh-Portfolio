@@ -262,6 +262,109 @@
   color: var(--ink);
   max-width: 640px;
 }
+.featuresGrid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+.featCard {
+  padding: 22px 24px;
+  background: #fcfcfc;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.featTitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.featTitle::before {
+  content: "✦";
+  color: var(--accent);
+  font-size: 12px;
+}
+.featDesc {
+  margin-top: 8px;
+  font-size: 14.5px;
+  line-height: 1.58;
+  color: var(--ink-2);
+}
+
+.qaGrid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.qaItem {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 20px 22px;
+  background: rgba(13, 148, 136, 0.05);
+  border: 1px solid rgba(13, 148, 136, 0.2);
+  border-radius: 14px;
+}
+.qaCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.qaItem p {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.stackGrid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.stackGroup {
+  padding: 18px 20px;
+  background: #fcfcfc;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.stackGroupLabel {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.stackTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stackTag {
+  font-size: 12px;
+  font-weight: 700;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: var(--ink);
+}
+
 .note {
   margin-top: 26px;
   font-size: 13px;

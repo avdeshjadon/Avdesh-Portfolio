@@ -10,6 +10,9 @@ export type Study = {
   outcomes: string[];
   reflection: string;
   note?: string;
+  keyFeatures?: { title: string; description: string }[];
+  testingHighlights?: string[];
+  techStack?: { category: string; skills: string[] }[];
 };
 
 export type Cover = {
@@ -94,6 +97,36 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Building a high-throughput routing engine underscored the importance of database indexing, latency budgets, and defensive URL sanitization.",
+      keyFeatures: [
+        {
+          title: "Dynamic UTM Parameter Forwarding",
+          description: "Smart query parameter preservation that carries marketing tags to destinations without losing attribution.",
+        },
+        {
+          title: "Device & Geo-Conditional Routing",
+          description: "Redirects mobile vs desktop users and regional visitors to targeted landing pages automatically.",
+        },
+        {
+          title: "Real-Time Telemetry & Click Analytics",
+          description: "Live click counters, unique visitors, browser distribution, and referrer graphs in an interactive dashboard.",
+        },
+        {
+          title: "Link Expiry & Fallback Rules",
+          description: "Automatic routing to safe fallback URLs when campaigns expire or request quotas are met.",
+        },
+      ],
+      testingHighlights: [
+        "JUnit 5 unit tests for URL parsing, slug collisions, and regex sanitization",
+        "Integration tests for Spring Boot controllers verifying atomic database writes in MySQL",
+        "Automated Postman test suites validating redirect status codes (301, 302, 307, 308) and query preservation",
+        "JMeter load testing simulating 1,000+ concurrent redirect requests to evaluate memory and CPU headroom",
+      ],
+      techStack: [
+        { category: "Backend", skills: ["Java", "Spring Boot", "Spring Data JPA", "Maven"] },
+        { category: "Frontend", skills: ["React", "JavaScript", "Tailwind CSS", "Chart.js"] },
+        { category: "Database & Cache", skills: ["MySQL", "In-Memory Caching", "Indexed Lookups"] },
+        { category: "Testing & QA", skills: ["JUnit 5", "Postman API Testing", "Apache JMeter"] },
+      ],
     },
   },
 
@@ -153,6 +186,36 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Integrating Spring Security with third-party OAuth providers highlighted the power of standardized auth flows and declarative authorization.",
+      keyFeatures: [
+        {
+          title: "OAuth2 Social Authentication",
+          description: "Seamless single sign-on with Google and GitHub, integrated alongside Spring Security and JWT claims.",
+        },
+        {
+          title: "Rental Lifecycle State Machine",
+          description: "Strict book borrowing, renewal, return, and overdue state transitions with inventory locking.",
+        },
+        {
+          title: "Automated Fine Calculation Engine",
+          description: "Background scheduled cron jobs compute daily late fees based on loan period policies.",
+        },
+        {
+          title: "Glassmorphism Admin Dashboard",
+          description: "Live real-time statistics covering total volumes, active rentals, top borrowed genres, and revenue.",
+        },
+      ],
+      testingHighlights: [
+        "JUnit 5 tests for boundary condition return dates and fine computation edge cases",
+        "Spring Security integration tests verifying role separation (ROLE_ADMIN vs ROLE_STUDENT)",
+        "Postman collection covering CRUD operations, token refresh cycles, and multi-user checkout race conditions",
+        "Cross-browser validation for frosted-glass CSS styling across Safari, Chrome, and Firefox",
+      ],
+      techStack: [
+        { category: "Backend", skills: ["Java", "Spring Boot", "Spring Security", "OAuth2", "Hibernate"] },
+        { category: "Frontend", skills: ["React", "JavaScript", "Glassmorphism UI", "Lucide Icons"] },
+        { category: "Database", skills: ["MySQL", "Spring Data JPA"] },
+        { category: "Testing & QA", skills: ["JUnit 5", "Postman", "Role-Based Security Testing"] },
+      ],
     },
   },
 
@@ -212,6 +275,36 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Chrome extension development requires strict adherence to Manifest v3 permissions and careful DOM isolation techniques.",
+      keyFeatures: [
+        {
+          title: "Isolated Shadow DOM Injection",
+          description: "Encapsulated styling and markup that guarantees zero visual clash with host webpage stylesheets.",
+        },
+        {
+          title: "Draggable Physics with Edge Snapping",
+          description: "Butter-smooth mouse and touch dragging with viewport boundary detection and edge dock snapping.",
+        },
+        {
+          title: "Customizable Quick-Launch Dock",
+          description: "One-click access to ChatGPT, Google Gemini, GitHub, LeetCode, and custom user-defined shortcuts.",
+        },
+        {
+          title: "Multi-Session Chrome Sync",
+          description: "Seamless synchronization of custom preferences and widget positions using Chrome Storage Sync API.",
+        },
+      ],
+      testingHighlights: [
+        "Shadow DOM style isolation verified across 50+ popular websites (e.g. YouTube, GitHub, Reddit, Wikipedia)",
+        "Drag and drop boundary testing on dynamic viewport resize and multi-monitor setups",
+        "Manifest v3 CSP and permission policy audits ensuring zero external script leakage",
+        "Chrome Task Manager memory profiling showing 0% CPU consumption during idle state",
+      ],
+      techStack: [
+        { category: "Core", skills: ["JavaScript (ES6+)", "Manifest v3", "Shadow DOM API"] },
+        { category: "Styling", skills: ["Vanilla CSS", "Hardware-Accelerated Transforms"] },
+        { category: "Storage", skills: ["Chrome Storage API", "Chrome Runtime Messaging"] },
+        { category: "Testing & QA", skills: ["Cross-Site DOM Audit", "DevTools Performance Profiler"] },
+      ],
     },
   },
 
@@ -271,6 +364,36 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Designing personal productivity software taught me to prioritize friction-free capture over excessive configuration options.",
+      keyFeatures: [
+        {
+          title: "Real-Time Markdown & Code Engine",
+          description: "Live syntax highlighting for JavaScript, Python, Java, and SQL with zero preview latency.",
+        },
+        {
+          title: "Spaced Repetition Review Algorithm",
+          description: "Automated flashcard recall intervals based on user confidence scores (Hard, Medium, Easy).",
+        },
+        {
+          title: "Productivity Heatmap & Analytics",
+          description: "Interactive study streak graphs and weekly topic retention metrics powered by MongoDB aggregations.",
+        },
+        {
+          title: "Fast Tag-Based Filtering",
+          description: "Instant index-based search across concepts, DSA patterns, and framework documentation notes.",
+        },
+      ],
+      testingHighlights: [
+        "React 19 concurrent render tests ensuring markdown parsing doesn't block UI input",
+        "Supertest API integration tests covering CRUD notes, tag relations, and streak resets",
+        "MongoDB query execution profiling verifying indexed lookup performance under large note volumes",
+        "Lighthouse performance and accessibility audits scoring 98+ on desktop",
+      ],
+      techStack: [
+        { category: "Frontend", skills: ["React 19", "JavaScript", "Tailwind CSS", "Lucide Icons"] },
+        { category: "Backend", skills: ["Node.js", "Express.js", "REST APIs"] },
+        { category: "Database", skills: ["MongoDB", "Mongoose", "Aggregation Pipelines"] },
+        { category: "Testing & QA", skills: ["Jest", "Supertest", "Lighthouse Audit"] },
+      ],
     },
   },
 
@@ -330,6 +453,35 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "High-frequency user input demands minimal component re-renders and direct DOM/ref manipulation for the smoothest possible feel.",
+      keyFeatures: [
+        {
+          title: "Real-Time WPM & Accuracy Metrics",
+          description: "Instantaneous calculations based on standard 5-character word units with character error breakdowns.",
+        },
+        {
+          title: "Progressive Row-by-Row Training",
+          description: "Targeted modules for home row, top row, bottom row, numbers, and custom word banks.",
+        },
+        {
+          title: "Butter-Smooth Cursor Physics",
+          description: "Fluid RAF-interpolated cursor glide with dynamic letter-width detection for natural feedback.",
+        },
+        {
+          title: "Distraction-Free Zen Mode",
+          description: "Minimalist dark palette that eliminates all distractions during active typing sessions.",
+        },
+      ],
+      testingHighlights: [
+        "Keystroke buffer latency benchmarking tested up to 150 WPM without dropped characters",
+        "Input handling edge cases verified: backspaces, word wraps, modifier combinations, and fast repetitions",
+        "Cross-platform layout validation across macOS and Windows keyboard mappings",
+        "Responsive canvas and flex layout tests across varied device aspect ratios",
+      ],
+      techStack: [
+        { category: "Frontend", skills: ["React", "Vite", "JavaScript (ES6+)"] },
+        { category: "Styling & Motion", skills: ["Vanilla CSS", "RAF Interpolation", "Hardware Transforms"] },
+        { category: "Testing & QA", skills: ["High-Speed Input Stress Tests", "Cross-Platform Keyboard Audits"] },
+      ],
     },
   },
 
@@ -389,6 +541,35 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Building QA utility extensions deepened my understanding of browser security boundaries, SameSite attributes, and cookie lifecycles.",
+      keyFeatures: [
+        {
+          title: "One-Click Cookie Export to JSON",
+          description: "Exports all session, persistent, and HttpOnly cookies for the active domain into clean JSON.",
+        },
+        {
+          title: "Instant Cookie Injection & Restoration",
+          description: "Injects cookies with full preservation of path, domain, secure flags, and expiration timestamps.",
+        },
+        {
+          title: "QA Persona Profile Switcher",
+          description: "Save multiple testing session profiles (e.g. Admin, Customer, Guest) and swap instantly.",
+        },
+        {
+          title: "Live Cookie Search & Inspection",
+          description: "Search active cookies by key name or value with instantaneous copy-to-clipboard.",
+        },
+      ],
+      testingHighlights: [
+        "Chrome Cookies API permission boundary checks ensuring zero cross-domain leaks",
+        "Edge-case tests for malformed or expired JSON cookie schemas during manual import",
+        "Security validation of SameSite (Strict, Lax, None) and Secure attribute retention",
+        "Real-world QA workflow verification accelerating repetitive auth testing by 75%",
+      ],
+      techStack: [
+        { category: "Core Extension", skills: ["JavaScript", "Manifest v3", "Chrome Cookies API"] },
+        { category: "UI & Popup", skills: ["HTML5", "CSS3", "JSON Formatter"] },
+        { category: "Testing & QA", skills: ["Cookie Boundary Testing", "Security Flag Audits"] },
+      ],
     },
   },
 
@@ -448,6 +629,35 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Handling authentication tokens in browser extensions reinforced the necessity of zero-telemetry architecture and strict user privacy.",
+      keyFeatures: [
+        {
+          title: "Automated Auth Token Interception",
+          description: "Detects HTTP 200/201 login responses and captures bearer headers or session IDs in milliseconds.",
+        },
+        {
+          title: "Regex-Powered Credential Extraction",
+          description: "Distinguishes between JWT tokens, OAuth access tokens, JSESSIONID, and PHPSESSID strings.",
+        },
+        {
+          title: "Quick Clipboard Sync with Toast Alert",
+          description: "Copies tokens instantly to OS clipboard formatted for immediate insertion into Postman or cURL.",
+        },
+        {
+          title: "Domain Whitelist Security Controls",
+          description: "Restricts active monitoring strictly to developer-approved localhost, staging, or QA URLs.",
+        },
+      ],
+      testingHighlights: [
+        "Chrome webRequest API listener performance tests validating non-blocking network thread execution",
+        "Regex extraction accuracy tested against standard JWT, UUID, and base64 encoded cookies",
+        "Comprehensive zero-telemetry audit confirming no unauthorized network calls or local storage leakages",
+        "Postman API test integration verifying exported headers resolve authenticated mock endpoints seamlessly",
+      ],
+      techStack: [
+        { category: "Core Extension", skills: ["JavaScript", "Chrome webRequest API", "Manifest v3"] },
+        { category: "Pattern Matching", skills: ["RegEx Engine", "JWT Decoder"] },
+        { category: "Testing & QA", skills: ["Zero-Telemetry Security Audit", "Postman Integration Tests"] },
+      ],
     },
   },
 
@@ -507,6 +717,36 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Mastering Hibernate ORM and JPA provided fundamental insights into enterprise Java architectures and relational database abstractions.",
+      keyFeatures: [
+        {
+          title: "Relational Entity Modeling",
+          description: "Clean object-relational mapping for Employee, Department, and Compensation entities using JPA annotations.",
+        },
+        {
+          title: "Atomic Transaction Commit & Rollback",
+          description: "Guaranteed ACID compliance across all multi-entity operations with programmatic rollback on exceptions.",
+        },
+        {
+          title: "Interactive Console CLI",
+          description: "Clean terminal navigation menu supporting employee search, department assignment, and payroll reports.",
+        },
+        {
+          title: "HQL (Hibernate Query Language) Optimization",
+          description: "Custom queries for cross-department salary aggregations and tenure reporting without raw SQL coupling.",
+        },
+      ],
+      testingHighlights: [
+        "JUnit 5 test suites for DAO methods validating CRUD operations against an in-memory H2 test database",
+        "Transaction rollback verification simulating database constraint failures and network drops",
+        "Boundary testing for edge cases: zero/negative salary inputs, duplicate emails, and orphan record prevention",
+        "Hibernate SQL log inspection confirming zero N+1 query loops during department hierarchy traversal",
+      ],
+      techStack: [
+        { category: "Language & ORM", skills: ["Java 17", "Hibernate ORM 6", "JPA"] },
+        { category: "Database", skills: ["MySQL 8.0", "H2 In-Memory DB (Testing)"] },
+        { category: "Build Tool", skills: ["Apache Maven"] },
+        { category: "Testing & QA", skills: ["JUnit 5", "Transaction Integrity Testing", "HQL Optimization"] },
+      ],
     },
   },
 
@@ -566,6 +806,35 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Micro-interactions transform mundane tasks into memorable user moments when executed with performance and restraint.",
+      keyFeatures: [
+        {
+          title: "SVG Rigged Animated Panda Face",
+          description: "Movable paws, pupils, and ears responding dynamically to active form focus events.",
+        },
+        {
+          title: "Password Focus Paw-Covering Interaction",
+          description: "Playfully covers eyes when entering passwords and peeks through paw gaps when toggled.",
+        },
+        {
+          title: "Hardware-Accelerated CSS Keyframes",
+          description: "GPU-rendered transitions guaranteeing constant 60fps performance without frame drops.",
+        },
+        {
+          title: "Submission Error Shake Affordance",
+          description: "Gentle horizontal feedback animations when validation rules or passwords fail criteria.",
+        },
+      ],
+      testingHighlights: [
+        "DOM event listener verification preventing stuck paw states during rapid tab switching",
+        "Cross-browser CSS animation profiling on Safari WebKit, Chrome V8, and Firefox Gecko",
+        "Keyboard accessibility testing ensuring full navigation without a pointing device",
+        "Lighthouse audit achieving 100 on Best Practices and SEO",
+      ],
+      techStack: [
+        { category: "Markup & Animation", skills: ["HTML5", "CSS3 Keyframes", "SVG Rigging"] },
+        { category: "DOM Scripting", skills: ["Vanilla JavaScript (ES6)"] },
+        { category: "Testing & QA", skills: ["60fps Animation Profiling", "Keyboard Accessibility Audit"] },
+      ],
     },
   },
 
@@ -625,6 +894,35 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Building this clone solidified my confidence in complex CSS Grid architectures and subtle aesthetic details.",
+      keyFeatures: [
+        {
+          title: "Tri-Pane CSS Grid Architecture",
+          description: "Sidebar library, scrollable album feed, and sticky bottom music playback controller.",
+        },
+        {
+          title: "Hover-Elevated Play Buttons",
+          description: "Replication of Spotify's signature green play circle elevating on card hover states.",
+        },
+        {
+          title: "Sleek Dark Theme Aesthetic",
+          description: "Deep neutral palettes, subtle radial gradient headers, and custom-styled webkit scrollbars.",
+        },
+        {
+          title: "Adaptive Breakpoint Downscaling",
+          description: "Smoothly collapses sidebars on tablet and mobile viewports for compact browsing.",
+        },
+      ],
+      testingHighlights: [
+        "Visual regression inspection compared side-by-side against the official Spotify web app",
+        "Cross-browser testing on Chromium, WebKit, and Gecko engines for flex/grid parity",
+        "Zero-framework performance audit verifying instant asset rendering and zero layout shift (CLS: 0)",
+        "Accessibility check ensuring adequate color contrast ratios on dark mode text",
+      ],
+      techStack: [
+        { category: "Layout & Structure", skills: ["HTML5 Semantic Elements", "CSS Grid", "CSS Flexbox"] },
+        { category: "Visual Design", skills: ["CSS Custom Properties", "Radial Gradients", "SVG Assets"] },
+        { category: "Testing & QA", skills: ["Pixel-Perfect Visual Testing", "Zero Layout Shift Audit"] },
+      ],
     },
   },
 
@@ -684,6 +982,35 @@ export const PROJECTS: Project[] = [
       ],
       reflection:
         "Dissecting Twitter's interface revealed how subtle borders and generous whitespace create effortless legibility in dense content feeds.",
+      keyFeatures: [
+        {
+          title: "Sticky Multi-Column Layout",
+          description: "Left primary navigation, centered scrollable timeline, and right trending search sidebar.",
+        },
+        {
+          title: "Modular Tweet Cards",
+          description: "Structured components with user avatars, handle metadata, media embeds, and social actions.",
+        },
+        {
+          title: "Pixel-Accurate Typography & Dividers",
+          description: "Exact 1px border dividers, subtle hover fills, and crisp Twitter-native type hierarchy.",
+        },
+        {
+          title: "Scalable Vector Action Icons",
+          description: "Lightweight SVGs for comments, retweets, likes, bookmarks, and sharing states.",
+        },
+      ],
+      testingHighlights: [
+        "Sticky positioning tests ensuring sticky sidebars don't jitter during high-velocity mouse scrolling",
+        "CSS border alignment validation confirming 1px precision across various display DPI scales",
+        "Mobile viewport stress testing verifying right sidebar hides gracefully under 1000px widths",
+        "W3C HTML validator test confirming 100% compliant semantic structure",
+      ],
+      techStack: [
+        { category: "Structure & Style", skills: ["HTML5", "CSS3 Flexbox", "CSS Sticky Positioning"] },
+        { category: "Design Elements", skills: ["SVG Iconography", "Micro-Hover Transitions"] },
+        { category: "Testing & QA", skills: ["W3C Validation", "Sticky Scroll Stability Tests"] },
+      ],
     },
   },
 ];

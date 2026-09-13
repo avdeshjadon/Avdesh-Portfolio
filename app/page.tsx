@@ -56,7 +56,7 @@ export default function Home() {
           <Experience />
         </Scene>
 
-        <Scene order={9} runway={3.5} id="credentials">
+        <Scene order={9} runway={4.8} id="credentials">
           <Certifications />
         </Scene>
 
@@ -72,3 +72,4 @@ export default function Home() {
     </>
   );
 }
+

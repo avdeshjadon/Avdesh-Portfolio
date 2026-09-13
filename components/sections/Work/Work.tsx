@@ -108,7 +108,6 @@ export default function Work() {
                   }
                 >
                   {p.cover?.src && p.cover.variant === "photo" ? (
-
                     <img
                       className={styles.coverPhoto}
                       src={p.cover.src}
@@ -117,7 +116,6 @@ export default function Work() {
                       loading="lazy"
                     />
                   ) : p.cover?.src ? (
-
                     <img
                       className={styles.coverBrand}
                       src={p.cover.src}
@@ -148,9 +146,7 @@ export default function Work() {
                   </div>
                 </div>
               </a>
-              {
 
-}
               {(p.site || p.repo) && (
                 <a
                   className={styles.siteChip}

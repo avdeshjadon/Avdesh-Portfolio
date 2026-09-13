@@ -112,9 +112,13 @@ export default function Certifications() {
         },
       });
 
-      const handlers: Array<[HTMLElement, () => void]> = [];
+      const handlers: Array<[HTMLElement, EventListener]> = [];
       panels.forEach((pnl, i) => {
-        const h = () => {
+        const h: EventListener = (e) => {
+          const target = (e as MouseEvent).target as HTMLElement | null;
+          if (target && target.closest("a, button")) {
+            return;
+          }
           const y = st.start + (i / (n - 1)) * (st.end - st.start);
           const lenis = getLenis();
           if (lenis) lenis.scrollTo(y, { duration: 1 });
@@ -184,13 +188,12 @@ export default function Certifications() {
 }
                 <div className={styles.band}>
                   <span className={styles.no}>{c.no}</span>
-                  <span className={styles.kind}>{t("cert.certification")}</span>
+                  <span className={styles.kind}>{c.kind}</span>
                   <span className={`${styles.status} ${c.verified ? styles.ok : ""}`}>
                     {c.verified ? t("cert.verified") : t("cert.onRequest")}
                   </span>
                 </div>
 
-                {}
                 <div className={styles.issuerRow}>
                   {c.logo ? (
                     <span className={styles.logoPlate}>
@@ -202,7 +205,11 @@ export default function Certifications() {
                     </span>
                   ) : null}
                   <span className={styles.issuerName}>
-                    {c.issuer ? `${c.issuer} ${t("cert.certified")}` : t("cert.issuerTBC")}
+                    {c.issuer
+                      ? c.issuerSuffix
+                        ? `${c.issuer} · ${c.issuerSuffix}`
+                        : `${c.issuer} ${c.kind}`
+                      : t("cert.issuerTBC")}
                   </span>
                 </div>
 
@@ -240,16 +247,30 @@ export default function Certifications() {
                       ))}
                     </ul>
 
-                    {c.credentialUrl && (
-                      <a
-                        className={styles.verifyLink}
-                        href={c.credentialUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {t("cert.verify")}
-                      </a>
-                    )}
+                    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "14px", position: "relative", zIndex: 12 }}>
+                      {c.credentialUrl && c.credentialUrl.startsWith("http") && (
+                        <a
+                          className={styles.verifyLink}
+                          href={c.credentialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Verify Online ↗
+                        </a>
+                      )}
+                      {c.pdfUrl && (
+                        <a
+                          className={styles.verifyLink}
+                          href={encodeURI(c.pdfUrl)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          View PDF ↗
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </article>

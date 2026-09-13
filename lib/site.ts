@@ -6,18 +6,18 @@ export const SITE_URL =
 export const PERSON = {
   name: "Avdesh Jadon",
   jobTitle: "Software Developer & Software Tester",
-  email: "avdeshjadon.dev@gmail.com",
+  email: "theavdeshjadon@gmail.com",
   location: "Punjab, India",
   hometown: "Agra, India",
   university: "Educational Institution",
   passoutYear: "2027",
 
   sameAs: [
-    "https://www.linkedin.com/in/avdeshjadon",
+    "https://www.linkedin.com/in/avdeshjadon/",
     "https://github.com/avdeshjadon",
+    "https://www.instagram.com/__avdeshhere/",
     "https://leetcode.com/avdeshjadon",
     "https://www.geeksforgeeks.org/user/avdeshjadon/",
     "https://www.hackerrank.com/avdeshjadon",
-    "https://www.instagram.com/itsavdeshjadon",
   ],
 };
