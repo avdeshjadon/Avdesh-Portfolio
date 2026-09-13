@@ -48,32 +48,29 @@ export default function Experience() {
 
       const place = (p: number) => {
         for (let i = 0; i < n; i++) {
-          const d = i - p; 
+          const d = i - p;
           const b = boards[i];
 
-          if (d > DEPTH + 0.6 || d < -1.1) {
-            b.style.visibility = "hidden";
+          const hidden = d > DEPTH + 0.6 || d < -1.1;
+          if (hidden) {
+            if (b.style.visibility !== "hidden") b.style.visibility = "hidden";
             continue;
           }
-          b.style.visibility = "visible";
+          if (b.style.visibility !== "visible") b.style.visibility = "visible";
 
           if (d >= 0) {
-
             const k = Math.min(d, DEPTH);
             b.style.transform =
               `translate3d(${(k * RIGHT).toFixed(1)}px, ${(-k * UP).toFixed(1)}px, ${(-k * BACK).toFixed(1)}px)` +
               ` scale(${(1 - k * 0.028).toFixed(3)})`;
             b.style.opacity = String(Math.max(0, 1 - k * 0.16));
-            b.style.filter = k > 1.2 ? `blur(${Math.min(3, (k - 1.2) * 1.2).toFixed(2)}px)` : "";
             b.style.zIndex = String(200 - Math.round(k * 10));
           } else {
-
             const t = Math.min(1, -d / 1.1);
             b.style.transform =
               `translate3d(${(-t * 40).toFixed(1)}px, ${(t * 230).toFixed(1)}px, ${(-t * 320).toFixed(1)}px)` +
               ` scale(${(1 - t * 0.06).toFixed(3)})`;
             b.style.opacity = String(Math.max(0, 1 - t * 1.35));
-            b.style.filter = t > 0.25 ? `blur(${((t - 0.25) * 5).toFixed(2)}px)` : "";
             b.style.zIndex = "210";
           }
         }
