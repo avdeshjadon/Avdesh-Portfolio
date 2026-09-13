@@ -15,6 +15,7 @@ export const DICT: Record<string, string> = {
   "nav.close": "Close menu",
 
   "intro.scroll": "Scroll to enter",
+  "intro.role": "Software Developer & Software Tester",
 
   "hero.kicker": "Full Stack Developer & Software Tester",
   "hero.h1a": "Software that feels",

@@ -139,12 +139,28 @@
   white-space: nowrap;
 }
 
+.heroRole {
+  position: absolute;
+  left: 50%;
+  bottom: 122px;
+  transform: translateX(-50%);
+  font-size: clamp(11px, 1.2vw, 13.5px);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 5;
+}
+
 .hint {
   position: absolute;
   left: 50%;
-  bottom: 86px;
+  bottom: 84px;
   transform: translateX(-50%);
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.26em;
   text-transform: uppercase;
@@ -152,6 +168,7 @@
   opacity: 0;
   animation: hintPulse 2.6s ease-in-out infinite;
   pointer-events: none;
+  z-index: 5;
 }
 @keyframes hintPulse {
   0%,
@@ -166,7 +183,7 @@
 .progress {
   position: absolute;
   left: 50%;
-  bottom: 40px;
+  bottom: 38px;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -178,6 +195,7 @@
   font-variant-numeric: tabular-nums;
   pointer-events: none;
   opacity: 0;
+  z-index: 5;
 }
 .stageNow {
   color: var(--ink);
@@ -201,11 +219,19 @@
 }
 
 @media (max-width: 700px) {
+  .heroRole {
+    bottom: 112px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    width: 92%;
+    text-align: center;
+    white-space: normal;
+  }
   .hint {
-    bottom: 76px;
+    bottom: 72px;
   }
   .progress {
-    bottom: 34px;
+    bottom: 28px;
   }
 }
 

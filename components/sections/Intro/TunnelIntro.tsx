@@ -306,6 +306,7 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
     const fillEl = rootEl.querySelector<HTMLElement>(`.${styles.progFill}`);
     const progressWrap = rootEl.querySelector<HTMLElement>(`.${styles.progress}`);
     const hintEl = rootEl.querySelector<HTMLElement>(`.${styles.hint}`);
+    const roleEl = rootEl.querySelector<HTMLElement>(`.${styles.heroRole}`);
     let stageShown = 1;
 
     const onPointerMove = (e: PointerEvent) => {
@@ -378,6 +379,7 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       const rel = gsap.utils.clamp(0, 1, (progress - T_RELEASE) / (1 - T_RELEASE));
       canvas.style.opacity = String(1 - rel);
       if (progressWrap) progressWrap.style.opacity = String(1 - rel);
+      if (roleEl) roleEl.style.opacity = String(Math.max(0, 1 - progress * 6) * (1 - rel));
       if (hintEl) hintEl.style.opacity = String(Math.max(0, 1 - progress * 6) * (1 - rel));
 
       renderer.render(scene, camera);
@@ -432,6 +434,7 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
 
       const navEl = document.querySelector("header");
       if (navEl) gsap.set(navEl, { autoAlpha: 0 });
+      if (roleEl) gsap.set(roleEl, { autoAlpha: 0, y: 14 });
       if (hintEl) gsap.set(hintEl, { autoAlpha: 0, y: 16 });
       if (progressWrap) gsap.set(progressWrap, { autoAlpha: 0, y: 16 });
 
@@ -474,10 +477,13 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
           document.documentElement.classList.remove("av-boot");
         }, 3.3)
         .to(navEl, { autoAlpha: 1, duration: 0.65, ease: "power2.out" }, 3.3)
-        .to([hintEl, progressWrap], { autoAlpha: 1, y: 0, duration: 0.65, ease: "power2.out" }, 3.5);
+        .to([roleEl, hintEl, progressWrap], { autoAlpha: 1, y: 0, duration: 0.65, ease: "power2.out" }, 3.5);
     } else {
       document.documentElement.classList.remove("av-boot");
       setLoaderActive(false);
+      if (roleEl) gsap.set(roleEl, { autoAlpha: 1, y: 0 });
+      if (hintEl) gsap.set(hintEl, { autoAlpha: 1, y: 0 });
+      if (progressWrap) gsap.set(progressWrap, { autoAlpha: 1, y: 0 });
     }
 
     const st = ScrollTrigger.create({
@@ -541,7 +547,11 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
             <span className={styles.fallback}>{text}</span>
           )}
         </div>
-        <h1 className={styles.srOnly}>{text} — Full Stack Developer &amp; Software Tester</h1>
+        <h1 className={styles.srOnly}>{text} — Software Developer &amp; Software Tester</h1>
+
+        <p className={styles.heroRole} aria-hidden="true">
+          {t("intro.role")}
+        </p>
 
         <p className={styles.hint} aria-hidden="true">
           {t("intro.scroll")}
