@@ -1,3 +1,4 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -5,8 +6,6 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useLang } from "@/lib/i18n";
 import styles from "./Nav.module.css";
 
-/* `#home` resolves to the very top of the document (see lib/lenis.ts), so
-   Home always returns to the true beginning of the portfolio. */
 const LINKS = [
   { key: "nav.home", href: "#home", watch: null },
   { key: "nav.about", href: "#about", watch: "about" },
@@ -18,12 +17,9 @@ export default function Nav() {
   const ref = useRef<HTMLElement>(null);
   const { t } = useLang();
   const [active, setActive] = useState<string | null>(null);
-  /* mobile drawer — the desktop pill can't hold four links plus the toggle
-     at phone widths, so below 900px navigation lives behind a menu button
-     rather than being hidden entirely (which is what it was doing) */
+
   const [menuOpen, setMenuOpen] = useState(false);
 
-  /* close on Escape, and lock the page behind the open drawer */
   useEffect(() => {
     if (!menuOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -38,7 +34,6 @@ export default function Nav() {
     };
   }, [menuOpen]);
 
-  /* never leave the drawer open behind a resize to desktop */
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 901px)");
     const close = () => mq.matches && setMenuOpen(false);
@@ -51,9 +46,7 @@ export default function Nav() {
     if (!nav) return;
 
     const ctx = gsap.context(() => {
-      /* The header is PERSISTENT: it never hides. It only condenses slightly
-         once the page has been scrolled, which keeps it feeling part of the
-         page rather than a floating panel. */
+
       ScrollTrigger.create({
         start: "top top-=40",
         onUpdate: (self) => {
@@ -62,11 +55,6 @@ export default function Nav() {
         onLeaveBack: () => nav.classList.remove(styles.scrolled),
       });
 
-      /* scroll-spy: the nav reflects where you actually are, and falls back
-         to Home whenever you are near the top of the document. Targets are
-         resolved as ELEMENTS (not selector strings): host sections live in
-         <main>, outside this header — the context's scoped selector only
-         searches inside the nav and would otherwise warn "Element not found". */
       const spies = LINKS.filter((l) => l.watch)
         .map((l) => {
           const target = document.getElementById(l.watch!);
@@ -89,9 +77,36 @@ export default function Nav() {
         },
       });
 
+      const about = document.getElementById("about");
+      const aboutHide = about
+        ? (() => {
+            const tw = gsap.to(nav, {
+              opacity: 0,
+              y: -14,
+              duration: 1,
+              ease: "power2.inOut",
+              paused: true,
+              onComplete: () => {
+                nav.style.pointerEvents = "none";
+              },
+              onReverseComplete: () => {
+                nav.style.pointerEvents = "";
+              },
+            });
+            return ScrollTrigger.create({
+              trigger: about,
+              start: "top 80%",
+              end: "top 25%",
+              onEnter: () => tw.play(),
+              onLeaveBack: () => tw.reverse(),
+            });
+          })()
+        : null;
+
       return () => {
         spies.forEach((s) => s.kill());
         top.kill();
+        aboutHide?.kill();
       };
     }, nav);
 
@@ -139,7 +154,7 @@ export default function Nav() {
         </div>
       </div>
 
-      {/* ---------- mobile drawer ---------- */}
+      {}
       <div
         className={`${styles.sheet} ${menuOpen ? styles.sheetOpen : ""}`}
         id="mobile-nav"

@@ -1,12 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * LET'S CONNECT — the closing chapter (Patta "Let's connect" as the mood
- * reference: curved panel row, floating perspective, calm typography).
- * Our take: five memory panels on a shallow 3D arc that lean with the
- * cursor and breathe on idle; the site-wide Button carries the CTA; social
- * cards use the same circle-fill + roll language as the nav.
- */
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { gsap, EASE, prefersReducedMotion } from "@/lib/gsap";
@@ -14,10 +7,6 @@ import Button from "@/components/ui/Button";
 import styles from "./Connect.module.css";
 import { useLang } from "@/lib/i18n";
 
-/* ⚠ PLACEHOLDER socials — replace with the real profiles/email when ready.
-   `focus` is object-position only: the frames are portrait and two of the
-   photos are landscape, so this keeps the subject in frame — the images are
-   cropped, never scaled non-uniformly, and their colour is left untouched. */
 const PANELS = [
   { src: "/images/connect/moment-1.jpg", focus: "58% 30%", rotate: 26, z: -110, y: -26 },
   { src: "/images/connect/moment-2.jpg", focus: "center 32%", rotate: 13, z: -40, y: -8 },
@@ -26,9 +15,6 @@ const PANELS = [
   { src: "/images/connect/moment-5.jpg", focus: "46% 32%", rotate: -26, z: -110, y: -26 },
 ];
 
-/* Official brand marks, inlined so they inherit size and need no requests.
-   Paths are the brands' own glyphs (LinkedIn "in" bug, GitHub mark,
-   Instagram camera outline) — not generic lookalikes. */
 const MARKS: Record<string, ReactNode> = {
   linkedin: (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -47,7 +33,6 @@ const MARKS: Record<string, ReactNode> = {
   ),
 };
 
-/* URLs exactly as supplied — never guessed (see CONTENT_AUDIT.md) */
 const SOCIALS = [
   { name: "LinkedIn", mark: "linkedin", href: "https://www.linkedin.com/in/avdesh-jadon-" },
   { name: "GitHub", mark: "github", href: "https://github.com/avdeshjadon" },
@@ -64,7 +49,7 @@ export default function Connect() {
     if (!el || prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
-      /* reveal */
+
       gsap.from(`.${styles.head} > *`, {
         y: 36,
         autoAlpha: 0,
@@ -93,7 +78,6 @@ export default function Connect() {
         scrollTrigger: { trigger: `.${styles.socials}`, start: "top 88%" },
       });
 
-      /* idle float — each panel bobs on its own rhythm */
       gsap.utils.toArray<HTMLElement>(`.${styles.panelInner}`).forEach((p, i) => {
         gsap.to(p, {
           y: `+=${6 + (i % 3) * 3}`,
@@ -105,7 +89,6 @@ export default function Connect() {
         });
       });
 
-      /* cursor: the whole arc leans, each panel adds its own micro-tilt */
       const panels = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`);
       const setters = panels.map((p, i) => ({
         rx: gsap.quickTo(p, "rotationX", { duration: 0.9, ease: "power3.out" }),
@@ -157,7 +140,7 @@ export default function Connect() {
         </div>
       </div>
 
-      {/* curved memory arc */}
+      {}
       <div className={styles.arc} aria-hidden="true">
         {PANELS.map((p, i) => (
           <div
@@ -184,7 +167,7 @@ export default function Connect() {
         ))}
       </div>
 
-      {/* social cards */}
+      {}
       <div className={styles.socials}>
         {SOCIALS.map((s) => (
           <a

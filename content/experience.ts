@@ -1,7 +1,5 @@
-/* Professional experience — from Avdesh's CV, positioned engineering-first
-   per the developer repositioning. Reverse chronological: newest first.
-   ⚠ PLACEHOLDER engineering framing — the companies, periods and outcomes
-   are real; the technical wording is to be confirmed/edited by Avdesh. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 export type Role = {
   company: string;
@@ -13,26 +11,18 @@ export type Role = {
   achievements: string[];
   outcome: string;
   skills: string[];
-  /* panel color — intentional, one vibrant per role (Experience deck) */
+
   color: string;
   fg: "light" | "dark";
-  /* Company mark. `variant` follows what the supplied file actually IS:
-     · "tile"  — the logo ships with its own background baked in (square
-                 avatars), so it is shown as a rounded tile, uncropped
-     · "plate" — transparent artwork that needs a light ground to read;
-                 the plate's width follows the logo's true aspect ratio
-     · absent  — no official file supplied yet → typographic fallback */
+
   logo?: {
     src: string;
     variant: "tile" | "plate";
     aspect: number;
-    /* Placement adapts to how dense the panel's copy is — a logo is not
-       forced into the same slot for every company.
-       "right" — sits beside the content (default, when there is room)
-       "below" — closes the panel underneath the content (dense copy) */
+
     placement?: "right" | "below";
   };
-  /* French copy for the translatable fields (see lib/i18n.tsx → L()) */
+
   fr?: { role?: string; summary?: string; outcome?: string; achievements?: string[] };
 };
 
@@ -54,8 +44,7 @@ export const ROLES: Role[] = [
     skills: ["React", "Next.js", "TypeScript", "Node.js", "Jest", "Playwright"],
     color: "#0072E3",
     fg: "light",
-    /* transparent two-tone blue lockup, 1199×330 — needs a light ground.
-       Composition has room, so it stays on the right. */
+
     logo: {
       src: "/images/companies/heeding.png",
       variant: "plate",
@@ -91,9 +80,7 @@ export const ROLES: Role[] = [
     skills: ["TypeScript", "React", "On-device AI", "Prototyping", "HTML/CSS"],
     color: "#6D3BF5",
     fg: "light",
-    /* transparent violet wordmark, 685×226 — needs a light ground.
-       This panel's copy is dense, so the mark closes the panel underneath
-       the content instead of competing with it on the right. */
+
     logo: {
       src: "/images/companies/unbias.png",
       variant: "plate",
@@ -128,7 +115,7 @@ export const ROLES: Role[] = [
     skills: ["Process Mapping", "Power BI", "Data Modelling", "Stakeholders"],
     color: "#FFFFFF",
     fg: "dark",
-    /* gold chevron on its own black ground, 200×200 */
+
     logo: { src: "/images/companies/vraise.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Analyste données & processus",
@@ -157,7 +144,7 @@ export const ROLES: Role[] = [
     skills: ["Test Design", "Data Validation", "Responsible AI", "Regression Testing"],
     color: "#FF2E0F",
     fg: "light",
-    /* blue ring mark on its own blue ground, 100×100 */
+
     logo: { src: "/images/companies/oigetit.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Analyste QA & validation de données",
@@ -213,7 +200,7 @@ export const ROLES: Role[] = [
     skills: ["Strategy", "Segmentation", "Pipeline", "Leadership"],
     color: "#FFB200",
     fg: "dark",
-    /* blue wordmark on its own lavender ground, 100×100 */
+
     logo: { src: "/images/companies/sage.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Responsable opérations & développement commercial",
@@ -242,7 +229,7 @@ export const ROLES: Role[] = [
     skills: ["Go-to-Market", "Growth", "Retention"],
     color: "#171429",
     fg: "light",
-    /* navy wordmark on its own white ground, 100×100 */
+
     logo: { src: "/images/companies/tutorac.jpg", variant: "tile", aspect: 1 },
     fr: {
       role: "Chargé de développement commercial",

@@ -1,11 +1,9 @@
-/* ============ HERO v5 — final composition ============
-   Kicker → headline → sub → CTAs → stage (stats · arch+portrait · stats)
-   → one quiet scroll cue. Ambient glows, geometry and particles fill the
-   flanks without touching the content. Everything breathes. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .hero {
   position: relative;
-  background: #fff; /* opaque, so the layer above covers it cleanly */
+  background: #fff; 
   height: auto;
   min-height: 100svh;
   display: flex;
@@ -14,7 +12,6 @@
   padding-top: 96px;
 }
 
-/* ---------- ambient composition ---------- */
 .ambient {
   position: absolute;
   inset: 0;
@@ -72,13 +69,12 @@
   background: rgba(255, 46, 15, 0.5);
 }
 
-/* ---------- Head ---------- */
 .head {
   text-align: center;
   z-index: 5;
   padding: 20px 24px 0;
 }
-/* plain eyebrow — no pill, no box; the headline owns the stage */
+
 .kicker {
   font-size: 12px;
   font-weight: 700;
@@ -126,7 +122,6 @@
   color: var(--accent);
 }
 
-/* ---------- Stage row ---------- */
 .stageRow {
   flex: 1;
   display: grid;
@@ -201,7 +196,6 @@
   line-height: 1.35;
 }
 
-/* ---------- Stage: arch + portrait (the focal point) ---------- */
 .stage {
   position: relative;
   z-index: 3;
@@ -247,7 +241,6 @@
   will-change: transform;
 }
 
-/* ---------- chip rails — larger, legible ---------- */
 .chipLayer {
   position: absolute;
   inset: 0 0 24px 0;
@@ -287,7 +280,6 @@
   height: 24px;
 }
 
-/* ---------- script annotations ---------- */
 .annot {
   position: absolute;
   left: -14%;
@@ -326,7 +318,6 @@
   color: var(--ink-3);
 }
 
-/* ---------- bottom: one quiet cue ---------- */
 .scrollCue {
   display: flex;
   align-items: center;
@@ -357,7 +348,6 @@
   }
 }
 
-/* ============ Responsive ============ */
 @media (max-width: 1180px) {
   .hero {
     padding-top: 104px;

@@ -1,31 +1,10 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * TUNNEL TYPE — the live Three.js Gallery Tunnel, visible only through
- * huge typography.
- *
- * Pipeline:   LIVE WEBGL CANVAS  →  COMPOSITOR MASK  →  LETTERFORMS
- *
- * · The tunnel is the user-supplied Originkit implementation, ported intact:
- *   Three.js scene · PerspectiveCamera · 15 recycled segments · grid tubes ·
- *   floor/ceiling/wall slab slots · vibrant color materials · image textures
- *   with fade-in · fog · camera-chase interpolation · DPR cap · resize.
- * · The canvas renders opaque (the tunnel's own dark world). A raster of
- *   "AVDESH" — drawn with the page's real loaded display font — is applied
- *   as a CSS mask ON the canvas element. Masking happens in the compositor:
- *   the WebGL loop keeps running untouched, so the 3D world moves while the
- *   stationary letters act as windows into it.
- * · Wheel / touch drive the camera forward through the tunnel (with a slow
- *   idle drift so it never feels dead); the pointer shifts the camera
- *   subtly on x/y. Reduced motion renders a single static frame.
- * · If WebGL is unavailable the component degrades to solid ink type.
- */
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import styles from "./TunnelType.module.css";
 
-/* ---------- tunnel constants (from the supplied implementation) ---------- */
 const TUNNEL_WIDTH = 2;
 const TUNNEL_HEIGHT = 1.8;
 const SEGMENT_DEPTH = 1;
@@ -39,10 +18,10 @@ const FOG_FAR = NUM_SEGMENTS * SEGMENT_DEPTH * 0.95;
 const BACKGROUND = "#0a0a0c";
 const LINE_COLOR = "#9a9aa0";
 const LINE_OPACITY = 0.5;
-/* the supplied vibrant palette, red swapped for the brand vermilion */
+
 const COLORS = ["#FF6A00", "#AB54F7", "#FF2E0F", "#0072E3", "#00AA3C", "#FFB200"];
 const GRID = 4;
-const FADE_PORTION = 1; /* fog reaches the full depth, like the reference */
+const FADE_PORTION = 1; 
 
 const IMAGES = [
   "https://imagedelivery.net/IEUjvl3YUlxY-MrTpOAWDQ/f8b3688c-11d0-425c-0b6f-66f133322c00/w=800",
@@ -52,10 +31,9 @@ const IMAGES = [
   "https://imagedelivery.net/IEUjvl3YUlxY-MrTpOAWDQ/babdb603-8b5b-4520-58d6-240a34463c00/w=800",
 ];
 
-/* ---------- motion ---------- */
-const IDLE_SPEED = 0.9; /* slow forward drift so the world never freezes */
-const WHEEL_GAIN = 0.045; /* wheel px → tunnel travel */
-const MOUSE_X = 0.11; /* max sideways camera shift (world units) */
+const IDLE_SPEED = 0.9; 
+const WHEEL_GAIN = 0.045; 
+const MOUSE_X = 0.11; 
 const MOUSE_Y = 0.07;
 
 type Props = {
@@ -74,7 +52,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ================= the tunnel (supplied implementation) ================= */
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
@@ -134,7 +111,7 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
         },
         undefined,
         () => {
-          /* a dead URL costs a blank slab, not a broken tunnel */
+
         }
       );
       return mat;
@@ -174,7 +151,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
       return m;
     };
 
-    /* slab slots on floor, ceiling and both walls */
     const SLOTS: { geo: THREE.BufferGeometry; pos: THREE.Vector3; rot: THREE.Euler }[] = [];
     {
       const z = -SEGMENT_DEPTH / 2;
@@ -268,7 +244,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
       segments.push(g);
     }
 
-    /* ================= the typography mask ================= */
     const buildMask = () => {
       const w = Math.max(1, frame.clientWidth);
       const h = Math.max(1, frame.clientHeight);
@@ -282,7 +257,7 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
 
       const family =
         getComputedStyle(document.body).fontFamily || "Inter, sans-serif";
-      /* fit the word to 94% of the frame width */
+
       let size = h * 0.62;
       ctx.font = `900 ${size}px ${family}`;
       if ("letterSpacing" in ctx) {
@@ -306,7 +281,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
       canvas.style.setProperty("-webkit-mask-repeat", "no-repeat");
     };
 
-    /* ================= sizing ================= */
     const resize = () => {
       const w = Math.max(1, frame.clientWidth);
       const h = Math.max(1, frame.clientHeight);
@@ -319,12 +293,11 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
     const ro = new ResizeObserver(resize);
     ro.observe(frame);
     resize();
-    /* rebuild once the display font is actually loaded */
+
     document.fonts?.ready?.then(() => {
       if (alive) buildMask();
     });
 
-    /* ================= input ================= */
     let scrollPos = 0;
     let travelTarget = 0;
     let mx = 0;
@@ -357,7 +330,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
     frame.addEventListener("pointermove", onPointerMove);
     frame.addEventListener("pointerleave", onPointerLeave);
 
-    /* ================= loop ================= */
     let raf = 0;
     let last = 0;
 
@@ -367,17 +339,15 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
       const dt = last ? Math.min((now - last) / 1000, 1 / 30) : 1 / 60;
       last = now;
 
-      /* travel: slow idle drift + eased wheel/touch input */
       travelTarget += IDLE_SPEED * dt * 10;
       scrollPos += (travelTarget - scrollPos) * 0.06;
 
       const want = -SCROLL_TO_Z * scrollPos;
       camera.position.z += CAMERA_CHASE * (want - camera.position.z);
-      /* subtle pointer shift — a lean, not a game */
+
       camera.position.x += (mx * MOUSE_X - camera.position.x) * 0.06;
       camera.position.y += (-my * MOUSE_Y - camera.position.y) * 0.06;
 
-      /* infinite segment recycling (from the supplied implementation) */
       const span = NUM_SEGMENTS * SEGMENT_DEPTH;
       const z = camera.position.z;
       for (const seg of segments) {
@@ -394,7 +364,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
         }
       }
 
-      /* image fade-in */
       for (let i = fading.length - 1; i >= 0; i--) {
         const m = fading[i];
         m.opacity = Math.min(1, m.opacity + dt / FADE_IN);
@@ -410,7 +379,6 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
       raf = requestAnimationFrame(animate);
     }
 
-    /* ================= cleanup ================= */
     return () => {
       alive = false;
       cancelAnimationFrame(raf);
@@ -442,7 +410,7 @@ export default function TunnelType({ text = "AVDESH" }: Props) {
       ) : (
         <span className={styles.fallback}>{text}</span>
       )}
-      {/* real text for screen readers and search engines */}
+      {}
       <h1 className={styles.srOnly}>{text}</h1>
     </div>
   );

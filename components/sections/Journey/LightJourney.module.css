@@ -1,10 +1,9 @@
-/* ============ JOURNEY v2 — light-cable tunnel ============
-   The tunnel is the stage; the chapters are the story travelling through it.
-   Everything animated here is opacity / transform only. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .journey {
   position: relative;
-  background: #fff; /* white portfolio around; the tunnel owns its own dark */
+  background: #fff; 
 }
 
 .frame {
@@ -20,8 +19,6 @@
   height: 100%;
 }
 
-/* Keeps white type legible wherever the cables flare bright. Sits between
-   the canvas and the copy, and never intercepts pointer events. */
 .scrim {
   position: absolute;
   inset: 0;
@@ -34,14 +31,12 @@
   pointer-events: none;
 }
 
-/* ---------- narrative layer ---------- */
 .overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-/* ---------- the opening title ---------- */
 .intro {
   position: absolute;
   left: 50%;
@@ -82,7 +77,6 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
-/* ---------- a chapter ---------- */
 .chapter {
   position: absolute;
   left: 50%;
@@ -103,9 +97,6 @@
   filter: blur(0);
 }
 
-/* Year → Title → Place → Story → Transition.
-   Children carry the stagger; the delays only apply on the way in, so an
-   outgoing chapter clears the frame in one clean move. */
 .chYear,
 .chTitle,
 .chPlace,
@@ -175,7 +166,7 @@
   color: rgba(255, 255, 255, 0.84);
   text-wrap: pretty;
 }
-/* the hand-off into the next chapter — serif italic, the site's accent voice */
+
 .chBridge {
   margin: 22px auto 0;
   max-width: 48ch;
@@ -193,7 +184,6 @@
   margin-right: 6px;
 }
 
-/* ---------- chapter rail ---------- */
 .rail {
   position: absolute;
   left: 50%;
@@ -230,7 +220,6 @@
   transform: scaleY(1.6);
 }
 
-/* white returns at the climax */
 .whiteout {
   position: absolute;
   inset: 0;
@@ -239,7 +228,6 @@
   pointer-events: none;
 }
 
-/* ---------- accessibility / no-motion / no-WebGL ---------- */
 .srOnly {
   position: absolute;
   width: 1px;
@@ -249,7 +237,6 @@
   white-space: nowrap;
 }
 
-/* the pin never runs in this mode, so the frame grows with the content */
 .frameStatic {
   height: auto;
   min-height: 100svh;
@@ -325,7 +312,6 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* ---------- responsive ---------- */
 @media (max-width: 1024px) {
   .chStory {
     max-width: 52ch;
@@ -335,13 +321,10 @@
   }
 }
 
-/* Promoted from 700px to the site's real mobile boundary: between 701 and
-   1000px the layout is already mobile, yet chapters were still animating a
-   blur filter over the live WebGL canvas. */
 @media (max-width: 1000px) {
   .chapter {
     width: 90vw;
-    /* blur costs more than it gives on mobile GPUs */
+
     filter: none;
     transition:
       opacity 0.45s ease,
@@ -380,7 +363,6 @@
   }
 }
 
-/* short landscape phones: the story must still fit above the rail */
 @media (max-height: 560px) {
   .chYear {
     font-size: clamp(30px, 7vh, 44px);

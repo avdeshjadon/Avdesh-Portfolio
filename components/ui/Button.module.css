@@ -1,4 +1,5 @@
-/* ============ Button — site-wide interaction standard ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .btn {
   --btn-bg: var(--accent);
@@ -24,7 +25,6 @@
   scale: 0.97;
 }
 
-/* circular fill — grows from the pill's bottom edge */
 .fill {
   position: absolute;
   left: 50%;
@@ -40,7 +40,7 @@
 .btn:hover .fill {
   transform: translate(-50%, -50%) scale(1);
 }
-/* touch has no hover — the tap drives the same fill, same timing */
+
 @media (hover: none) {
   .btn:active .fill {
     transform: translate(-50%, -50%) scale(1);
@@ -50,7 +50,6 @@
   }
 }
 
-/* rolling label */
 .labelWrap {
   position: relative;
   z-index: 1;
@@ -74,7 +73,6 @@
   color: var(--btn-fill-fg);
 }
 
-/* leading node (play glyph, icon, …) */
 .lead {
   position: relative;
   z-index: 1;
@@ -87,7 +85,6 @@
   color: var(--btn-fill-fg);
 }
 
-/* trailing arrow in a soft circle — rotates on hover */
 .arrow {
   position: relative;
   z-index: 1;
@@ -106,7 +103,6 @@
   color: var(--btn-fill-fg);
 }
 
-/* ---------- variants ---------- */
 .primary {
   --btn-bg: var(--accent);
   --btn-fg: #fff;
@@ -133,7 +129,6 @@
   background: rgba(20, 20, 20, 0.07);
 }
 
-/* ---------- sizes ---------- */
 .sm {
   font-size: 12.5px;
   padding: 9px 18px;
@@ -143,7 +138,6 @@
   padding: 11px 20px;
 }
 
-/* ---------- accessibility & touch ---------- */
 .btn:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
@@ -158,8 +152,4 @@
     transform: translate(-50%, -50%) scale(1);
   }
 }
-/* NOTE: there is deliberately no `@media (hover: none) { .fill { display: none } }`
-   here. That rule used to exist and silently defeated the tap-driven fill
-   above — worse, the label still rolled to its white clone, so a pressed
-   ghost button rendered white text on a fill that never appeared. Touch gets
-   the same fill as hover, driven by :active. */
+

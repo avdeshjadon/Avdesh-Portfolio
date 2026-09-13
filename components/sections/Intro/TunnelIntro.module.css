@@ -1,4 +1,5 @@
-/* ============ SECTION 01 — tunnel opening ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .intro {
   position: relative;
@@ -16,7 +17,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  /* typography mask injected inline; opacity driven by the transition */
+
 }
 
 .fallback {
@@ -41,7 +42,6 @@
   white-space: nowrap;
 }
 
-/* "Scroll to enter" — fades as soon as the journey starts */
 .hint {
   position: absolute;
   left: 50%;
@@ -65,7 +65,6 @@
   }
 }
 
-/* 01 ━━━━━━ 06 */
 .progress {
   position: absolute;
   left: 50%;

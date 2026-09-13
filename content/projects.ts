@@ -1,13 +1,5 @@
-/* Featured projects — single source of truth for the Work section
-   and the /work/[slug] case-study routes. Order = showcase order,
-   fixed by Avdesh (2026-08-08): Heeding · LockAI · five GitHub
-   builds · the automation system.
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 
-   ⚠ SOURCING: panels 3–7 come from github.com/avdeshjadon ONLY —
-   real repo names, README facts and his uploaded captures. Reel numbers
-   (56K views, 20.5K likes) are verified in PROJECT_DATABASE.md. Live-demo
-   links were reachability-checked before shipping; the two Vercel demos
-   currently return 402 (paused), so those cards link to their repos. */
 
 export type Study = {
   role: string;
@@ -21,26 +13,17 @@ export type Study = {
   note?: string;
 };
 
-/* French mirror of Study. Every field optional: anything left out falls back
-   to the English original, so a half-translated entry still renders. */
 export type StudyFr = Partial<Study>;
 
-/* Card / case-page cover.
-   ⚠ Only VERIFIED assets go in `src` — official brand marks, or Avdesh's
-   own project captures. `variant: "photo"` renders full-bleed; "brand"
-   (default) centres the mark on its ground. Projects with no asset get a
-   designed typographic cover (`mark`), never a stock image. */
 export type Cover = {
-  bg: string; /* brand ground (also the letterbox behind photos) */
+  bg: string; 
   ink: "light" | "dark";
-  src?: string; /* verified asset */
-  aspect?: number; /* true aspect ratio of a brand mark */
+  src?: string; 
+  aspect?: number; 
   variant?: "brand" | "photo";
-  /* object-position for photo covers. The supplied artwork is portrait and
-     the card frame is landscape, so this keeps the subject in frame — the
-     image is only ever cropped, never scaled non-uniformly. */
+
   focus?: string;
-  mark?: string; /* typographic cover when no asset exists */
+  mark?: string; 
 };
 
 export type Project = {
@@ -49,18 +32,17 @@ export type Project = {
   tags: string[];
   year: string;
   oneLiner: string;
-  /* the card's one-line "what I did" — portfolio copy, not a resume bullet */
+
   contribution: string;
-  coverLabel: string; /* alt/aria text for the cover */
+  coverLabel: string; 
   cover?: Cover;
-  /* verified official destination — never guessed (CONTENT_AUDIT rule) */
+
   site?: { url: string; label: string };
-  /* verified GitHub repository */
+
   repo?: string;
   award?: string;
   study: Study;
-  /* French copy — card fields plus the full case study (see lib/i18n.tsx -> L()).
-     Company, product and tool names are deliberately left untranslated. */
+
   fr?: {
     title?: string;
     oneLiner?: string;
@@ -71,7 +53,7 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
-  /* ─────────────── 1 · HEEDING (kept) ─────────────── */
+
   {
     slug: "heeding-marketplace",
     title: "Heeding — Sustainable-Fuel Marketplace",
@@ -82,7 +64,7 @@ export const PROJECTS: Project[] = [
     contribution:
       "Full-stack build — three buyer journeys, one governed component system, tested all the way through.",
     coverLabel: "HEEDING MARKETPLACE",
-    /* official Heeding lockup (supplied file) on a light brand ground */
+
     cover: { bg: "#E9F2FC", ink: "dark", src: "/images/companies/heeding.png", aspect: 1199 / 330 },
     site: { url: "https://www.myheeding.com/en", label: "myheeding.com" },
     fr: {
@@ -190,7 +172,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 2 · LOCKAI / UNBIAS (kept) ─────────────── */
   {
     slug: "lockai",
     title: "LockAI — Offline On-Device AI Assistant",
@@ -201,7 +182,7 @@ export const PROJECTS: Project[] = [
     contribution:
       "On-device AI workflow and three working prototypes — a pitch the jury could click.",
     coverLabel: "LOCKAI",
-    /* official UNBIAS wordmark (supplied file) on a light violet ground */
+
     cover: { bg: "#F0EBFD", ink: "dark", src: "/images/companies/unbias.png", aspect: 685 / 226 },
     award: "🏆 1st Place",
     fr: {
@@ -289,7 +270,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 4 · PRICE INTELLIGENCE ─────────────── */
   {
     slug: "price-intelligence",
     title: "Supply-Chain Price Intelligence",
@@ -386,7 +366,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 5 · OIGETIT ─────────────── */
   {
     slug: "oigetit-hitl",
     title: "Oigetit — Validating AI Trust",
@@ -467,7 +446,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 6 · WEB PERFORMANCE ─────────────── */
   {
     slug: "seo-growth",
     title: "Portfolio-Wide Web Performance",
@@ -550,7 +528,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 8 · AVENGERS: DOOMSDAY (GitHub) ─────────────── */
   {
     slug: "avengers-doomsday",
     title: "Avengers: Doomsday — Scroll-Driven Cinema",
@@ -566,7 +543,7 @@ export const PROJECTS: Project[] = [
       ink: "light",
       src: "/images/projects/avengers-cover.jpg",
       variant: "photo",
-      focus: "center 26%", /* keeps the mask in frame */
+      focus: "center 26%", 
     },
     repo: "https://github.com/avdeshjadon/AVENGERS-DOOMSDAY-",
     fr: {
@@ -643,7 +620,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 4 · GAME OF THRONES (GitHub) ─────────────── */
   {
     slug: "got-cinematic",
     title: "Game of Thrones — A Cinematic Experience",
@@ -659,7 +635,7 @@ export const PROJECTS: Project[] = [
       ink: "light",
       src: "/images/projects/got-cover.jpg",
       variant: "photo",
-      focus: "center 34%", /* Daenerys and the dragon's eyes */
+      focus: "center 34%", 
     },
     repo: "https://github.com/avdeshjadon/GoT",
     fr: {
@@ -734,7 +710,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 5 · BAAHUBALI (GitHub) ─────────────── */
   {
     slug: "baahubali",
     title: "Baahubali — A Legend Never Dies",
@@ -821,7 +796,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 11 · GHOST RIDER (GitHub) ─────────────── */
   {
     slug: "ghost-rider",
     title: "Ghost Rider — Spirit of Vengeance",
@@ -837,7 +811,7 @@ export const PROJECTS: Project[] = [
       ink: "light",
       src: "/images/projects/ghostrider-cover.jpg",
       variant: "photo",
-      focus: "center 30%", /* the split face */
+      focus: "center 30%", 
     },
     repo: "https://github.com/avdeshjadon/Ghost-Rider-",
     site: { url: "https://ghost-rider-orpin.vercel.app", label: "Live site" },
@@ -907,7 +881,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 12 · HABU (GitHub) ─────────────── */
   {
     slug: "habu",
     title: "HABU — Deep-Ocean Exosuit",
@@ -923,7 +896,7 @@ export const PROJECTS: Project[] = [
       ink: "light",
       src: "/images/projects/habu-cover.jpg",
       variant: "photo",
-      focus: "center 45%", /* the diver, with the signal above */
+      focus: "center 45%", 
     },
     repo: "https://github.com/avdeshjadon/HABU-",
     fr: {
@@ -998,7 +971,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 13 · VISTARAIL (GitHub) ─────────────── */
   {
     slug: "vistarail",
     title: "VistaRail — Night-Train Travel, Imagined",
@@ -1083,7 +1055,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 7 · RÊVERIE (GitHub) ─────────────── */
   {
     slug: "reverie",
     title: "Rêverie — A Waking Dream",
@@ -1169,7 +1140,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 14 · AUTOMATION SYSTEM (kept) ─────────────── */
   {
     slug: "workflow-automation",
     title: "Supply Chain & Sales Marketing Automation System",
@@ -1266,10 +1236,6 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ─────────────── 15 · SPIDER-MAN (visual showcase, no repo) ───────────────
-     Deliberately has neither `site` nor `repo`: no public URL exists, and the
-     rule is never to invent one. The panel is identical in every other way —
-     same cover treatment, typography, arc position and hover language. */
   {
     slug: "spider-man",
     title: "Spider-Man — The Power Behind the Mask",

@@ -1,3 +1,4 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif, Caveat, Anton } from "next/font/google";
 import SmoothScroll from "@/components/layout/SmoothScroll";
@@ -23,8 +24,6 @@ const caveat = Caveat({
   variable: "--font-script",
 });
 
-/* Condensed single-weight display face for the My Creative Hunch lockup —
-   without it the editorial title collapses to a stretched regular weight. */
 const anton = Anton({
   subsets: ["latin"],
   weight: "400",
@@ -32,27 +31,50 @@ const anton = Anton({
 });
 
 const DESCRIPTION =
-  "Full Stack Developer & Software Tester building web and app products for climate-tech and AI — React, Next.js, Node and end-to-end QA. Based in Antibes, France.";
+  "Software Developer & Software Tester at NIT Jalandhar — building full-stack web apps, automation and end-to-end QA with React, Next.js, Node and TypeScript.";
+
+const IMAGE = {
+  url: `${SITE_URL}/about/hero-portrait.jpg`,
+  width: 1408,
+  height: 1117,
+  alt: "Avdesh Jadon — Software Developer & Software Tester",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Avdesh Jadon — Full Stack Developer & Software Tester",
+    default: "Avdesh Jadon — Software Developer & Software Tester",
     template: "%s",
   },
   description: DESCRIPTION,
+  keywords: [
+    "Avdesh Jadon",
+    "Software Developer",
+    "Software Tester",
+    "Full Stack Developer",
+    "NIT Jalandhar",
+    "Agra",
+    "QA",
+    "React",
+    "Next.js",
+  ],
+  creator: "Avdesh Jadon",
+  authors: [{ name: "Avdesh Jadon", url: SITE_URL }],
+  alternates: { canonical: SITE_URL },
   openGraph: {
-    title: "Avdesh Jadon — Full Stack Developer & Software Tester",
+    title: "Avdesh Jadon — Software Developer & Software Tester",
     description: DESCRIPTION,
     url: SITE_URL,
     siteName: "Avdesh — Portfolio",
     type: "website",
     locale: "en_US",
+    images: [IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Avdesh Jadon — Full Stack Developer & Software Tester",
+    title: "Avdesh Jadon — Software Developer & Software Tester",
     description: DESCRIPTION,
+    images: [IMAGE.url],
   },
 };
 
@@ -62,8 +84,27 @@ const personJsonLd = {
   name: PERSON.name,
   jobTitle: PERSON.jobTitle,
   email: `mailto:${PERSON.email}`,
-  address: { "@type": "PostalAddress", addressLocality: "Antibes", addressCountry: "FR" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "NIT Jalandhar, Punjab",
+    addressCountry: "IN",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: PERSON.university,
+  },
+  knowsAbout: [
+    "Software Development",
+    "Software Testing",
+    "QA Engineering",
+    "Full Stack Web Development",
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+  ],
   url: SITE_URL,
+  image: IMAGE.url,
   sameAs: PERSON.sameAs,
 };
 

@@ -1,4 +1,5 @@
-/* ============ LET'S CONNECT — the closing chapter ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .connect {
   position: relative;
@@ -55,7 +56,6 @@
   justify-content: center;
 }
 
-/* ---------- curved memory arc ---------- */
 .arc {
   display: flex;
   align-items: center;
@@ -98,9 +98,7 @@
   border-color: rgba(255, 46, 15, 0.28);
   box-shadow: 0 44px 96px -24px rgba(20, 20, 20, 0.3), 0 0 0 5px rgba(255, 46, 15, 0.06);
 }
-/* photo panels: the image fills the frame at its own aspect ratio (cover
-   crops, never stretches) and keeps its true colour — no desaturation at
-   rest, so the photograph reads exactly as supplied. */
+
 .hasPhoto {
   filter: none;
   background: #101012;
@@ -132,7 +130,6 @@
   color: var(--ink-3);
 }
 
-/* ---------- social cards ---------- */
 .socials {
   display: flex;
   justify-content: center;
@@ -162,7 +159,7 @@
   color: var(--ink-2);
   transition: color 0.3s ease, border-color 0.3s ease;
 }
-/* same interaction standard as nav links & Button: circle fill + label roll */
+
 .social::before {
   content: "";
   position: absolute;
@@ -196,8 +193,7 @@
   background: rgba(255, 255, 255, 0.16);
   color: #fff;
 }
-/* official brand marks (LinkedIn / GitHub / Instagram) — currentColor SVGs,
-   so the circle-fill hover inverts them exactly like the text glyphs */
+
 .glyph svg {
   display: block;
   width: 15px;
@@ -228,7 +224,6 @@
   color: #fff;
 }
 
-/* ---------- footer ---------- */
 .footer {
   margin-top: 96px;
   border-top: 1px solid var(--line);
@@ -255,7 +250,6 @@
   color: var(--accent);
 }
 
-/* ---------- responsive ---------- */
 @media (max-width: 1080px) {
   .panelInner {
     width: 172px;
@@ -266,9 +260,7 @@
     height: 268px;
   }
 }
-/* Promoted from 820px: five 172px panels plus four 26px gaps need ~964px, so
-   between 821 and 963px the outer two were cropped by the viewport edge. The
-   arc drops to three panels for the whole mobile range instead. */
+
 @media (max-width: 1000px) {
   .connect {
     padding-top: 100px;

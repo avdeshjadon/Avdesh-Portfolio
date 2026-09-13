@@ -1,31 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * MY TECH STACK — full-viewport spiral orbit
- *
- * Engine rebuilt from the Archimedean-spiral reference. Kept:
- *   · Archimedean path (radius falls linearly with angle → evenly spaced arms)
- *   · arc-length reparameterization — a lookup table inverts cumulative arc
- *     length so equal steps along the PATH give equal visual gaps. Without it,
- *     cards bunch up near the center.
- *   · continuous delta-time advance, tangent-derived rotation, fade at both
- *     ends of the path, scale attenuation toward the center, depth ordering.
- *
- * Adapted for this portfolio:
- *   · The path is an ELLIPSE matched to the viewport, not a circle. A circular
- *     spiral on a 16:9 screen can only be as wide as the screen is tall, which
- *     leaves the sides empty; the ellipse fills all four edges. The arc-length
- *     table is rebuilt whenever the aspect ratio changes, so spacing stays
- *     visually even under that anisotropic scaling.
- *   · Rotation is applied as a BANK taken straight from the tangent vector
- *     (lean ∝ dy/|d|). Aligning cards to the raw tangent would flip half the
- *     labels upside down; this keeps the lean-into-the-curve read with every
- *     name upright, and is continuous so it never jumps at angle wrap.
- *   · DOM, not canvas — glassmorphism, per-card hover and screen-reader access
- *     are impossible on canvas. 21 nodes, transform + opacity only (~0.15ms of
- *     scripting per frame), driven by the shared gsap ticker and gated by an
- *     IntersectionObserver so it stops when off screen.
- */
 
 import { useEffect, useRef } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
@@ -35,29 +9,20 @@ import { useLang } from "@/lib/i18n";
 
 const TWO_PI = Math.PI * 2;
 
-/* path shape */
 const TURNS = 1.9;
 const PHASE = -Math.PI * 0.5;
-/* innermost radius as a fraction of the outer one — the clean disc the
-   stationary center content lives in. Larger on narrow screens, where the
-   text takes up proportionally more of the width. */
+
 const INNER_WIDE = 0.4;
 const INNER_COMPACT = 0.62;
 
-/* motion */
-const SPEED = 0.021; /* path fractions per second (~48s per full traverse) */
+const SPEED = 0.021; 
 const HOVER_SLOW = 0.16;
 
-/* appearance along the path */
 const FADE_IN = 0.09;
 const FADE_OUT = 0.3;
 const SCALE_POW = 0.5;
-const LEAN_MAX = 11; /* degrees */
+const LEAN_MAX = 11; 
 
-/* ---------- arc-length reparameterization ----------
-   Built in units of Rx, for a given ratio = Ry/Rx and inner radius, so the
-   table measures true on-screen distance. Cached; rebuilt only when the
-   viewport's aspect ratio changes meaningfully. */
 const M = 1000;
 const K = 1024;
 
@@ -117,8 +82,7 @@ export default function DesignStack() {
       const compact = compactMQ.matches;
 
       inner = compact ? INNER_COMPACT : INNER_WIDE;
-      /* the outer ring reaches every edge; on very narrow screens it is
-         allowed to overflow horizontally so the orbit still clears the text */
+
       Rx = compact ? Math.max(0.5 * w, 236) : 0.5 * w;
       Ry = 0.5 * h;
 
@@ -136,8 +100,6 @@ export default function DesignStack() {
       stageEl.style.setProperty("--card-w", `${cardW}px`);
     };
 
-    /** arc fraction s ∈ [0,1) → spiral parameter n (interpolated; rounding
-     *  would quantize the motion into visible steps) */
     const arcToN = (s: number) => {
       const x = Math.min(K, Math.max(0, s * K));
       const i = Math.floor(x);
@@ -160,16 +122,13 @@ export default function DesignStack() {
         const n = arcToN(s);
         const p = at(n);
 
-        /* fade at both ends of the path */
         let o = 1;
         if (s < FADE_IN) o = s / FADE_IN;
         else if (s > 1 - FADE_OUT) o = (1 - s) / FADE_OUT;
         o = Math.max(0, Math.min(1, o));
 
-        /* smaller toward the center */
         const scale = Math.pow(p.rFrac, SCALE_POW);
 
-        /* bank taken from the true tangent vector — continuous, always upright */
         const q = at(Math.min(n + 0.002, 1));
         const dx = q.x - p.x;
         const dy = q.y - p.y;
@@ -208,8 +167,6 @@ export default function DesignStack() {
       place(base);
     };
 
-    /* the orbit eases down only while a CARD is hovered, so you can read the
-       one you reached for; crossing empty stage does nothing */
     let hovered = 0;
     const onOver = (e: PointerEvent) => {
       if ((e.target as Element)?.closest?.(`.${styles.card}`)) {
@@ -264,7 +221,7 @@ export default function DesignStack() {
       <div className={styles.glowB} aria-hidden="true" />
 
       <div className={styles.stage} ref={stage}>
-        {/* stationary focal point */}
+        {}
         <div className={styles.center}>
           <p className={styles.eyebrow}>
             <span>03</span> {t("stack.eyebrow")}
@@ -280,7 +237,7 @@ export default function DesignStack() {
           </p>
         </div>
 
-        {/* orbiting cards — a real list, so screen readers get the full set */}
+        {}
         <ul className={styles.orbit}>
           {TOOLS.map((t) => (
             <li className={styles.card} key={t.name}>

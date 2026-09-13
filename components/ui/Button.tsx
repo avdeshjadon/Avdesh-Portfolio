@@ -1,15 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * Design-system Button — the interaction standard for every CTA on the site.
- * Interaction language (recreated from scratch, PillNav as benchmark):
- *   · circular fill expands from the bottom of the pill on hover
- *   · label rolls up, replacement rolls in from below
- *   · optional trailing arrow rotates -45° on hover
- *   · magnetic pull on fine pointers
- * All motion is transform-only (GPU), respects prefers-reduced-motion,
- * and degrades to plain taps on touch devices.
- */
 
 import { useEffect, useRef, type ReactNode, type MouseEventHandler } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";

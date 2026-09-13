@@ -1,25 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * SECTION 01 — THE OPENING. The live Three.js Gallery Tunnel seen through
- * "AVDESH", stretched into a ~5.5-viewport cinematic journey that hands
- * over to the real Hero.
- *
- * Journey design:
- *   · The section pins; pin progress maps to tunnel travel through an
- *     ease-in curve (p^1.35) — the deeper you go, the faster panels pass.
- *   · Motion is double-smoothed for physicality: scrub smoothing feeds a
- *     travel-lerp, which feeds the reference's camera-chase lerp. Slow
- *     scrolling drifts; hard flicks accelerate; nothing ever snaps.
- *   · A slow idle drift keeps the world alive before the first scroll.
- *   · THE TRANSITION (final ~22%): background and fog lerp to white while
- *     the fog wall closes in — the world compresses into brightness, the
- *     typography dissolves into the page (inside becomes white like the
- *     outside), the canvas releases, the nav arrives, and the Hero rises.
- *   · Nav is hidden while the journey runs (body class, see Nav.module.css).
- *   · Mobile: reduced grid, fewer segments, tighter DPR cap.
- *   · Reduced motion: a single static masked frame, no pin.
- */
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
@@ -28,7 +8,6 @@ import { sceneScrub } from "@/lib/scene";
 import styles from "./TunnelIntro.module.css";
 import { useLang } from "@/lib/i18n";
 
-/* ---------- tunnel constants (from the supplied implementation) ---------- */
 const TUNNEL_WIDTH = 2;
 const TUNNEL_HEIGHT = 1.8;
 const SEGMENT_DEPTH = 1;
@@ -49,14 +28,13 @@ const IMAGES = [
   "https://imagedelivery.net/IEUjvl3YUlxY-MrTpOAWDQ/babdb603-8b5b-4520-58d6-240a34463c00/w=800",
 ];
 
-/* ---------- journey design ---------- */
-const JOURNEY_VIEWPORTS = 5.5; /* pinned scroll length */
-const STAGES = 6; /* progress rail: 01 … 06 */
-const TRAVEL_UNITS = 1050; /* total tunnel travel across the journey */
-const TRAVEL_CURVE = 1.35; /* ease-in: the journey accelerates toward its climax */
-const IDLE_DRIFT = 5; /* travel units/s while resting — the world never freezes */
-const T_START = 0.78; /* transition begins (brighten) */
-const T_RELEASE = 0.9; /* canvas begins to release (fade) */
+const JOURNEY_VIEWPORTS = 5.5; 
+const STAGES = 6; 
+const TRAVEL_UNITS = 1050; 
+const TRAVEL_CURVE = 1.35; 
+const IDLE_DRIFT = 5; 
+const T_START = 0.78; 
+const T_RELEASE = 0.9; 
 const MOUSE_X = 0.11;
 const MOUSE_Y = 0.07;
 
@@ -74,19 +52,16 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
     if (!rootEl || !frame || !canvas) return;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    /* same boundary as the rest of the site — a landscape phone must not get
-       the desktop tunnel density */
+
     const compact = window.matchMedia(
       "(max-width: 1000px), (hover: none) and (pointer: coarse)"
     ).matches;
 
-    /* mobile density reduction */
     const GRID = compact ? 3 : 4;
     const NUM_SEGMENTS = compact ? 11 : 15;
     const FOG_FAR = NUM_SEGMENTS * SEGMENT_DEPTH * 0.95;
     const DPR_CAP = compact ? 1.5 : 2;
 
-    /* ================= renderer / scene ================= */
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({
@@ -149,7 +124,6 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       return mat;
     });
 
-    /* ================= geometry ================= */
     const hw = TUNNEL_WIDTH / 2;
     const hh = TUNNEL_HEIGHT / 2;
     const colW = TUNNEL_WIDTH / GRID;
@@ -259,7 +233,6 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       segments.push(g);
     }
 
-    /* ================= typography mask ================= */
     const buildMask = () => {
       const w = Math.max(1, frame.clientWidth);
       const h = Math.max(1, frame.clientHeight);
@@ -308,7 +281,6 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       if (alive) buildMask();
     });
 
-    /* ================= reduced motion: one static frame, no pin ================= */
     if (reduced) {
       renderer.render(scene, camera);
       document.body.classList.remove("intro-active");
@@ -319,11 +291,10 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       };
     }
 
-    /* ================= journey state ================= */
     document.body.classList.add("intro-active");
 
-    let progress = 0; /* pin progress, scrub-smoothed by ScrollTrigger */
-    let scrollPos = 0; /* travel, lerped toward target — the inertia layer */
+    let progress = 0; 
+    let scrollPos = 0; 
     let idle = 0;
     let mx = 0;
     let my = 0;
@@ -346,7 +317,6 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
     frame.addEventListener("pointermove", onPointerMove);
     frame.addEventListener("pointerleave", onPointerLeave);
 
-    /* ================= render loop ================= */
     let raf = 0;
     let last = 0;
     let running = false;
@@ -357,7 +327,6 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       const dt = last ? Math.min((now - last) / 1000, 1 / 30) : 1 / 60;
       last = now;
 
-      /* travel: eased journey mapping + idle drift, then the inertia lerp */
       idle += IDLE_DRIFT * dt;
       const target = Math.pow(progress, TRAVEL_CURVE) * TRAVEL_UNITS + idle;
       scrollPos += (target - scrollPos) * 0.07;
@@ -367,7 +336,6 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
       camera.position.x += (mx * MOUSE_X - camera.position.x) * 0.06;
       camera.position.y += (-my * MOUSE_Y - camera.position.y) * 0.06;
 
-      /* infinite segment recycling */
       const span = NUM_SEGMENTS * SEGMENT_DEPTH;
       const z = camera.position.z;
       for (const seg of segments) {
@@ -390,13 +358,12 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
         if (m.opacity >= 1) fading.splice(i, 1);
       }
 
-      /* ---- THE TRANSITION: world compresses into white ---- */
       const k = gsap.utils.clamp(0, 1, (progress - T_START) / (1 - T_START));
       if (k > 0) {
         const eased = k * k * (3 - 2 * k);
         (scene.background as THREE.Color).copy(bgColor).lerp(white, eased);
         fog.color.copy(bgColor).lerp(white, eased);
-        fog.far = FOG_FAR - (FOG_FAR - 2.2) * eased; /* depth reduces */
+        fog.far = FOG_FAR - (FOG_FAR - 2.2) * eased; 
         lineMaterial.opacity = 0.5 * (1 - eased);
       } else {
         (scene.background as THREE.Color).copy(bgColor);
@@ -404,7 +371,7 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
         fog.far = FOG_FAR;
         lineMaterial.opacity = 0.5;
       }
-      /* canvas releases at the very end — white page remains */
+
       const rel = gsap.utils.clamp(0, 1, (progress - T_RELEASE) / (1 - T_RELEASE));
       canvas.style.opacity = String(1 - rel);
       if (progressWrap) progressWrap.style.opacity = String(1 - rel);
@@ -425,18 +392,15 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
     };
     startLoop();
 
-    /* ================= the journey, held by its Scene =================
-       The Scene's sticky hold pins this section, so no `pin` here — this
-       trigger only reads progress across the scene's runway. */
     const st = ScrollTrigger.create({
       ...sceneScrub(rootEl),
       scrub: 0.6,
       invalidateOnRefresh: true,
       onUpdate: (self) => {
         progress = self.progress;
-        /* nav returns as the hero arrives */
+
         document.body.classList.toggle("intro-active", self.progress < 0.94);
-        /* progress rail */
+
         const stage = Math.min(STAGES, 1 + Math.floor(self.progress * STAGES));
         if (stage !== stageShown && stageEl) {
           stageShown = stage;
@@ -490,7 +454,7 @@ export default function TunnelIntro({ text = "AVDESH" }: { text?: string }) {
           {t("intro.scroll")}
         </p>
 
-        {/* 01 ━━━━━━ 06 — you're entering the experience */}
+        {}
         <div className={styles.progress} aria-hidden="true">
           <span className={styles.stageNow}>01</span>
           <span className={styles.progLine}>

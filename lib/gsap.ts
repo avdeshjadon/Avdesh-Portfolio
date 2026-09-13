@@ -1,3 +1,4 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -5,7 +6,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-/* Shared motion vocabulary — 02_UX_AND_INTERACTIONS.md */
 export const EASE = {
   outExpo: "expo.out",
   softInOut: "power3.inOut",

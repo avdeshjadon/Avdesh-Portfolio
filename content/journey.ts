@@ -1,24 +1,5 @@
-/* THE JOURNEY — the chapters the light tunnel travels through.
- *
- * ⚠ SOURCING: every fact here traces to Avdesh's CV (mirrored in
- * content/experience.ts) — companies, dates, places, roles and outcomes.
- * The 2021 chapter carries only what he stated himself: the year and
- * Telangana. Nothing biographical is invented around it.
- *
- * ⚠ CONTENT: the engineering framing here is placeholder copy written for
- * the developer/tester repositioning — the facts (companies, years, places,
- * wins) are real, the technical framing is to be confirmed in edit.
- *
- * Shape per chapter:
- *   year   — shown large, the anchor
- *   title  — what the chapter is about, in his voice
- *   place  — where it happened (context line)
- *   story  — what was actually happening, 2–3 sentences
- *   bridge — how it handed over to the next chapter (the transition line)
- *
- * `fr` mirrors every translatable field (see lib/i18n.tsx -> L()). Company,
- * product and place names stay as they are. French runs ~15% longer than
- * English, so the copy is written to length, not translated literally. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 export type Chapter = {
   id: string;

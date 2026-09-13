@@ -1,4 +1,5 @@
-/* ============ DESIGN TOKENS — 01_DESIGN_SYSTEM.md (sampled from Figma) ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 :root {
   --bg: #ffffff;
   --ink: #141414;
@@ -25,12 +26,9 @@
 }
 
 html {
-  scroll-behavior: auto; /* Lenis owns scrolling */
+  scroll-behavior: auto; 
 }
 
-/* fixed header must never cover the top of a section — this covers native
-   anchor jumps, scrollIntoView and reduced-motion; lib/lenis.ts applies the
-   same offset to the smooth-scrolled path */
 :root {
   --nav-offset: 104px;
 }
@@ -47,7 +45,6 @@ html.lenis body {
   scroll-behavior: auto !important;
 }
 
-/* hide scrollbars everywhere — scrolling stays fully functional (Lenis) */
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -65,9 +62,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  /* `clip` rather than `hidden`: both block horizontal scroll, but `hidden`
-     makes body a scroll container and silently disables position:sticky
-     anywhere on the page. Keeping `clip` leaves that door open. */
+
   overflow-x: clip;
 }
 
@@ -76,9 +71,6 @@ img {
   display: block;
 }
 
-/* The closing frame: rises over the last sticky scene and covers it, then
-   scrolls on into the footer. Opaque and above the stack so nothing from
-   behind shows through. */
 .finalFrame {
   position: relative;
   z-index: 20;

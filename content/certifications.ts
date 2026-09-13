@@ -1,27 +1,11 @@
-/* Credentials — professional certification records.
- *
- * ⚠ SOURCING NOTE — read before editing.
- * Everything here comes from Avdesh's CV. His LinkedIn certifications page
- * is login-walled and could not be read, so ISSUERS, YEARS and CREDENTIAL IDs
- * were NOT available for most entries. Those fields are deliberately left
- * null and render as "to confirm" rather than being guessed: printing
- * "Microsoft Certified" or an invented credential ID on a job-seeker's
- * portfolio is a false credential claim, not a design detail.
- *
- * To complete a panel, fill in: issuer, year, credentialId, credentialUrl.
- * `verified` should only become true when a credential URL exists.
- *
- * `fr` carries French copy for the human-readable fields. Issuers stay as
- * issued, and a programme title that is itself a product name (Power BI,
- * Power Virtual Agents) is not translated. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 export type Cert = {
-  no: string; /* deck-style section number */
-  /* the awarding organisation, exactly as it issued the credential */
+  no: string; 
+
   issuer: string | null;
-  /* official issuer mark, supplied by Avdesh. Always rendered on a light
-     plate so brand colours stay true on dark and light panels alike.
-     `aspect` is the file's real ratio — the mark is never distorted. */
+
   logo?: { src: string; aspect: number };
   title: string;
   year: string | null;
@@ -36,9 +20,7 @@ export type Cert = {
 export const CERTS: Cert[] = [
   {
     no: "2.1",
-    /* CV lists this under Microsoft's Power Platform, but describes it as an
-       "applied curriculum" — so the issuing body is named, the credential
-       status is not asserted. */
+
     issuer: "Microsoft",
     logo: { src: "/images/issuers/microsoft.png", aspect: 2110 / 540 },
     title: "Power Platform — Power BI & Power Virtual Agents",
@@ -62,9 +44,7 @@ export const CERTS: Cert[] = [
   },
   {
     no: "2.2",
-    /* ⚠ INFERRED, awaiting Avdesh's confirmation: this is the exact course
-       title inside Google's Digital Marketing & E-commerce certificate, and
-       he supplied a Google mark. Swap or clear if that is not the issuer. */
+
     issuer: "Google",
     logo: { src: "/images/issuers/google.png", aspect: 10000 / 3382 },
     title: "Attract & Engage Customers with Digital Marketing",
@@ -135,9 +115,7 @@ export const CERTS: Cert[] = [
   },
   {
     no: "2.5",
-    /* ⚠ INFERRED, awaiting Avdesh's confirmation: "Foundations" matches
-       IBM's AI Foundations track and he supplied an IBM mark. If this belongs
-       to Business Analysis Fundamentals instead, move the logo there. */
+
     issuer: "IBM",
     logo: { src: "/images/issuers/ibm.png", aspect: 4464 / 1944 },
     title: "Artificial Intelligence — Foundations & Applied Use Cases",

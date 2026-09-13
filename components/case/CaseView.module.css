@@ -1,11 +1,11 @@
-/* ============ CASE STUDY — editorial template ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .page {
   min-height: 100svh;
   background: #fff;
 }
 
-/* slim top bar */
 .bar {
   position: sticky;
   top: 0;
@@ -28,7 +28,7 @@
 .back:hover {
   color: var(--ink);
 }
-/* wordmark + language toggle share the right end of the bar */
+
 .barRight {
   display: flex;
   align-items: center;
@@ -50,7 +50,6 @@
   padding: 0 32px;
 }
 
-/* ---------- hero ---------- */
 .hero {
   padding: 96px 0 0;
   animation: rise 0.9s var(--ease-out-expo) both;
@@ -115,7 +114,7 @@
   animation: rise 0.9s var(--ease-out-expo) 0.12s both;
   overflow: hidden;
 }
-/* his own capture of the built site — fills the cover */
+
 .coverPhoto {
   width: 100%;
   height: 100%;
@@ -123,7 +122,6 @@
   object-position: center;
 }
 
-/* verified brand mark / typographic cover (mirrors the Work card language) */
 .coverBrand {
   width: min(52%, 420px);
   height: auto;
@@ -143,7 +141,6 @@
   opacity: 0.7;
 }
 
-/* ---------- sections ---------- */
 .section {
   padding-top: 84px;
 }
@@ -180,7 +177,6 @@
   max-width: 680px;
 }
 
-/* process steps */
 .steps {
   margin-top: 26px;
   display: flex;
@@ -214,7 +210,6 @@
   color: var(--ink-2);
 }
 
-/* decisions */
 .decisions {
   margin-top: 26px;
   display: grid;
@@ -237,7 +232,6 @@
   max-width: 600px;
 }
 
-/* outcomes */
 .outcomes {
   margin-top: 26px;
   display: flex;
@@ -257,7 +251,6 @@
   color: var(--accent);
 }
 
-/* reflection */
 .reflection {
   margin-top: 18px;
   font-family: var(--font-serif), Georgia, serif;
@@ -273,7 +266,6 @@
   color: var(--ink-3);
 }
 
-/* ---------- footer nav ---------- */
 .footNav {
   margin-top: 100px;
   border-top: 1px solid var(--line);

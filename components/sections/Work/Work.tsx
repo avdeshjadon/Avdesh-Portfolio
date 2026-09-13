@@ -1,11 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * Featured Work — the curved project track (02_UX_AND_INTERACTIONS.md §3.3).
- * Desktop: the section pins and vertical scroll scrubs the cards along a
- * perspective arc — center card frontal, neighbours rotate away and recede.
- * Touch / reduced motion: a native horizontal snap row, same cards.
- */
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger, prefersReducedMotion, EASE } from "@/lib/gsap";
@@ -14,13 +8,10 @@ import { PROJECTS } from "@/content/projects";
 import styles from "./Work.module.css";
 import { useLang, L } from "@/lib/i18n";
 
-const SPREAD = 330; /* px between card centers on the arc */
-/* Scroll px per card. With 14 projects this is the page's longest pin, so
-   the step is kept tight — enough for each card to land at centre, without
-   turning the section into a corridor. */
+const SPREAD = 330; 
+
 const PIN_PER_CARD = 210;
 
-/* two-digit counter — the collection is past nine projects */
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Work() {
@@ -48,11 +39,7 @@ export default function Work() {
             y: Math.min(ad * ad * 9, 110),
             rotationY: gsap.utils.clamp(-34, 34, -d * 10),
             scale: 1 - Math.min(ad * 0.065, 0.38),
-            /* Depth is carried by position, scale and rotation — NOT by
-               dimming. The cards on screen (roughly ad <= 2) stay fully
-               opaque so every cover reads at its true brightness; only
-               cards already travelling off the viewport edge fade, and
-               only enough to soften the exit. */
+
             autoAlpha: ad <= 2 ? 1 : Math.max(0.55, 1 - (ad - 2) * 0.22),
             zIndex: Math.round(100 - ad * 10),
           });
@@ -66,8 +53,6 @@ export default function Work() {
 
       render(0);
 
-      /* the Scene's sticky hold does the pinning; this only reads progress
-         across the scene's runway (see lib/scene.ts) */
       const st = ScrollTrigger.create({
         ...sceneScrub(el),
         scrub: 0.65,
@@ -75,7 +60,6 @@ export default function Work() {
         onUpdate: (self) => render(self.progress * (n - 1)),
       });
 
-      /* header reveal, once, on pin start */
       gsap.from(`.${styles.header} > *`, {
         y: 40,
         autoAlpha: 0,
@@ -88,12 +72,6 @@ export default function Work() {
 
       return () => st.kill();
     });
-
-    /* Touch & reduced motion: the snap row needs no JS. The reveal tween that
-       used to live here could never run — the snap-row CSS pins the cards with
-       `transform: none !important; opacity: 1 !important`, which inline GSAP
-       styles cannot beat — so it was dead code that only risked flashing the
-       cards through a hidden state. The row simply renders. */
 
     return () => mm.revert();
   }, []);
@@ -130,7 +108,7 @@ export default function Work() {
                   }
                 >
                   {p.cover?.src && p.cover.variant === "photo" ? (
-                    /* his own capture of the built site — full-bleed */
+
                     <img
                       className={styles.coverPhoto}
                       src={p.cover.src}
@@ -139,7 +117,7 @@ export default function Work() {
                       loading="lazy"
                     />
                   ) : p.cover?.src ? (
-                    /* verified brand mark, sized by its true aspect ratio */
+
                     <img
                       className={styles.coverBrand}
                       src={p.cover.src}
@@ -170,9 +148,9 @@ export default function Work() {
                   </div>
                 </div>
               </a>
-              {/* verified destination — a sibling of the card link, so the
-                  anchors never nest; sits over the cover's top-right. Live
-                  site wins when a project has both. */}
+              {
+
+}
               {(p.site || p.repo) && (
                 <a
                   className={styles.siteChip}

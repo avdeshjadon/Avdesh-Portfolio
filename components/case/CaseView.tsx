@@ -1,19 +1,16 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/* Client half of the case study. The route stays a server component so
-   generateStaticParams / generateMetadata keep working; everything the
-   reader sees lives here. */
 
 import Link from "next/link";
 import { PROJECTS } from "@/content/projects";
 import { useLang, L } from "@/lib/i18n";
-import styles from "./case.module.css";
+import styles from "./CaseView.module.css";
 
 export default function CaseView({ slug }: { slug: string }) {
   const { t } = useLang();
 
   const project = PROJECTS.find((p) => p.slug === slug);
-  if (!project) return null; /* the server component already called notFound() */
+  if (!project) return null; 
 
   const study = project.study;
   const tags = project.tags;
@@ -35,7 +32,7 @@ export default function CaseView({ slug }: { slug: string }) {
       </div>
 
       <div className={styles.wrap}>
-        {/* ---- hero ---- */}
+        {}
         <header className={styles.hero}>
           <p className={styles.kicker}>
             {t("case.kicker")} · {project.year}
@@ -56,7 +53,7 @@ export default function CaseView({ slug }: { slug: string }) {
               <b>{t("case.focus")}</b>
               <span>{tags.join(" · ")}</span>
             </div>
-            {/* verified official destinations only — never a guessed URL */}
+            {}
             {project.site && (
               <div>
                 <b>{t("case.site")}</b>
@@ -123,25 +120,25 @@ export default function CaseView({ slug }: { slug: string }) {
           )}
         </header>
 
-        {/* ---- context ---- */}
+        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.context")}</p>
           <p className={styles.body}>{study.context}</p>
         </section>
 
-        {/* ---- problem ---- */}
+        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.problem")}</p>
           <p className={styles.problem}>{study.problem}</p>
         </section>
 
-        {/* ---- process ---- */}
+        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.process")}</p>
           <div className={styles.steps}>
-            {/* index keys on purpose: these lists are static and never
-                reorder, so switching language re-labels rows in place
-                instead of remounting them */}
+            {
+
+}
             {study.process.map((s, i) => (
               <div className={styles.step} key={i}>
                 <span className={styles.stepN}>0{i + 1}</span>
@@ -154,7 +151,7 @@ export default function CaseView({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {/* ---- decisions ---- */}
+        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.decisions")}</p>
           <div className={styles.decisions}>
@@ -167,7 +164,7 @@ export default function CaseView({ slug }: { slug: string }) {
           </div>
         </section>
 
-        {/* ---- outcome ---- */}
+        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.outcome")}</p>
           <div className={styles.outcomes}>
@@ -180,13 +177,13 @@ export default function CaseView({ slug }: { slug: string }) {
           {study.note && <p className={styles.note}>{study.note}</p>}
         </section>
 
-        {/* ---- reflection ---- */}
+        {}
         <section className={styles.section}>
           <p className={styles.secLabel}>{t("case.reflection")}</p>
           <p className={styles.reflection}>&ldquo;{study.reflection}&rdquo;</p>
         </section>
 
-        {/* ---- next ---- */}
+        {}
         <nav className={styles.footNav}>
           <Link href="/#work" className={styles.back}>
             {t("case.all")}

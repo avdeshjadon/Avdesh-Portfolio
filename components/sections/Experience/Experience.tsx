@@ -1,21 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * EXPERIENCE — centred stacked panel composition.
- *
- * Corrections applied from review:
- *   · The stack is the HERO VISUAL and sits in the CENTRE of the viewport —
- *     not small cards on the right, not a timeline, not a carousel.
- *   · Panels are WIDE, SHORT boards (≈72vw × 150–170px), sharp-edged and
- *     perspective-distorted — physical sheets, not rounded app cards.
- *   · Depth stack recedes up-and-back on a diagonal; the active board is
- *     closest, largest, sharpest. Exit travels down + back + blur + fade.
- *   · TEXT NEVER COLLIDES: waiting boards render identity only (year · role ·
- *     company). Description and skills exist ONLY on the active board.
- *   · Scroll physics: scroll → target progress → rAF interpolation →
- *     transforms. Never bound directly to raw scroll position.
- *   · One curated colour per board; white gallery background.
- */
 
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger, EASE } from "@/lib/gsap";
@@ -25,21 +9,13 @@ import { ROLES } from "@/content/experience";
 import styles from "./Experience.module.css";
 import { useLang, L } from "@/lib/i18n";
 
-/* Scroll length per board. Kept deliberately short: Work, Experience and
-   Credentials are three pinned set-pieces in a row, so each one holds only as
-   long as its own interaction needs — the page reads as cinematic beats
-   rather than one long locked stretch. */
 const STEP_VH = 0.62;
-const DEPTH = 3; /* panels rendered behind the active one — depth/context */
+const DEPTH = 3; 
 
-/* Stack geometry (px). NOTE: the stage's rotateX turns part of each board's
-   negative Z into DOWNWARD screen movement, which cancels much of the upward
-   offset. UP is therefore sized so the RENDERED gap still exceeds the 46px
-   identity strip — that is what keeps text from ever colliding. */
-const UP = 74; /* each waiting panel sits this much higher */
-const RIGHT = 26; /* …and this much further right → diagonal */
-const BACK = 96; /* …and this much deeper in Z */
-const TILT = 6; /* rotateX on the stage: the trapezoid read */
+const UP = 74; 
+const RIGHT = 26; 
+const BACK = 96; 
+const TILT = 6; 
 
 export default function Experience() {
   const root = useRef<HTMLElement>(null);
@@ -72,7 +48,7 @@ export default function Experience() {
 
       const place = (p: number) => {
         for (let i = 0; i < n; i++) {
-          const d = i - p; /* >0 waiting · 0 active · <0 leaving */
+          const d = i - p; 
           const b = boards[i];
 
           if (d > DEPTH + 0.6 || d < -1.1) {
@@ -82,7 +58,7 @@ export default function Experience() {
           b.style.visibility = "visible";
 
           if (d >= 0) {
-            /* waiting: up + right + back, progressively compressed */
+
             const k = Math.min(d, DEPTH);
             b.style.transform =
               `translate3d(${(k * RIGHT).toFixed(1)}px, ${(-k * UP).toFixed(1)}px, ${(-k * BACK).toFixed(1)}px)` +
@@ -91,7 +67,7 @@ export default function Experience() {
             b.style.filter = k > 1.2 ? `blur(${Math.min(3, (k - 1.2) * 1.2).toFixed(2)}px)` : "";
             b.style.zIndex = String(200 - Math.round(k * 10));
           } else {
-            /* leaving: down + back, dissolving */
+
             const t = Math.min(1, -d / 1.1);
             b.style.transform =
               `translate3d(${(-t * 40).toFixed(1)}px, ${(t * 230).toFixed(1)}px, ${(-t * 320).toFixed(1)}px)` +
@@ -104,7 +80,6 @@ export default function Experience() {
         setActive(Math.round(gsap.utils.clamp(0, n - 1, p)));
       };
 
-      /* ---- scroll → target → interpolation → transforms ---- */
       let target = 0;
       let current = 0;
       const tick = (_t: number, dt: number) => {
@@ -115,7 +90,6 @@ export default function Experience() {
       gsap.ticker.add(tick);
       place(0);
 
-      /* the Scene's sticky hold does the pinning; this only reads progress */
       const st = ScrollTrigger.create({
         ...sceneScrub(el),
         scrub: 0.5,
@@ -139,7 +113,6 @@ export default function Experience() {
         handlers.push([elm, h]);
       });
 
-      /* very small perspective response to the pointer */
       const stage = el.querySelector<HTMLElement>(`.${styles.stage}`);
       let rx: ReturnType<typeof gsap.quickTo> | null = null;
       let ry: ReturnType<typeof gsap.quickTo> | null = null;
@@ -205,7 +178,7 @@ export default function Experience() {
         </h2>
       </div>
 
-      {/* the stack — centred, large, the hero visual of this section */}
+      {}
       <div className={styles.stageWrap}>
         <div className={styles.stage}>
           {ROLES.map((r, i) => (
@@ -214,17 +187,17 @@ export default function Experience() {
               key={r.company}
               style={{ background: r.color, zIndex: 200 - i }}
             >
-              {/* IDENTITY STRIP — sits inside the exposed top band of every
-                  panel, so a waiting panel's text can never be covered by,
-                  or collide with, the panel in front of it */}
+              {
+
+}
               <div className={styles.strip}>
                 <span className={styles.year}>{r.period}</span>
                 <span className={styles.company}>{r.company}</span>
                 <span className={styles.type}>{t(`type.${r.type}`)}</span>
               </div>
 
-              {/* FULL CONTENT — the active panel only, which nothing sits
-                  in front of. This is the large, readable experience card. */}
+              {
+}
               <div
                 className={`${styles.detailCol} ${
                   r.logo?.placement === "below" ? styles.logoBelow : ""
@@ -258,8 +231,8 @@ export default function Experience() {
                   </div>
                 </div>
 
-                {/* right-hand visual anchor — the company mark. Sits forward
-                    in Z so it parallaxes with the panel's own 3D movement. */}
+                {
+}
                 <div className={styles.logoCol}>
                   {r.logo ? (
                     <span
@@ -270,13 +243,13 @@ export default function Experience() {
                           : undefined
                       }
                     >
-                      {/* not lazy: five marks totalling ~17KB, and lazy
-                          loading never triggers reliably inside a
-                          3D-transformed panel — it just risks pop-in */}
+                      {
+
+}
                       <img src={r.logo.src} alt={`${r.company} logo`} />
                     </span>
                   ) : (
-                    /* no official file supplied yet — typographic stand-in */
+
                     <span className={`${styles.logoWrap} ${styles.mono}`}>
                       <b>{r.company.split(" ")[0]}</b>
                     </span>

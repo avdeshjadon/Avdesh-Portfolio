@@ -1,4 +1,5 @@
-/* ============ NAV — floating capsule, scroll-aware ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .wrap {
   position: fixed;
@@ -10,11 +11,7 @@
   justify-content: center;
   padding: 0 20px;
   pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.7s var(--ease-out-expo);
 }
-
-/* CORRECTION 01 — the header is now present from the very first viewport,
-   including over the opening tunnel. It is never hidden or duplicated. */
 
 .cap {
   pointer-events: auto;
@@ -48,8 +45,7 @@
 .logo:hover {
   letter-spacing: 0.01em;
 }
-/* the red period is the brand mark — it does the PillNav logo-spin's job:
-   a small, springy acknowledgement on hover */
+
 .logo i {
   font-style: normal;
   color: var(--accent);
@@ -60,7 +56,6 @@
   transform: translateY(-4px) scale(1.15);
 }
 
-/* --- links with roll-over micro-interaction --- */
 .links {
   display: flex;
   gap: 6px;
@@ -68,7 +63,7 @@
   font-weight: 600;
   color: var(--ink-2);
 }
-/* pill links — same interaction standard as Button: circle fill + label roll */
+
 .links a {
   position: relative;
   padding: 7px 15px;
@@ -82,8 +77,7 @@
   position: absolute;
   left: 50%;
   top: 100%;
-  /* geometry and timing matched to the Connect social buttons, so the
-     header speaks exactly the same interaction language */
+
   width: 240%;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -96,8 +90,7 @@
 .links a:focus-visible::before {
   transform: translate(-50%, -50%) scale(1);
 }
-/* the current section stays a quiet weight change — the black fill is
-   reserved for hover/touch, as requested */
+
 .links a.on {
   color: var(--ink);
   font-weight: 700;
@@ -119,8 +112,7 @@
 .roll span:last-child {
   color: #fff;
 }
-/* Touch devices never fire :hover, so the fill is driven by the tap itself
-   instead of being switched off — same animation, same timing. */
+
 @media (hover: none) {
   .links a:active::before {
     transform: translate(-50%, -50%) scale(1);
@@ -130,21 +122,16 @@
   }
 }
 
-/* --- right cluster --- */
 .right {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-/* ============ MOBILE NAVIGATION ============
-   The pill can't carry four links plus the toggle at phone widths, so below
-   900px the links move into a drawer behind a menu button. Previously they
-   were simply `display: none` — the header had no navigation at all. */
 
 .burger {
   display: none;
   position: relative;
-  /* 44px: the minimum comfortable touch target */
+
   width: 44px;
   height: 44px;
   border-radius: 999px;
@@ -175,7 +162,6 @@
   transform: translate(-50%, 0) rotate(-45deg);
 }
 
-/* the drawer itself */
 .sheet {
   pointer-events: auto;
   position: absolute;
@@ -204,7 +190,7 @@
   flex-direction: column;
 }
 .sheet a {
-  /* a generous touch target — 52px, comfortably over the 44px minimum */
+
   display: flex;
   align-items: center;
   min-height: 52px;
@@ -224,7 +210,6 @@
   background: rgba(20, 20, 20, 0.05);
 }
 
-/* tap-anywhere-to-close, behind the drawer */
 .scrim {
   display: none;
   position: fixed;
@@ -272,7 +257,6 @@
   }
 }
 
-/* the drawer is a mobile affordance only */
 @media (min-width: 901px) {
   .sheet {
     display: none;

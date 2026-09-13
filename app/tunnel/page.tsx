@@ -1,10 +1,7 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 import type { Metadata } from "next";
-import TunnelType from "@/components/lab/TunnelType";
-import LabBar from "./LabBar";
-
-/* Isolated preview of the tunnel-through-type effect.
-   Nothing else in the portfolio references this route — it exists so the
-   effect can be approved on its own before it's placed. */
+import TunnelType from "@/components/tunnel/TunnelType";
+import LabBar from "@/components/layout/LabBar";
 
 export const metadata: Metadata = {
   title: "Tunnel Type — Lab · Avdesh",

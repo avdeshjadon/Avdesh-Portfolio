@@ -1,3 +1,4 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -53,7 +54,7 @@ export default function About() {
     if (!el || prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
-      /* shared reveal grammar — same as hero: y + fade, soft expo */
+
       const reveal = (targets: gsap.TweenTarget, trigger: Element, vars: gsap.TweenVars = {}) =>
         gsap.from(targets, {
           y: 44,
@@ -68,7 +69,6 @@ export default function About() {
 
       reveal([`.${styles.eyebrow}`, `.${styles.h2}`], el.querySelector(`.${styles.header}`)!);
 
-      /* metrics: reveal + count-up when the band enters */
       const band = el.querySelector(`.${styles.metrics}`);
       if (band) {
         reveal(`.${styles.metric}`, band, { stagger: 0.09 });
@@ -80,9 +80,7 @@ export default function About() {
             gsap.utils.toArray<HTMLElement>("[data-metric-count]").forEach((numEl) => {
               const target = Number(numEl.dataset.metricCount);
               const obj = { v: 0 };
-              /* the markup ships the real number, so it is correct with no JS
-                 at all; the count-up rewinds to zero only at the moment it is
-                 actually about to run */
+
               numEl.textContent = "0";
               gsap.to(obj, {
                 v: target,
@@ -129,9 +127,9 @@ export default function About() {
                 {m.count !== null ? (
                   <>
                     {"prefix" in m && m.prefix}
-                    {/* ships the real number: with reduced motion (or no JS)
-                        the count-up never runs, and a hardcoded 0 here left
-                        those users reading "0+" and "$0K+" permanently */}
+                    {
+
+}
                     <span data-metric-count={m.count}>{m.count}</span>
                     <i>{m.suffix}</i>
                   </>

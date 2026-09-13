@@ -1,21 +1,12 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * Centralised English-only store for every user-facing string on the site.
- *
- * The French option was removed completely: there is no language state, no
- * toggle and no persistence — the site is single-language English now.
- *
- * Proper nouns (companies, products, tools, place names) are deliberately
- * NOT translated.
- */
 
 import { createContext, useContext, type ReactNode } from "react";
 
 export type Lang = "en";
 
 export const DICT: Record<string, string> = {
-  /* ---------------- nav ---------------- */
+
   "nav.home": "Home",
   "nav.about": "About",
   "nav.work": "Work",
@@ -23,10 +14,8 @@ export const DICT: Record<string, string> = {
   "nav.menu": "Open menu",
   "nav.close": "Close menu",
 
-  /* ---------------- intro ---------------- */
   "intro.scroll": "Scroll to enter",
 
-  /* ---------------- hero ---------------- */
   "hero.kicker": "Full Stack Developer & Software Tester",
   "hero.h1a": "Software that feels",
   "hero.h1aEm": "obvious.",
@@ -42,7 +31,6 @@ export const DICT: Record<string, string> = {
   "stat.countries": "Countries Worked With",
   "stat.satisfaction": "Client Satisfaction",
 
-  /* ---------------- about ---------------- */
   "about.eyebrow": "About",
   "about.h2a": "Code is how I think —",
   "about.h2b": "shipping is how I",
@@ -56,15 +44,12 @@ export const DICT: Record<string, string> = {
     "MSc International Business · Montpellier Business School · 2024–2026 · Global Market Intelligence · Strategic Leadership · AI in Business",
   "about.cta": "Explore My Work",
 
-  /* ---------------- journey ----------------
-     Chapter copy lives in content/journey.ts; only the chrome is here. */
   "journey.eyebrow": "My Journey",
   "journey.enter": "Scroll to travel",
   "journey.chapter": "Chapter",
   "journey.lede":
     "From Telangana to the Côte d’Azur — the chapters that turned a salesperson into a full stack developer.",
 
-  /* ---------------- tech stack ---------------- */
   "stack.eyebrow": "Toolkit",
   "stack.h2": "My Tech",
   "stack.h2Em": "Stack.",
@@ -73,13 +58,8 @@ export const DICT: Record<string, string> = {
   "stack.count": "tools",
   "stack.disciplines": "disciplines",
 
-  /* ---------------- my creative hunch ----------------
-     The editorial lockup (giant title, sides, labels, rails) is a designed
-     composition and stays untranslated, like a brand. Only the chrome is
-     localised. */
   "hunch.eyebrow": "My Creative Hunch",
 
-  /* ---------------- work ---------------- */
   "work.eyebrow": "Featured Work",
   "work.h2a": "Selected projects,",
   "work.h2b": "built to",
@@ -89,7 +69,6 @@ export const DICT: Record<string, string> = {
   "work.open": "Open case study",
   "work.hint": "SCROLL TO BROWSE",
 
-  /* ---------------- experience ---------------- */
   "exp.eyebrow": "Experience",
   "exp.h2": "Where I built my",
   "exp.h2Em": "judgment.",
@@ -102,7 +81,6 @@ export const DICT: Record<string, string> = {
   "type.Hackathon": "Hackathon",
   "type.Freelance": "Freelance",
 
-  /* ---------------- credentials ---------------- */
   "cert.introLabel": "Introduction",
   "cert.introTitle1": "VERIFIED",
   "cert.introTitle2": "CREDENTIALS",
@@ -128,7 +106,6 @@ export const DICT: Record<string, string> = {
   "cert.verify": "Verify credential ↗",
   "cert.foot": "Credentials",
 
-  /* ---------------- gallery — the people behind the work ---------------- */
   "gallery.eyebrow": "The Archive",
   "gallery.h2a": "The people behind",
   "gallery.h2Em": "the work",
@@ -138,7 +115,6 @@ export const DICT: Record<string, string> = {
   "gallery.frames": "Frames",
   "gallery.hint": "Scroll to travel the archive",
 
-  /* ---------------- connect ---------------- */
   "connect.eyebrow": "Let’s Connect",
   "connect.h2a": "Let’s build what’s",
   "connect.h2Em": "next.",
@@ -148,7 +124,6 @@ export const DICT: Record<string, string> = {
   "connect.credit": "Developed by",
   "connect.top": "Back to top ↑",
 
-  /* ---------------- case study (/work/[slug]) ---------------- */
   "case.back": "← Back to work",
   "case.kicker": "Case Study",
   "case.role": "Role",
@@ -166,11 +141,9 @@ export const DICT: Record<string, string> = {
   "case.all": "← All projects",
   "case.next": "Next project",
 
-  /* ---------------- lab (/tunnel) ---------------- */
   "lab.back": "← PORTFOLIO",
   "lab.hint": "LAB · TUNNEL TYPE — SCROLL TO TRAVEL · MOVE THE MOUSE",
 
-  /* ---------------- 404 ---------------- */
   "nf.label": "404 — NOT FOUND",
   "nf.h1": "This page went",
   "nf.h1Em": "off the grid.",
@@ -194,10 +167,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 export const useLang = () => useContext(LanguageContext);
 
-/** Pick a translated field off a content record: `L(lang, item, "title")`
- *  returns `item.title`. Kept for compatibility with content records that still
- *  carry a `fr` field — the site never renders French, so the English original
- *  is always used. */
 export function L<T>(
   _lang: Lang,
   item: T,

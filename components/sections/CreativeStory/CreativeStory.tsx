@@ -1,28 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * THE CREATIVE STORY — My Creative Hunch → puzzle → About Me
- *
- * One scrubbed Scene ported from the software-Developer project's Sections
- * 02 and 03. The whole journey lives in a single pinned frame so the two
- * chapters can hand off at the pixel:
- *
- *   PHASE A (scroll 0→s2Range) — the editorial composition scrubs in:
- *   the three title lines rise out of their masks, meta fades up, the five
- *   labels contract outward from their centroid.
- *
- *   PHASE B (s2Range→s2Range+trRange) — the composed piece is dismantled:
- *   the lockup is cloned into a grid of tile fragments which scatter with a
- *   travelling seam, a "player window" draws a red hairline, shrinks and
- *   fades; the label cluster drifts out last. Behind the departing pieces the
- *   About Me chapter assembles inside the dark void — dim type, the oversized
- *   "About Me" title climbing out of its mask, the three doors rising in
- *   sequence — then locks and becomes interactive.
- *
- * Everything is pegged to the scene's runway via lib/scene.ts (the same
- * pattern every scroll-driven scene uses), and is fully reversible: scroll
- * back and the pieces fly home.
- */
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -80,7 +57,6 @@ const DOORS = [
 
 type DoorId = "who" | "think";
 
-/* ---------- the approved timelines ---------- */
 const S2_RANGE_DESK = 2.4;
 const S2_RANGE_MOBILE = 1.8;
 const TR_RANGE_DESK = 3.4;
@@ -106,9 +82,6 @@ const easeInOut = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 const sub = (p: number, a: number, b: number) => clamp01((p - a) / (b - a));
 
-/* tile grid: r = rect as fractions of the composition; d = travel as
-   fractions of the stage; s = phase-B start of this tile's motion.
-   Edges leave first, the center releases last — dismantled, not random. */
 type TileCfg = {
   r: [number, number, number, number];
   d: [number, number];
@@ -158,7 +131,6 @@ export default function CreativeStory() {
   const [flash, setFlash] = useState(false);
   const { t } = useLang();
 
-  /* ---- one scrub owns the whole journey (phase A + phase B) ---- */
   useEffect(() => {
     const el = root.current;
     if (!el) return;
@@ -302,7 +274,6 @@ export default function CreativeStory() {
       layoutFragments();
     };
 
-    /* phase A — the approved Section-02 timeline */
     const applyS2 = (p: number) => {
       lines.forEach((line, i) => {
         if (!line) return;
@@ -336,7 +307,6 @@ export default function CreativeStory() {
       });
     };
 
-    /* phase B — the puzzle transition and the About Me assembly */
     let trActive = false;
 
     const applyTr = (pt: number) => {
@@ -357,12 +327,10 @@ export default function CreativeStory() {
       }
       if (!active) return;
 
-      /* chrome steps aside */
       const hOut = easeOut(sub(pt, 0, 0.14));
       const eyebrow = q(`.${styles.eyebrow}`);
       if (eyebrow) eyebrow.style.opacity = (1 - hOut).toFixed(3);
 
-      /* the side rails detach first */
       const railOut = easeOut(sub(pt, 0, 0.12));
       qa(`.${styles.rail}`).forEach((r, i) => {
         r.style.opacity = (1 - railOut).toFixed(3);
@@ -371,13 +339,11 @@ export default function CreativeStory() {
         ).toFixed(1)}px, 0, 0)`;
       });
 
-      /* void + dim type behind the window */
       if (trAtmo)
         trAtmo.style.opacity = easeOut(sub(pt, 0.02, 0.16)).toFixed(3);
       if (p3Dim)
         p3Dim.style.opacity = (0.55 * easeOut(sub(pt, 0.06, 0.2))).toFixed(3);
 
-      /* transition credits hand over to the about corners */
       const creditsOut = easeOut(sub(pt, 0.8, 0.9));
       atmoCredits.forEach((c) => {
         c.style.opacity = (1 - creditsOut).toFixed(3);
@@ -387,7 +353,6 @@ export default function CreativeStory() {
         c.style.opacity = cornersIn.toFixed(3);
       });
 
-      /* the About Me composition assembles behind the departing pieces */
       const locked = pt > 0.985;
       if (!locked) {
         if (abTitle) {
@@ -408,7 +373,6 @@ export default function CreativeStory() {
           abFoot.style.opacity = easeOut(sub(pt, 0.85, 0.97)).toFixed(3);
       }
 
-      /* lock: About Me becomes interactive (inline styles hand over to CSS) */
       if (locked !== !!stageEl?.classList.contains(styles.isLocked)) {
         stageEl?.classList.toggle(styles.isLocked, locked);
         if (locked) {
@@ -424,7 +388,6 @@ export default function CreativeStory() {
         }
       }
 
-      /* the stage becomes a player window */
       const framed = easeInOut(sub(pt, 0.02, 0.17));
       const windowFade = easeOut(sub(pt, 0.92, 1));
       const wScale = 1 - (isMobileLayout() ? 0.1 : 0.2) * framed;
@@ -437,7 +400,6 @@ export default function CreativeStory() {
       if (trGhost)
         trGhost.style.opacity = (1 - easeInOut(sub(pt, 0.5, 0.85))).toFixed(3);
 
-      /* the puzzle pieces */
       const seamGlobal = easeOut(sub(pt, 0.05, 0.18));
       tiles.forEach(({ el: tile, seam, cfg }) => {
         const e = easeInOut(sub(pt, cfg.s, cfg.s + TR_SPAN));
@@ -456,7 +418,6 @@ export default function CreativeStory() {
         seam.style.opacity = (seamGlobal * (1 - e)).toFixed(3);
       });
 
-      /* the label cluster survives the longest, then releases */
       if (trCluster) {
         const drift = easeInOut(sub(pt, 0.3, 0.85));
         const cfade = easeOut(sub(pt, 0.8, 0.92));
@@ -475,13 +436,8 @@ export default function CreativeStory() {
       applyTr(pt);
     };
 
-    /* triggerEl must exist before measure() runs — measure reads its height
-         and a bare `const` after the call would throw in the TDZ. */
     const triggerEl = sceneScrub(el).trigger;
 
-    /* measure BEFORE the trigger exists: ScrollTrigger.create fires its
-         initial refresh (and thus onUpdate -> apply) synchronously, so range,
-         centers, centroid and stage size must already be populated. */
     measure();
 
     const st = ScrollTrigger.create({
@@ -521,7 +477,6 @@ export default function CreativeStory() {
     };
   }, []);
 
-  /* ---- doors: open the detail layer, or route What I Do to Works ---- */
   const openDoor = (key: DoorId) => {
     setOpen(key);
     lastOpenRef.current = key;
@@ -569,7 +524,6 @@ export default function CreativeStory() {
     openDoor(key as DoorId);
   };
 
-  /* Esc closes the detail layer */
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -579,7 +533,6 @@ export default function CreativeStory() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open, closeAbout]);
 
-  /* lock the document behind the opened detail layer */
   useEffect(() => {
     if (!open) return;
     document.documentElement.style.overflow = "hidden";
@@ -599,7 +552,7 @@ export default function CreativeStory() {
       </p>
 
       <div className={styles.stage}>
-        {/* PHASE A · My Creative Hunch — the editorial composition */}
+        {}
         <div className={styles.comp}>
           <p className={styles.brand} aria-hidden="true">
             <span>My </span>
@@ -692,7 +645,7 @@ export default function CreativeStory() {
           <span className={`${styles.railLine} ${styles.railLineB}`} />
         </div>
 
-        {/* PHASE B · the void that will be revealed */}
+        {}
         <div className={styles.atmo} aria-hidden="true">
           <p className={`${styles.credit} ${styles.creditL}`}>
             MyCreativeHunch Studio
@@ -702,7 +655,7 @@ export default function CreativeStory() {
           </p>
         </div>
 
-        {/* PHASE B · About Me — assembles behind the departing pieces */}
+        {}
         <div className={styles.p3} id="section-03">
           <div className={styles.dim} aria-hidden="true">
             <span>Functional &amp; Beautiful</span>
@@ -782,7 +735,7 @@ export default function CreativeStory() {
             </div>
           </div>
 
-          {/* expanded layer: grows out of the clicked door */}
+          {}
           {open && (
             <div
               ref={detailRef}
@@ -870,7 +823,7 @@ export default function CreativeStory() {
           )}
         </div>
 
-        {/* PHASE B · the player window: ghost + fragments + surviving labels */}
+        {}
         <div className={styles.window} aria-hidden="true">
           <div className={styles.ghost} />
           <div className={styles.frags} />
@@ -879,7 +832,7 @@ export default function CreativeStory() {
         </div>
       </div>
 
-      {/* the black cut used when What I Do routes to the Works chapter */}
+      {}
       {flash &&
         typeof document !== "undefined" &&
         createPortal(

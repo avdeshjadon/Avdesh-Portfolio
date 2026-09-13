@@ -1,3 +1,4 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -16,7 +17,6 @@ const STATS_RIGHT = [
   { n: 100, suffix: "%", key: "stat.satisfaction", icon: "/images/icons/satisfaction.png" },
 ];
 
-/* ambient particles — position (vw/vh %), size px, tone */
 const PARTICLES = [
   { x: 8, y: 26, s: 6, accent: true },
   { x: 14, y: 62, s: 4, accent: false },
@@ -48,16 +48,9 @@ export default function Hero() {
     if (!el || prefersReducedMotion()) return;
 
     const ctx = gsap.context(() => {
-      /* ---------- Entrance: plays when the hero ARRIVES (revealed by the
-         tunnel opening above it), not on page load ---------- */
+
       const tl = gsap.timeline({
-        /* immediateRender:false is load-bearing here, not a nicety. Every
-           tween below is a `.from()`, which by default hides its target the
-           moment the timeline is built and only restores it when the trigger
-           fires. If that trigger never resolves — which happens when the
-           section is held inside a scene — the kicker, sub-copy and BOTH
-           CTAs stay invisible forever. This way the hero renders complete
-           and the entrance is an enhancement layered on top. */
+
         defaults: { ease: EASE.outExpo, immediateRender: false },
         scrollTrigger: { trigger: el, start: "top 85%", once: true },
       });
@@ -85,7 +78,6 @@ export default function Hero() {
         )
         .from(`.${styles.scrollCue}`, { y: 16, autoAlpha: 0, duration: 0.7 }, "-=0.6");
 
-      /* stat count-up — synced to the entrance timeline, not page load */
       tl.call(
         () => {
           gsap.utils.toArray<HTMLElement>(`.${styles.statNum}`).forEach((numEl) => {
@@ -105,7 +97,6 @@ export default function Hero() {
         "-=0.9"
       );
 
-      /* ---------- Idle life ---------- */
       gsap.utils.toArray<HTMLElement>(`.${styles.particle}`).forEach((p) => {
         gsap.to(p, {
           y: `+=${gsap.utils.random(-18, 18)}`,
@@ -128,7 +119,6 @@ export default function Hero() {
         });
       });
 
-      /* ---------- Mouse: layered parallax + a breath of portrait tilt ---------- */
       const layers = gsap.utils.toArray<HTMLElement>("[data-depth]");
       const setters = layers.map((layer) => ({
         depth: Number(layer.dataset.depth),
@@ -150,7 +140,6 @@ export default function Hero() {
       };
       window.addEventListener("mousemove", onMove);
 
-      /* ---------- Scroll: gentle layered exit ---------- */
       gsap
         .timeline({
           scrollTrigger: { trigger: el, start: "top top", end: "bottom top", scrub: true },
@@ -168,7 +157,7 @@ export default function Hero() {
 
   return (
     <section className={styles.hero} id="home" ref={root}>
-      {/* ---- ambient composition: glows, geometry, particles ---- */}
+      {}
       <div className={styles.ambient} aria-hidden="true">
         <span className={`${styles.glow} ${styles.glowL}`} data-depth="0.012" />
         <span className={`${styles.glow} ${styles.glowR}`} data-depth="0.016" />
@@ -184,7 +173,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ---- Head ---- */}
+      {}
       <div className={styles.head} data-depth="0.01">
         <p className={styles.kicker}>{t("hero.kicker")}</p>
         <h1 className={styles.h1}>
@@ -207,7 +196,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ---- Stage ---- */}
+      {}
       <div className={styles.stageRow}>
         <div className={`${styles.side} ${styles.sideL}`}>
           {STATS_LEFT.map((s) => (
@@ -238,7 +227,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ---- Bottom: a single quiet cue ---- */}
+      {}
       <div className={styles.scrollCue}>
         <span>{t("hero.scroll")}</span>
         <span className={styles.cueArrow} aria-hidden="true">

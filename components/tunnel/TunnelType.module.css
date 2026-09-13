@@ -1,10 +1,11 @@
-/* ============ TUNNEL TYPE — live WebGL tunnel masked inside letterforms ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .frame {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #fff; /* the page stays clean white — only the letters open */
+  background: #fff; 
   overflow: hidden;
 }
 
@@ -12,11 +13,9 @@
   display: block;
   width: 100%;
   height: 100%;
-  /* the typography mask is injected inline (data-URL raster of the text,
-     drawn with the real loaded display font) */
+
 }
 
-/* WebGL-unavailable fallback: solid ink type, same fitting intent */
 .fallback {
   position: absolute;
   inset: 0;

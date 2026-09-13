@@ -1,3 +1,4 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 import type { MetadataRoute } from "next";
 import { PROJECTS } from "@/content/projects";
 import { SITE_URL } from "@/lib/site";

@@ -1,12 +1,9 @@
-/* ============ CREDENTIALS — pitch-deck cascade ============
-   Colour relationships, panel geometry, typography scale and composition
-   taken from the supplied reference: warm light-grey ground, 16:10 slide
-   panels in a near-black / white / vermilion rhythm, tiny mono section
-   numbers, oversized condensed titles, ghosted metric numerals. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .certs {
   position: relative;
-  /* the reference ground: warm light grey, subtly darker toward the bottom */
+
   background: linear-gradient(163deg, #ededee 0%, #e4e4e6 52%, #d9d9dc 100%);
   overflow: hidden;
   padding: 96px 0;
@@ -19,7 +16,6 @@
   flex-direction: column;
 }
 
-/* ---------- section heading: the section names itself ---------- */
 .head {
   position: relative;
   z-index: 6;
@@ -61,8 +57,6 @@
   text-wrap: pretty;
 }
 
-/* Short viewports: the heading gives room back to the credential panel
-   rather than squeezing the panel's own content. */
 @media (max-height: 800px) {
   .deckMode {
     padding-top: 30px;
@@ -76,12 +70,11 @@
     font-size: 13px;
     max-width: 520px;
   }
-  /* the heading now costs less, so the panel reclaims that height.
-     `.deckMode` prefix keeps this ahead of the base .stage rule below. */
+
   .deckMode .stage {
     --panel-w: clamp(340px, min(58vw, calc((100vh - 270px) * 1.6)), 980px);
   }
-  /* and the panel's own rhythm tightens so the record still fits */
+
   .band {
     height: 40px;
   }
@@ -98,14 +91,13 @@
 }
 @media (max-height: 680px) {
   .lede {
-    display: none; /* the heading alone still names the section */
+    display: none; 
   }
   .deckMode .stage {
     --panel-w: clamp(340px, min(58vw, calc((100vh - 215px) * 1.6)), 980px);
   }
 }
 
-/* ---------- the cascade ---------- */
 .stageWrap {
   position: relative;
   z-index: 3;
@@ -119,19 +111,18 @@
 }
 .stage {
   position: relative;
-  /* the stage IS the focused panel; the others recede behind its centre */
+
   --panel-w: clamp(340px, min(58vw, calc((100vh - 430px) * 1.6)), 980px);
   width: var(--panel-w);
   height: calc(var(--panel-w) * 0.625);
   transform-style: preserve-3d;
-  /* square to the viewer — no stage tilt, no warped perspective */
+
   will-change: transform;
 }
 
-/* clean rectangular credential panels, straight edges, subtle radius */
 .panel {
   position: absolute;
-  inset: 0; /* every panel fills the stage; the motion moves it from there */
+  inset: 0; 
   border-radius: 10px;
   backface-visibility: hidden;
   padding: 0 clamp(26px, 3vw, 44px) clamp(22px, 2.6vh, 34px);
@@ -144,7 +135,6 @@
   overflow: hidden;
 }
 
-/* the reference's three panel tones */
 .dark {
   background: #17171a;
   color: #ffffff;
@@ -158,11 +148,10 @@
   color: #ffffff;
 }
 
-/* ---------- identity band: stays in the exposed upper area ---------- */
 .band {
   flex: 0 0 auto;
   height: 50px;
-  /* panels are square now, so the band can run the full width */
+
   display: flex;
   align-items: center;
   gap: 16px;
@@ -172,14 +161,13 @@
   text-transform: uppercase;
   white-space: nowrap;
 }
-/* "CERTIFICATION" — states plainly what the panel is */
+
 .kind {
   font-weight: 800;
   letter-spacing: 0.2em;
   opacity: 0.62;
 }
 
-/* ---------- issuer: the largest thing after the title ---------- */
 .issuerRow {
   flex: 0 0 auto;
   display: flex;
@@ -187,8 +175,7 @@
   gap: 14px;
   margin-bottom: clamp(10px, 1.4vh, 18px);
 }
-/* official marks always sit on a light plate so brand colours stay true
-   on dark and light panels alike */
+
 .logoPlate {
   display: inline-flex;
   align-items: center;
@@ -219,7 +206,7 @@
 .org {
   opacity: 0.78;
 }
-/* issuing organisation — the line that makes a panel read as a credential */
+
 .issuer {
   font-weight: 800;
   letter-spacing: 0.16em;
@@ -235,7 +222,6 @@
   color: #2e9e5b;
 }
 
-/* credential record — the fields a real certificate carries */
 .record {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, auto));
@@ -270,7 +256,6 @@
   padding-bottom: 2px;
 }
 
-/* the certification's own name */
 .title {
   font-size: clamp(22px, 3vw, 44px);
   font-weight: 900;
@@ -279,7 +264,6 @@
   text-transform: uppercase;
 }
 
-/* ---------- detail: focused panel only ---------- */
 .detail {
   margin-top: auto;
   display: flex;
@@ -299,7 +283,6 @@
   transition-delay: 0.12s;
 }
 
-/* ghosted metric numeral, as on the reference's metrics slides */
 .metric {
   display: flex;
   flex-direction: column;
@@ -320,7 +303,6 @@
   opacity: 0.5;
 }
 
-/* small right-hand text column, reference-style */
 .cols {
   max-width: 46%;
   font-size: 12.5px;
@@ -361,7 +343,6 @@
   margin-top: 8px;
 }
 
-/* ---------- brand panel: giant wordmark, as in the reference ---------- */
 .wordmark {
   margin-top: auto;
   font-size: clamp(56px, 9vw, 150px);
@@ -385,7 +366,6 @@
   white-space: nowrap;
 }
 
-/* ---------- foot strip, mirroring the reference's deck footer ---------- */
 .foot {
   position: relative;
   z-index: 6;
@@ -414,7 +394,6 @@
   justify-self: end;
 }
 
-/* ============ responsive ============ */
 @media (max-width: 1000px) {
   .certs {
     padding: 80px 0;
@@ -440,10 +419,7 @@
     padding: 0 24px;
     --panel-w: 100%;
   }
-  /* The band is one nowrap row (number · CERTIFICATION · status) that needs
-     ~360px. Inside a phone-width panel it was clipped, taking the
-     verification status off the right edge of every credential. Let it wrap
-     and give it room. */
+
   .band {
     height: auto;
     min-height: 40px;

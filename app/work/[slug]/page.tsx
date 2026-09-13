@@ -1,11 +1,8 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PROJECTS } from "@/content/projects";
-import CaseView from "./CaseView";
-
-/* Case study — the template from 03_CONTENT_STRATEGY.md §4:
-   hero → context → problem → process → decisions → outcome → reflection → next.
-   Statically generated per project; content lives in content/projects.ts. */
+import CaseView from "@/components/case/CaseView";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));

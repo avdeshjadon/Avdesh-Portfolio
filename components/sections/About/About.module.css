@@ -1,4 +1,5 @@
-/* ============ ABOUT — storytelling section ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .about {
   position: relative;
@@ -11,7 +12,6 @@
   padding: 120px 44px 130px;
 }
 
-/* ---------- header ---------- */
 .eyebrow {
   display: flex;
   align-items: center;
@@ -47,7 +47,6 @@
   color: var(--accent);
 }
 
-/* ---------- grid: beats + side cards ---------- */
 .grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -142,7 +141,6 @@
   color: var(--accent);
 }
 
-/* ---------- metrics band ---------- */
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -177,7 +175,6 @@
   max-width: 220px;
 }
 
-/* ---------- education + next ---------- */
 .edu {
   margin-top: 56px;
   font-size: 14.5px;
@@ -190,7 +187,6 @@
   margin-top: 34px;
 }
 
-/* ============ Responsive ============ */
 @media (max-width: 1100px) {
   .wrap {
     padding: 90px 24px 100px;

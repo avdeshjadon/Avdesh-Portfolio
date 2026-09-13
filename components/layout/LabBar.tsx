@@ -1,8 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/* Top bar for the lab route. Split out as a client component so the label
-   follows the EN/FR choice — the page itself stays a server component so its
-   noindex metadata is still emitted on the server. */
 
 import Link from "next/link";
 import { useLang } from "@/lib/i18n";

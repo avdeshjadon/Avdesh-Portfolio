@@ -1,28 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * THE PEOPLE BEHIND THE WORK — DriftWall.
- *
- * Built to the supplied DriftWall reference, in this portfolio's language:
- *   columns 5 · tilt 16° · turn -14° · perspective 1200 · depth 120
- *   speed 42px/s · direction up · variance 0.45 · parallax 0.6 · lift 64
- *   fade 0.6 · radius 14 · roll 0 · pauseOnHover false · grayscale false
- *
- * Two deliberate departures from the reference, both to keep Avdesh's own
- * photographs intact:
- *   · overlayColor #060010 → the portfolio's white ground, as instructed
- *   · dim 0.55 → tiles are NOT darkened. Depth reads through scale, the
- *     perspective itself and the soft edge mask, so every face stays bright.
- *
- * Tiles keep each photograph's TRUE aspect ratio rather than the reference's
- * fixed 200×132, so nothing is stretched and the column rhythm varies
- * naturally — the "slight variation between tiles" comes from the pictures.
- *
- * Columns wrap seamlessly: each column's content is rendered twice and the
- * offset wraps at half its height. Motion is a calm autonomous drift plus a
- * scroll contribution, so the wall is alive when still and responds as the
- * page moves. Pointer adds the parallax lean.
- */
 
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, EASE, prefersReducedMotion } from "@/lib/gsap";
@@ -31,16 +8,12 @@ import { FRAMES } from "@/content/gallery";
 import { useLang } from "@/lib/i18n";
 import styles from "./Gallery.module.css";
 
-/* ---- DriftWall parameters (reference values) ---- */
-const SPEED = 42; /* px/s base drift */
-const VARIANCE = 0.45; /* per-column speed spread */
-const PARALLAX = 0.6; /* pointer lean strength */
-const LIFT = 64; /* px of scroll-driven travel added across the section */
-const DIRECTION = -1; /* up */
+const SPEED = 42; 
+const VARIANCE = 0.45; 
+const PARALLAX = 0.6; 
+const LIFT = 64; 
+const DIRECTION = -1; 
 
-/* Columns per breakpoint. Fewer than the reference's 5 on purpose: at 5 the
-   tiles fell to ~220px wide, and these photographs deserve to be looked at.
-   The wall thins out on small screens rather than shrinking to mush. */
 const COLS_DESKTOP = 4;
 const COLS_LAPTOP = 4;
 const COLS_TABLET = 3;
@@ -53,9 +26,6 @@ export default function Gallery() {
   const root = useRef<HTMLElement>(null);
   const { t } = useLang();
 
-  /* Columns are computed on the client so the count can follow the viewport.
-     Round-robin keeps Avdesh's numbering: 1,2,3,4,5 across the first row,
-     then 6,7,8… so the sequence reads left-to-right down the wall. */
   const [cols, setCols] = useState<number>(COLS_DESKTOP);
 
   useEffect(() => {
@@ -72,7 +42,6 @@ export default function Gallery() {
     const colEls = gsap.utils.toArray<HTMLElement>(`.${styles.colInner}`);
     if (!colEls.length) return;
 
-    /* per-column speed: alternating faster / slower, spread by VARIANCE */
     const speeds = colEls.map(
       (_, i) =>
         SPEED *
@@ -82,9 +51,6 @@ export default function Gallery() {
     const offsets = colEls.map(() => 0);
     const halves = colEls.map((c) => Math.max(1, c.scrollHeight / 2));
 
-    /* The wall is a flex child now, so `vh` no longer describes its height.
-       Publish the measured height as --wall-h; tile sizing keys off it, which
-       is what keeps every photograph whole inside the frame. */
     const view = el.querySelector<HTMLElement>(`.${styles.wallView}`);
     const measure = () => {
       if (view) el.style.setProperty("--wall-h", `${Math.round(view.clientHeight)}px`);
@@ -95,7 +61,6 @@ export default function Gallery() {
     if (view) ro.observe(view);
     measure();
 
-    /* scroll adds to the drift as the wall passes through the viewport */
     let scrollPush = 0;
 
     const tick = (_t: number, dt: number) => {
@@ -108,7 +73,6 @@ export default function Gallery() {
       });
     };
 
-    /* only animate while the wall is on screen */
     let running = false;
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -124,8 +88,6 @@ export default function Gallery() {
     );
     io.observe(el);
 
-    /* the Scene holds the wall on screen; this reads progress across its
-       runway so the drift is driven by scroll while it is the active frame */
     const st = ScrollTrigger.create({
       ...sceneScrub(el),
       scrub: true,
@@ -135,9 +97,6 @@ export default function Gallery() {
       },
     });
 
-    /* Pointer parallax — the whole wall leans. Mouse only: on a touch screen
-       `pointermove` fires while dragging, so every swipe used to lurch the
-       wall sideways and fight the scroll. A finger is not a hovering cursor. */
     const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const wall = el.querySelector<HTMLElement>(`.${styles.wall}`);
     let onMove: ((e: PointerEvent) => void) | null = null;
@@ -154,12 +113,6 @@ export default function Gallery() {
       el.addEventListener("pointermove", onMove);
     }
 
-    /* The title must NEVER depend on a scroll trigger firing. A `gsap.from`
-       with autoAlpha immediately hides the element and only restores it when
-       its trigger fires — inside a sticky scene that trigger can fail to
-       resolve, and the heading stays invisible forever. `fromTo` with
-       immediateRender:false leaves the heading visible by default and only
-       animates if the trigger does fire. Fail-safe, not fail-hidden. */
     gsap.fromTo(
       `.${styles.head} > *`,
       { y: 36, autoAlpha: 0 },
@@ -183,7 +136,6 @@ export default function Gallery() {
     };
   }, [cols]);
 
-  /* deal the 14 frames into columns, round-robin, preserving Avdesh's order */
   const columns: (typeof FRAMES)[] = Array.from({ length: cols }, () => []);
   FRAMES.forEach((f, i) => columns[i % cols].push(f));
 
@@ -201,13 +153,13 @@ export default function Gallery() {
       </div>
 
       <div className={styles.wallView}>
-        {/* --cols is driven from JS so the grid can never disagree with the
-            number of columns actually rendered */}
+        {
+}
         <div className={styles.wall} style={{ "--cols": cols } as React.CSSProperties}>
           {columns.map((col, ci) => (
             <div className={styles.col} key={ci}>
               <div className={styles.colInner}>
-                {/* rendered twice for the seamless wrap */}
+                {}
                 {[...col, ...col].map((f, i) => (
                   <figure
                     className={styles.tile}
@@ -228,8 +180,8 @@ export default function Gallery() {
             </div>
           ))}
         </div>
-        {/* soft edge mask — the reference's `fade`, as a mask rather than a
-            dark overlay, so nothing is tinted */}
+        {
+}
         <div className={styles.fade} aria-hidden="true" />
       </div>
 

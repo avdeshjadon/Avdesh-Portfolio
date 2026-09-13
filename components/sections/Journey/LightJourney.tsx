@@ -1,26 +1,5 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 "use client";
-
-/*
- * THE JOURNEY v2 — light-cable tunnel (LightTunnel as the concept reference;
- * engine built from scratch to its parameter language: cables, pulses,
- * waviness, sway, glow, fade near/far, color variance, mouse influence).
- *
- * · 20 wavy light cables (10 on mobile) converge toward a vanishing point;
- *   additive-blended shader pulses travel outward along them — energy
- *   moving through a living system, with direction, depth and falloff.
- * · SCROLL IS THE JOURNEY: the section pins for ~4 viewports. Scroll
- *   progress (not just velocity) drives travel, pulse energy and the color
- *   progression — blue → orange → coral → purple → green — so the journey
- *   has a beginning, middle and climax. Velocity feel comes free from the
- *   double smoothing (scrub → travel-lerp): flick fast and the tunnel
- *   surges, then settles. Touch uses native scrolling.
- * · The pointer leans the camera and sways the tunnel — atmospheric, ±0.06.
- * · THE EXIT: light intensity peaks, then the cables dissolve as white
- *   returns and the next section arrives — the same compression-into-white
- *   grammar as the opening tunnel.
- * · Minimal chapter labels sit over the depth; the full story stays in
- *   screen-reader text. prefers-reduced-motion gets a calm static frame.
- */
 
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
@@ -30,26 +9,20 @@ import { CHAPTERS } from "@/content/journey";
 import styles from "./LightJourney.module.css";
 import { useLang, L } from "@/lib/i18n";
 
-/* palette progression across the journey */
 const PALETTE = ["#0072E3", "#FF6A00", "#FF2E0F", "#AB54F7", "#00AA3C"];
 
-/* One viewport of scroll per chapter, so a chapter can actually be read
-   before the tunnel moves on. */
 const JOURNEY_VIEWPORTS = CHAPTERS.length;
 const DEPTH = 30;
 const RADIUS = 1.12;
 const WAVINESS = 0.3;
-const TRAVEL_TOTAL = 26; /* pulse-phase travel across the journey */
-const T_EXIT = 0.9; /* white return begins */
+const TRAVEL_TOTAL = 26; 
+const T_EXIT = 0.9; 
 
-/* Chapters live inside this slice of the pin: the head is the section
-   title settling, the tail is the last chapter holding before the whiteout
-   takes over. Text is never asked to compete with the dissolve. */
 const CH_START = 0.06;
 const CH_END = 0.86;
 const CH_SPAN = (CH_END - CH_START) / CHAPTERS.length;
 
-const VERT = /* glsl */ `
+const VERT =  `
   varying float vT;
   varying float vZ;
   void main() {
@@ -60,7 +33,7 @@ const VERT = /* glsl */ `
   }
 `;
 
-const FRAG = /* glsl */ `
+const FRAG =  `
   uniform vec3 uColor;
   uniform float uTravel;
   uniform float uPhase;
@@ -69,11 +42,9 @@ const FRAG = /* glsl */ `
   varying float vT;
   varying float vZ;
   void main() {
-    /* rim base + a pulse with a decaying tail, travelling outward */
     float p = fract(vT * 3.0 - uTravel * 0.14 + uPhase);
     float pulse = smoothstep(0.30, 0.0, p) * (1.1 + uEnergy * 1.6);
     float b = 0.20 + pulse;
-    /* depth: fade in just past the camera, fade out into the far dark */
     float a = smoothstep(0.6, 2.4, vZ) * (1.0 - smoothstep(16.0, 27.0, vZ));
     vec3 c = uColor * b;
     gl_FragColor = vec4(c, 1.0) * a * uMaster;
@@ -85,8 +56,7 @@ export default function LightJourney() {
   const frameRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [webglOk, setWebglOk] = useState(true);
-  /* reduced motion (or no WebGL) drops the pin entirely, so the chapters
-     have to be readable as a plain stack — content is never motion-gated */
+
   const [staticMode, setStaticMode] = useState(false);
   const { t, lang } = useLang();
 
@@ -98,10 +68,7 @@ export default function LightJourney() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) setStaticMode(true);
-    /* Aligned to the site's real mobile boundary (1000px) and to coarse
-       pointers. At 700px a landscape phone or an 8-inch tablet fell through
-       to the desktop tier: 20 antialiased cables at DPR 2 in a continuous
-       loop across a six-viewport hold. */
+
     const compact = window.matchMedia(
       "(max-width: 1000px), (hover: none) and (pointer: coarse)"
     ).matches;
@@ -132,7 +99,6 @@ export default function LightJourney() {
 
     const paletteC = PALETTE.map((h) => new THREE.Color(h));
 
-    /* ---------- cables ---------- */
     type Cable = {
       mat: THREE.ShaderMaterial;
       baseColor: THREE.Color;
@@ -180,7 +146,6 @@ export default function LightJourney() {
       cables.push({ mat, baseColor, tmp: new THREE.Color() });
     }
 
-    /* soft core at the vanishing point — the infinite end of the tunnel */
     const coreCanvas = document.createElement("canvas");
     coreCanvas.width = coreCanvas.height = 128;
     const cctx = coreCanvas.getContext("2d")!;
@@ -204,7 +169,6 @@ export default function LightJourney() {
     core.scale.setScalar(7);
     scene.add(core);
 
-    /* ---------- sizing ---------- */
     const resize = () => {
       const w = Math.max(1, frame.clientWidth);
       const h = Math.max(1, frame.clientHeight);
@@ -217,7 +181,6 @@ export default function LightJourney() {
     ro.observe(frame);
     resize();
 
-    /* ---------- color mixing per progress ---------- */
     const mixed = new THREE.Color();
     const applyColors = (p: number) => {
       const x = gsap.utils.clamp(0, PALETTE.length - 1.001, p * (PALETTE.length - 1));
@@ -225,7 +188,7 @@ export default function LightJourney() {
       const f = x - i0;
       mixed.copy(paletteC[i0]).lerp(paletteC[i0 + 1], f);
       for (const c of cables) {
-        /* controlled variance: 72% progression color, 28% the cable's own hue */
+
         (c.mat.uniforms.uColor.value as THREE.Color)
           .copy(mixed)
           .lerp(c.baseColor, 0.28);
@@ -234,7 +197,6 @@ export default function LightJourney() {
     };
     applyColors(0);
 
-    /* ---------- reduced motion: calm static frame ---------- */
     if (reduced) {
       for (const c of cables) c.mat.uniforms.uTravel.value = 0.6;
       applyColors(0.4);
@@ -249,7 +211,6 @@ export default function LightJourney() {
       };
     }
 
-    /* ---------- journey state ---------- */
     let progress = 0;
     let travel = 0;
     let idle = 0;
@@ -286,28 +247,24 @@ export default function LightJourney() {
       const dt = last ? Math.min((now - last) / 1000, 1 / 30) : 1 / 60;
       last = now;
 
-      /* travel: progress-mapped + slow idle life, inertia-lerped */
       idle += dt * 0.35;
       const target = progress * TRAVEL_TOTAL + idle;
       travel += (target - travel) * 0.075;
 
-      const energy = 0.3 + progress * 1.5; /* pulses intensify with depth */
+      const energy = 0.3 + progress * 1.5; 
       for (const c of cables) {
         c.mat.uniforms.uTravel.value = travel;
         c.mat.uniforms.uEnergy.value = energy;
       }
 
-      /* exit: light peaks then dissolves into white */
       const rel = gsap.utils.clamp(0, 1, (progress - T_EXIT) / (1 - T_EXIT));
       const eased = rel * rel * (3 - 2 * rel);
       for (const c of cables) c.mat.uniforms.uMaster.value = 1 - eased;
       coreMat.opacity = 0.85 * (1 - eased) + 0.6 * eased;
       if (whiteout) whiteout.style.opacity = String(eased);
-      /* the story dissolves with the tunnel — white text never gets
-         stranded on the white exit */
+
       if (narrative) narrative.style.opacity = String(1 - eased);
 
-      /* atmosphere: camera lean + slow sway */
       camera.position.x += (mx * 0.06 - camera.position.x) * 0.05;
       camera.position.y += (-my * 0.045 - camera.position.y) * 0.05;
       group.rotation.z = Math.sin(travel * 0.05) * 0.05 + mx * 0.02;
@@ -327,9 +284,6 @@ export default function LightJourney() {
       cancelAnimationFrame(raf);
     };
 
-    /* ---------- the journey, held by its Scene ----------
-       The Scene's sticky hold pins this section, so no `pin` here — this
-       trigger only reads progress across the scene's runway. */
     const st = ScrollTrigger.create({
       ...sceneScrub(rootEl),
       scrub: 0.6,
@@ -338,10 +292,8 @@ export default function LightJourney() {
         progress = self.progress;
         const p = self.progress;
 
-        /* the section title hands over to chapter one */
         if (introEl) introEl.style.opacity = String(gsap.utils.clamp(0, 1, 1 - p / CH_START));
 
-        /* one chapter at a time; -1 while the title still owns the frame */
         const idx =
           p < CH_START
             ? -1
@@ -349,8 +301,7 @@ export default function LightJourney() {
 
         if (idx !== shown) {
           shown = idx;
-          /* class swap only — the stagger and crossfade are CSS, so the
-             text never re-lays-out mid-scroll */
+
           chapterEls.forEach((el, i) => el.classList.toggle(styles.on, i === idx));
           tickEls.forEach((el, i) => el.classList.toggle(styles.tickOn, i <= idx));
           if (counterEl) {
@@ -361,7 +312,6 @@ export default function LightJourney() {
       onToggle: (self) => (self.isActive ? startLoop() : stopLoop()),
     });
 
-    /* render while approaching too, so it's alive before the pin */
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) startLoop();
@@ -398,10 +348,10 @@ export default function LightJourney() {
           <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
         ) : null}
 
-        {/* ---------- travelling narrative (the scroll experience) ---------- */}
+        {}
         {!isStatic && (
           <>
-            {/* keeps white type legible wherever the cables flare */}
+            {}
             <div className={styles.scrim} aria-hidden="true" />
 
             <div className={styles.overlay} aria-hidden="true">
@@ -425,7 +375,7 @@ export default function LightJourney() {
                 </article>
               ))}
 
-              {/* chapter rail — where you are in the journey */}
+              {}
               <div className={styles.rail}>
                 <span className={styles.counter}>
                   <b className={styles.counterNow}>01</b> /{" "}
@@ -446,7 +396,7 @@ export default function LightJourney() {
           </>
         )}
 
-        {/* ---------- the same story, readable without motion ---------- */}
+        {}
         <div className={isStatic ? styles.staticStory : styles.srOnly}>
           <h2>{t("journey.eyebrow")}</h2>
           <p className={styles.staticLede}>{t("journey.lede")}</p>

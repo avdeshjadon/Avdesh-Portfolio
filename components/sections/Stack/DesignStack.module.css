@@ -1,4 +1,5 @@
-/* ============ MY DESIGN STACK — spiral orbit ============ */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 .section {
   position: relative;
@@ -9,7 +10,6 @@
   min-height: 660px;
 }
 
-/* ambient light behind the spiral — the glass has something to refract */
 .glowA,
 .glowB {
   position: absolute;
@@ -40,14 +40,12 @@
   );
 }
 
-/* ---------- stage: the whole viewport is the canvas ---------- */
 .stage {
   position: absolute;
   inset: 0;
   --card-w: 132px;
 }
 
-/* stationary focal point */
 .center {
   position: absolute;
   left: 50%;
@@ -102,7 +100,6 @@
   color: var(--accent);
 }
 
-/* ---------- orbit ---------- */
 .orbit {
   position: absolute;
   left: 50%;
@@ -122,11 +119,10 @@
   width: var(--card-w);
   will-change: transform, opacity;
   pointer-events: auto;
-  /* hidden until the first layout pass places it — no flash of stacked cards */
+
   opacity: 0;
 }
 
-/* the visible surface — JS owns .card's transform, CSS owns .face's */
 .face {
   display: flex;
   align-items: center;
@@ -191,7 +187,6 @@
   color: var(--ink);
 }
 
-/* ============ Responsive ============ */
 @media (max-width: 1040px) {
   .center {
     width: min(320px, 62%);
@@ -201,8 +196,6 @@
   }
 }
 
-/* the site treats <=1000px as mobile; glassmorphism on 23 continuously
-   orbiting cards is the single heaviest effect on the page */
 @media (max-width: 1000px) {
   .section {
     min-height: 600px;
@@ -217,7 +210,7 @@
   .count {
     display: none;
   }
-  /* logo-only chips: names would be unreadable at this scale */
+
   .card {
     margin-left: -26px;
     margin-top: -26px;

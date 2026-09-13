@@ -1,8 +1,5 @@
-/* My Tech Stack — tools shown in the spiral orbit.
-   Matches the SKILLS section of the resume — nothing extra.
-   `src` uses a real logo from /public/images/logos when we have one;
-   otherwise a brand-tinted monogram mark keeps the set visually uniform.
-   To upgrade a monogram: drop an SVG/PNG in that folder and swap in `src`. */
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
 
 export type Tool = {
   name: string;
@@ -13,23 +10,20 @@ export type Tool = {
 };
 
 export const TOOLS: Tool[] = [
-  /* — Languages — */
+
   { name: "Java", group: "Languages", mono: "Ja", color: "#E76F00" },
   { name: "Python", group: "Languages", mono: "Py", color: "#3776AB" },
   { name: "C++", group: "Languages", mono: "C+", color: "#00599C" },
 
-  /* — Frontend — */
   { name: "React", group: "Frontend", mono: "Re", color: "#0E7C99" },
   { name: "JavaScript", group: "Frontend", mono: "JS", color: "#C99A00" },
   { name: "Tailwind CSS", group: "Frontend", mono: "TW", color: "#0891A6" },
 
-  /* — Backend — */
   { name: "Spring Boot", group: "Backend", mono: "Sb", color: "#6DB33F" },
   { name: "Spring Security", group: "Backend", mono: "Ss", color: "#3D6B48" },
   { name: "Node.js", group: "Backend", mono: "No", color: "#339933" },
   { name: "REST APIs", group: "Backend", mono: "API", color: "#6C757D" },
 
-  /* — Database, DevOps & Testing — */
   { name: "MySQL", group: "Database, DevOps & Testing", mono: "My", color: "#00758F" },
   { name: "PostgreSQL", group: "Database, DevOps & Testing", mono: "Pg", color: "#336791" },
   { name: "MongoDB", group: "Database, DevOps & Testing", mono: "M", color: "#47A248" },
