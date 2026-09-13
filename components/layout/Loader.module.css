@@ -1,0 +1,173 @@
+/* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(360px, 76vw);
+  aspect-ratio: 1;
+  margin: calc(min(360px, 76vw) / -2) 0 0 calc(min(360px, 76vw) / -2);
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  border-top-color: var(--accent);
+  border-right-color: rgba(255, 46, 15, 0.3);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.frame {
+  position: absolute;
+  inset: 26px;
+  pointer-events: none;
+}
+
+.cornerSlot {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  opacity: 0;
+}
+
+.cornerInner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0 solid var(--line);
+  transform: scaleX(0) scaleY(0);
+  will-change: transform;
+}
+
+.cTL {
+  top: 0;
+  left: 0;
+}
+.cTL .cornerInner {
+  border-top-width: 1.5px;
+  border-left-width: 1.5px;
+  border-radius: 5px 0 0 0;
+  transform-origin: top left;
+}
+
+.cTR {
+  top: 0;
+  right: 0;
+}
+.cTR .cornerInner {
+  border-top-width: 1.5px;
+  border-right-width: 1.5px;
+  border-radius: 0 5px 0 0;
+  transform-origin: top right;
+}
+
+.cBL {
+  bottom: 0;
+  left: 0;
+}
+.cBL .cornerInner {
+  border-bottom-width: 1.5px;
+  border-left-width: 1.5px;
+  border-radius: 0 0 0 5px;
+  transform-origin: bottom left;
+}
+
+.cBR {
+  bottom: 0;
+  right: 0;
+}
+.cBR .cornerInner {
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
+  border-radius: 0 0 5px 0;
+  transform-origin: bottom right;
+}
+
+.inner {
+  position: relative;
+  text-align: center;
+  width: min(420px, 84vw);
+}
+
+.name {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  font-size: clamp(62px, 12vw, 136px);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--ink);
+  user-select: none;
+}
+
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 2px 0;
+}
+
+.char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.dot {
+  color: var(--accent);
+}
+
+.tag {
+  margin-top: 16px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 24px auto 0;
+  width: 100%;
+}
+
+.bar {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ph);
+  overflow: hidden;
+}
+
+.fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  will-change: transform;
+}
+
+.pct {
+  font-size: 12px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+  min-width: 44px;
+  text-align: right;
+  letter-spacing: 0.06em;
+}

@@ -71,6 +71,15 @@ img {
   display: block;
 }
 
+html.av-loading body {
+  visibility: hidden;
+  overflow: hidden;
+}
+
+html.av-loading .av-loader {
+  visibility: visible;
+}
+
 .finalFrame {
   position: relative;
   z-index: 20;

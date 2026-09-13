@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Inter, Instrument_Serif, Caveat, Anton } from "next/font/google";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import Loader from "@/components/layout/Loader";
 import { LanguageProvider } from "@/lib/i18n";
 import { SITE_URL, PERSON } from "@/lib/site";
 import "./globals.css";
@@ -112,9 +113,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable}`}
+      className={`av-loading ${inter.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable}`}
     >
       <body>
+        <Loader />
         <LanguageProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </LanguageProvider>
