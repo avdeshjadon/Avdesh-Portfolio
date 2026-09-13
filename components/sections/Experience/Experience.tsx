@@ -87,12 +87,23 @@ export default function Experience() {
       gsap.ticker.add(tick);
       place(0);
 
+      const totalSegs = Math.max(1, n - 1);
+      const seg = 1 / totalSegs;
       const st = ScrollTrigger.create({
         ...sceneScrub(el),
-        scrub: 0.5,
+        scrub: 0.2,
         invalidateOnRefresh: true,
+        snap: {
+          snapTo: (value: number) => {
+            const snapped = Math.round((value - seg * 0.3) / seg) * seg;
+            return gsap.utils.clamp(0, 1, snapped);
+          },
+          duration: { min: 0.2, max: 0.5 },
+          ease: "power2.inOut",
+          delay: 0.05,
+        },
         onUpdate: (self) => {
-          target = self.progress * (n - 1);
+          target = Math.round(gsap.utils.clamp(0, totalSegs, self.progress * totalSegs));
         },
       });
 
