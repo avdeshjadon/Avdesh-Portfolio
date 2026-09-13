@@ -1,6 +1,5 @@
 /* Portfolio by Avdesh Jadon — Full Stack Developer & Software Tester. */
 
-
 export type Study = {
   role: string;
   timeline: string;
@@ -14,14 +13,13 @@ export type Study = {
 };
 
 export type Cover = {
-  bg: string; 
+  bg: string;
   ink: "light" | "dark";
-  src?: string; 
-  aspect?: number; 
+  src?: string;
+  aspect?: number;
   variant?: "brand" | "photo";
-
   focus?: string;
-  mark?: string; 
+  mark?: string;
 };
 
 export type Project = {
@@ -30,706 +28,663 @@ export type Project = {
   tags: string[];
   year: string;
   oneLiner: string;
-
   contribution: string;
-  coverLabel: string; 
+  coverLabel: string;
   cover?: Cover;
-
   site?: { url: string; label: string };
-
   repo?: string;
   award?: string;
   study: Study;
 };
 
 export const PROJECTS: Project[] = [
-
   {
-    slug: "heeding-marketplace",
-    title: "Heeding — Sustainable-Fuel Marketplace",
-    tags: ["React", "Next.js", "Climate-Tech"],
+    slug: "dragolink",
+    title: "Dragolink — Dynamic Link & Campaign Routing Platform",
+    tags: ["React", "Spring Boot", "MySQL", "Dynamic Routing", "Analytics"],
     year: "2026",
     oneLiner:
-      "Building the B2B sustainable-fuel marketplace for Europe's energy transition — React/Next.js frontend, Node.js APIs and automated compliance flows that make heavy regulation invisible.",
+      "More than just a URL shortener! Dragolink is a comprehensive link management platform with powerful dynamic UTM routing rules, advanced analytics, and campaign tracking.",
     contribution:
-      "Full-stack build — three buyer journeys, one governed component system, tested all the way through.",
-    coverLabel: "HEEDING MARKETPLACE",
-
-    cover: { bg: "#E9F2FC", ink: "dark", src: "/images/companies/heeding.png", aspect: 1199 / 330 },
-    site: { url: "https://www.myheeding.com/en", label: "myheeding.com" },
+      "Full-stack architecture — Spring Boot REST APIs, dynamic redirection engine, and React analytics dashboard.",
+    coverLabel: "DRAGOLINK",
+    cover: {
+      bg: "#061A14",
+      ink: "light",
+      src: "/images/projects/dragolink.svg",
+      aspect: 1260 / 1284,
+      mark: "DL",
+    },
+    repo: "https://github.com/avdeshjadon/Dragolink",
     study: {
-      role: "Full Stack Developer (Next.js / Node.js)",
-      timeline: "May – Oct 2026 · ongoing",
+      role: "Full Stack Developer (Spring Boot & React)",
+      timeline: "2026",
       context:
-        "Heeding is an AI-powered platform connecting fuel buyers, producers and feedstock suppliers — smart offer matching, batch-level traceability with verifiable Proof of Sustainability, automated compliance and Well-to-Wheel CO₂ reporting, across six sectors and three purchase modes.",
+        "Modern marketing campaigns require precision link attribution, dynamic A/B routing, and device/geographic redirection rather than naive static URL shortening.",
       problem:
-        "Buying compliant sustainable fuel means weeks of paperwork across FuelEU, ReFuelEU, RED III and TIRUERT — for three buyer types with completely different journeys. The engineering problem: make compliance invisible.",
+        "Generic link shorteners lack real-time parameter injection, conditional fallback rules, and campaign performance dashboards tailored for high-throughput link clicks.",
       process: [
         {
-          title: "Map each buyer's workflow",
-          body: "Stakeholder interviews and segmentation workshops with fleet operators, fuel suppliers and public-sector buyers; each got its own decision-journey map instead of one averaged persona.",
+          title: "Schema & API Architecture",
+          body: "Engineered high-performance Spring Boot REST endpoints with MySQL indexing for sub-millisecond redirect lookups.",
         },
         {
-          title: "Features with a KPI attached",
-          body: "Every flow entered the backlog with a stated conversion intent — what the user should decide here, and how we'd measure it.",
+          title: "Dynamic Rule Engine",
+          body: "Implemented conditional redirect logic based on device, location, and UTM parameters.",
         },
         {
-          title: "Engineering inside a governed system",
-          body: "Shared React components and typed models co-owned with the Product Owner, so velocity never cost consistency.",
-        },
-        {
-          title: "Measure, then iterate",
-          body: "GA4-instrumented acquisition → activation → retention funnels reviewed weekly; insights fed straight back into the backlog.",
+          title: "React Analytics Dashboard",
+          body: "Built an interactive analytics control center with live click logs, conversion metrics, and referer graphs.",
         },
       ],
       decisions: [
         {
-          title: "Compliance is generated, never asked for",
-          why: "Users don't fill regulatory forms — the platform produces FuelEU/RED III/TIRUERT paperwork as a receipt of a normal purchase. The scariest part of the domain became a non-event.",
+          title: "Cached routing tables",
+          why: "In-memory caching for active links guarantees minimal redirection latency under heavy incoming traffic.",
         },
         {
-          title: "Three purchase modes, one mental model",
-          why: "Spot, Recurring and Tender share the same compare-decide-track skeleton, so learning one lane teaches all three.",
-        },
-        {
-          title: "A two-minute ramp before any commitment",
-          why: "The Flash Diagnostic gives a savings-and-emissions estimate with no signup — value before identity, the B2B trust sequence in miniature.",
+          title: "Parametric UTM preservation",
+          why: "Automatic forwarding and sanitization of incoming query parameters to destination targets ensures marketing attribution is never lost.",
         },
       ],
       outcomes: [
-        "Platform proof points: 80% time saved on fuel management · 100% traceability (product metrics)",
-        "End-to-end flows shipped for all three buyer segments",
-        "The product targets 1B+ tonnes of avoided CO₂ by 2050",
+        "Sub-10ms redirection resolution under concurrent simulated load",
+        "Zero-loss analytics telemetry with full referer and user-agent logging",
+        "Comprehensive campaign management and link lifecycle monitoring",
       ],
       reflection:
-        "Deep domain complexity is a gift to a builder: when regulation is the competitor's friction, clarity itself becomes the product.",
-      note: "Selected visuals only — client work; full flows available in a portfolio review call.",
+        "Building a high-throughput routing engine underscored the importance of database indexing, latency budgets, and defensive URL sanitization.",
     },
   },
 
   {
-    slug: "lockai",
-    title: "LockAI — Offline On-Device AI Assistant",
-    tags: ["TypeScript", "React", "On-device AI"],
+    slug: "libranova",
+    title: "Libranova — Book Rental Management System",
+    tags: ["React", "Spring Boot", "MySQL", "OAuth2", "Full-Stack"],
     year: "2026",
     oneLiner:
-      "Built an offline, privacy-first AI assistant end to end in one sprint — three working prototypes, an on-device inference workflow and a demo-first pitch that won the hackathon.",
+      "Libranova is a premium, full-stack Book Rental Management System featuring a modern glassmorphism UI, secure OAuth authentication (Google/GitHub), and an interactive Admin Dashboard with real-time stats.",
     contribution:
-      "On-device AI workflow and three working prototypes — a pitch the jury could click.",
-    coverLabel: "LOCKAI",
-
-    cover: { bg: "#F0EBFD", ink: "dark", src: "/images/companies/unbias.png", aspect: 685 / 226 },
-    award: "🏆 1st Place",
+      "End-to-end full-stack build — OAuth2 token pipeline, role-based access control, and inventory rental state machine.",
+    coverLabel: "LIBRANOVA",
+    cover: {
+      bg: "#EBF3EE",
+      ink: "dark",
+      src: "/images/projects/Libranova.svg",
+      aspect: 1,
+      mark: "LN",
+    },
+    repo: "https://github.com/avdeshjadon/Libranova",
     study: {
-      role: "Full Stack Engineer — AI",
-      timeline: "March 2026 · intensive sprint",
+      role: "Full Stack Developer (Spring Boot / React)",
+      timeline: "2026",
       context:
-        "UNBIAS Innovation Hackathon, ALPHA cohort. One sprint to build and defend an AI venture end to end — concept, architecture, product, pitch.",
+        "Libraries and educational institutions require automated book inventory tracking, member rental history, fine calculation, and streamlined authentication.",
       problem:
-        "People want AI help with their most sensitive information — exactly the information they'd never send to a cloud. How do you build an assistant whose privacy is *felt*, not just claimed?",
+        "Legacy library management tools suffer from clunky user interfaces, manual check-in/out workflows, and insecure password management.",
       process: [
         {
-          title: "Build before pitch",
-          body: "On-device inference workflow, monetisation logic and a three-year financial framework first — so every technical decision had a commercial reason to exist.",
+          title: "OAuth2 Security Architecture",
+          body: "Configured Spring Security with Google and GitHub OAuth2 social logins alongside JWT token verification.",
         },
         {
-          title: "An interaction model for trust",
-          body: "Offline-first, on-device inference where the local state is always visible: what stays on the device is the product's loudest message.",
+          title: "Relational Inventory Schema",
+          body: "Designed comprehensive JPA entities covering books, categories, rental transactions, overdue fines, and users.",
         },
         {
-          title: "Three prototypes, one story",
-          body: "Concept site, AI-workflow demo and commercial implementation — built live, so the jury clicked instead of imagining.",
+          title: "Modern Glassmorphism UI",
+          body: "Crafted a React interface with frosted glass styling, responsive book search filters, and smooth modal checkouts.",
         },
       ],
       decisions: [
         {
-          title: "Zero-cloud as a visible state, not a footnote",
-          why: "Privacy claims are wallpaper; a persistent on-device indicator makes the promise inspectable at all times.",
+          title: "Automated fine computation",
+          why: "Background scheduled jobs calculate daily overdue fines automatically upon return, eliminating human error.",
         },
         {
-          title: "Demo-first pitch",
-          why: "Walking the jury through architecture, user flow and unit economics live on screen turned a claim into evidence.",
+          title: "Role-based authorization",
+          why: "Strict separation between student borrower capabilities and administrative inventory controls guarantees system integrity.",
         },
       ],
       outcomes: [
-        "🏆 1st place — Sophia Antipolis Innovation Hackathon",
-        "Three functional prototype websites shipped inside the sprint",
+        "100% automated rental status transitions from borrowed to returned",
+        "Unified OAuth2 single sign-on experience across Google and GitHub",
+        "Interactive real-time admin analytics dashboard with live inventory counts",
       ],
       reflection:
-        "Constraints are a forcing function: with days instead of months, only decisions that serve the story survive.",
+        "Integrating Spring Security with third-party OAuth providers highlighted the power of standardized auth flows and declarative authorization.",
     },
   },
 
   {
-    slug: "price-intelligence",
-    title: "Supply-Chain Price Intelligence",
-    tags: ["Power BI", "REST APIs", "Data Engineering"],
+    slug: "webin",
+    title: "WebIn — Draggable Floating Overlay Chrome Extension",
+    tags: ["JavaScript", "Chrome Extension", "Productivity", "Open Source"],
     year: "2025",
     oneLiner:
-      "Turning complex data into decisions — a price-intelligence dashboard non-technical planners actually use, fed by REST APIs.",
+      "WebIn is a lightweight, draggable floating overlay that gives you instant access to your most-used web tools — right from any webpage! Whether you're coding, researching, chatting with AI, or chilling.",
     contribution:
-      "Data pipeline + KPI hierarchy and comparison-first views — pricing data into decisions.",
-    coverLabel: "PRICE INTELLIGENCE",
-    cover: { bg: "#0E1F38", ink: "light", mark: "KPI" },
+      "Chrome extension engineering — Manifest v3 content-script injection, draggable floating portal, and custom shortcut engine.",
+    coverLabel: "WEBIN",
+    cover: {
+      bg: "#0F172A",
+      ink: "light",
+      src: "/images/projects/webin.png",
+      aspect: 1,
+      mark: "WI",
+    },
+    repo: "https://github.com/avdeshjadon/WebIn",
     study: {
-      role: "Data Engineer & BI Developer",
-      timeline: "2025 · portfolio project",
+      role: "Extension Developer & Creator",
+      timeline: "2025",
       context:
-        "A real-time analytics dashboard tracking and comparing product prices across countries to support logistics planning and pricing strategy — built in Power BI over REST APIs.",
+        "Developers and power users switch tabs constantly to fetch tools, notes, bookmarks, or AI assistants, interrupting their primary workflow.",
       problem:
-        "The data existed; the decisions didn't. Multi-country price comparison lived in spreadsheets only an analyst could love — the engineering problem was making market intelligence legible to non-technical planners.",
+        "Traditional bookmark bars clutter screen real estate and lack contextual, draggable availability without leaving the active browser viewport.",
       process: [
         {
-          title: "KPI hierarchy before visuals",
-          body: "Decided what a planner must know in 5 seconds, 30 seconds and 5 minutes — the dashboard's three altitudes — before choosing a single chart.",
+          title: "Isolated Shadow DOM",
+          body: "Injected the floating widget via Shadow DOM to prevent host page CSS collisions.",
         },
         {
-          title: "Progressive filtering",
-          body: "Multi-dimensional filters that narrow from region to product without ever losing the comparison context.",
+          title: "Draggable Physics & Snapping",
+          body: "Engineered mouse and touch drag handlers with smooth boundary collision detection.",
         },
         {
-          title: "Encodings for scanning, not studying",
-          body: "Comparisons as aligned bars and deltas, never pie charts; anomalies pre-surfaced instead of hunted for.",
+          title: "Quick-Access Tool Hub",
+          body: "Built customizable launcher docks for web search, AI tools, and developer utilities.",
         },
       ],
       decisions: [
         {
-          title: "Tiles before tables",
-          why: "The 5-second answer lives in KPI tiles; the evidence lives underneath. Most sessions never need the table — and that's the success case.",
+          title: "Chrome Storage Sync",
+          why: "Persisted user position and configured shortcuts across multiple logged-in Chrome browser sessions.",
         },
         {
-          title: "Comparison is the default view",
-          why: "No one opens a price tool to see one price. The first screen answers 'where is it cheaper, and by how much?'",
+          title: "Zero CPU idle footprint",
+          why: "Event listeners attach only during active drag or expansion states, conserving browser resources.",
         },
       ],
       outcomes: [
-        "A multi-source pricing mess became decisions at a glance",
-        "Interactive visualisations usable by people who will never write a query",
+        "Instant tool invocation without ever leaving the active webpage",
+        "Zero style leakage into host page DOMs via isolated shadow roots",
+        "Customizable shortcut launcher supporting custom URLs and search queries",
       ],
       reflection:
-        "Dashboarding is honesty engineering: every tile either helps a decision or hides one.",
+        "Chrome extension development requires strict adherence to Manifest v3 permissions and careful DOM isolation techniques.",
     },
   },
 
   {
-    slug: "oigetit-hitl",
-    title: "Oigetit — Validating AI Trust",
-    tags: ["Responsible AI", "QA", "Validation"],
+    slug: "personallearn",
+    title: "PersonalLearn — Personal Learning & Productivity Dashboard",
+    tags: ["React 19", "Node.js", "MongoDB", "Tailwind CSS", "Analytics"],
     year: "2025",
     oneLiner:
-      "Making an AI misinformation filter explainable — trust validated at the model's boundaries.",
+      "A personal productivity dashboard built with React 19, Tailwind CSS, Node.js, and MongoDB, featuring markdown note-taking and learning analytics.",
     contribution:
-      "Edge cases validated, verdicts rewritten in human language.",
-    coverLabel: "AI TRUST · QA",
-    cover: { bg: "#EAF0F8", ink: "dark", src: "/images/companies/oigetit.jpg", aspect: 1 },
+      "Full-stack developer — React 19 UI state management, MongoDB aggregation pipelines, and markdown editor integration.",
+    coverLabel: "PERSONAL LEARN",
+    cover: {
+      bg: "#18181B",
+      ink: "light",
+      src: "/images/projects/personallearn.svg",
+      aspect: 1,
+      mark: "PL",
+    },
+    repo: "https://github.com/avdeshjadon/PersonalLearn",
     study: {
-      role: "Human-in-the-Loop AI Analyst",
-      timeline: "Jan – May 2025 · remote (Los Gatos, USA)",
+      role: "Full Stack Developer",
+      timeline: "2025",
       context:
-        "Oigetit filters fake news with an AI scoring engine. I sat in the loop — validating predictions, hunting edge cases, and explaining the machine to the humans it serves.",
+        "Self-directed technical learning requires continuous organization of notes, active recall flashcards, and quantitative progress tracking.",
       problem:
-        "An accurate model nobody understands is an untrusted model. The work was double-sided: make the AI more right, and make its rightness legible.",
+        "Scattered tools across Notion, Anki, and spreadsheets result in fragmented learning notes and lost momentum.",
       process: [
         {
-          title: "Validate at the edges",
-          body: "Systematic pattern recognition across misclassifications — sarcasm, partial truths, source laundering — fed back to strengthen the pipeline.",
+          title: "React 19 Concurrent Features",
+          body: "Leveraged React 19 transitions and hooks for instant markdown rendering and preview.",
         },
         {
-          title: "Translate the engine",
-          body: "Rewrote how the verification engine explains itself: simplified, user-facing language for why an article scores the way it does.",
+          title: "REST API & Aggregation",
+          body: "Built Node.js and Express backend with MongoDB aggregation pipelines for weekly study streaks.",
+        },
+        {
+          title: "Flashcard Review Loop",
+          body: "Implemented spaced repetition review mechanics with confidence scoring.",
         },
       ],
       decisions: [
         {
-          title: "Explanations in the reader's language",
-          why: "'Confidence: 0.82' persuades no one; 'multiple independent sources confirm the core claim' does.",
+          title: "Markdown-first storage",
+          why: "Raw markdown persistence with syntax highlighting for code snippets ensures notes remain portable and developer-friendly.",
+        },
+        {
+          title: "Aggregated analytics",
+          why: "MongoDB $group and $facet queries enable rapid streak and retention visualization without heavy client-side processing.",
         },
       ],
       outcomes: [
-        "Improved AI classification accuracy through recurring-pattern identification",
-        "Contributed to Responsible AI / Trustworthy AI initiatives",
+        "Unified study workspace with sub-50ms editor responsiveness",
+        "Visualized weekly retention rate and practice streak metrics",
+        "Tag-based search allowing instant retrieval of past engineering notes",
       ],
       reflection:
-        "AI products are trust products. The interface between a model and a person is exactly as strong as its explanation.",
+        "Designing personal productivity software taught me to prioritize friction-free capture over excessive configuration options.",
     },
   },
 
   {
-    slug: "seo-growth",
-    title: "Portfolio-Wide Web Performance",
-    tags: ["CRO", "Analytics", "Web"],
+    slug: "practicetyping",
+    title: "PracticeTyping — Sleek Minimalist Typing Application",
+    tags: ["React", "Vite", "JavaScript", "Touch Typing", "Zen Mode"],
     year: "2025",
     oneLiner:
-      "35% organic growth across a client portfolio — decisions driven by measurement.",
+      "A sleek, minimalist typing practice application. Built with React and Vite, featuring progressive row-by-row modes, live WPM tracking, a butter-smooth cursor, and a distraction-free Zen mode.",
     contribution:
-      "Template-level fixes across a client portfolio — one fix, hundreds of pages.",
-    coverLabel: "GROWTH & CRO",
-    cover: { bg: "#FF6A00", ink: "light", mark: "+35%" },
-    study: {
-      role: "SEO & Web Performance",
-      timeline: "Jan – Apr 2025 · Site Web & Co, Montpellier",
-      context:
-        "A digital agency's portfolio of B2B and B2C client sites, audited and optimised with Google Analytics, Search Console and keyword research.",
-      problem:
-        "Beautiful sites nobody found, templates that leaked traffic — the gap between how pages looked and how they performed was invisible to their owners.",
-      process: [
-        {
-          title: "Audit what actually ranks",
-          body: "Web-performance and SEO audits across the portfolio; the highest-traffic templates got their meta architecture and internal-linking logic rebuilt first.",
-        },
-        {
-          title: "Fix at the template level",
-          body: "One template fix propagates to hundreds of pages — leverage beats page-by-page perfectionism.",
-        },
-        {
-          title: "Report so clients act",
-          body: "Monthly dashboards translated analytics into next actions, not charts.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Technical SEO before content SEO",
-          why: "Content can't rescue a template that search engines struggle to parse; foundations first.",
-        },
-      ],
-      outcomes: ["35% organic-traffic growth across the managed portfolio"],
-      reflection:
-        "Growth work taught me the habit I bring to every build: ship, measure, and let the numbers argue.",
-    },
-  },
-
-  {
-    slug: "avengers-doomsday",
-    title: "Avengers: Doomsday — Scroll-Driven Cinema",
-    tags: ["Three.js", "GSAP", "Creative Dev"],
-    year: "2026",
-    oneLiner:
-      "A Marvel-inspired cinematic web experience where scroll conducts everything — video, 3D and story across six choreographed sections.",
-    contribution:
-      "Six scroll-choreographed scenes, a 3D Doom, frame-exact video scrubbing.",
-    coverLabel: "AVENGERS: DOOMSDAY",
+      "Frontend engineering — real-time keystroke buffer, accuracy calculation matrix, and smooth cursor physics.",
+    coverLabel: "PRACTICE TYPING",
     cover: {
-      bg: "#0B0B0E",
+      bg: "#323437",
       ink: "light",
-      src: "/images/projects/avengers-cover.jpg",
-      variant: "photo",
-      focus: "center 26%", 
+      src: "/images/projects/practicetyping.svg",
+      aspect: 1,
+      mark: "PT",
     },
-    repo: "https://github.com/avdeshjadon/AVENGERS-DOOMSDAY-",
+    repo: "https://github.com/avdeshjadon/PracticeTyping",
     study: {
-      role: "Full Stack & Engineering — solo",
-      timeline: "July 2026",
+      role: "Frontend Developer & UI Designer",
+      timeline: "2025",
       context:
-        "A scroll-driven cinematic experience inspired by Marvel Studios trailers: six choreographed sections, from a lightning-storm opening to an MCU-timeline finale, built as an educational fan concept.",
+        "Touch-typing mastery requires focused repetition without visual distractions, with immediate feedback on cadence and erroneous keystrokes.",
       problem:
-        "Trailer energy on the web usually means autoplay video and hope. The experiment: can scroll position alone conduct the entire film — every video frame, 3D move and story panel — with no traditional navigation at all?",
+        "Many typing platforms are cluttered with banner ads, complex layouts, and laggy cursor animations that disorient high-speed typists.",
       process: [
         {
-          title: "Scroll as the timeline",
-          body: "Frame-by-frame video scrubbing synced to scroll position, with all-intra encoding so frame-seeking is instant in both directions.",
+          title: "Keystroke Engine",
+          body: "Built a low-latency event listener handling character-by-character accuracy, backspaces, and word wraps.",
         },
         {
-          title: "A procedural centrepiece",
-          body: "A 3D Doctor Doom built in React Three Fiber, character cards orbiting the model, and a custom GLSL atmosphere — particles, volumetric fog, lightning.",
+          title: "Progressive Training",
+          body: "Created row-specific practice tiers (home row, top row, bottom row, number row) and custom word lists.",
         },
         {
-          title: "Performance as a feature",
-          body: "A zero-re-render signal architecture keeps React out of the frame loop; scroll drives shader uniforms directly.",
+          title: "Fluid Cursor Dynamics",
+          body: "Used CSS transforms and RAF (requestAnimationFrame) interpolation for a smooth cursor glide.",
         },
       ],
       decisions: [
         {
-          title: "No play buttons, anywhere",
-          why: "The visitor's scroll is the playhead — committing to one input makes the experience instantly legible.",
-        },
-      ],
-      outcomes: ["24 stars and 7 forks on GitHub", "Six cinematic sections, fully scroll-conducted"],
-      reflection:
-        "Constraint experiments like this are my interaction gym — product work is where that discipline gets spent.",
-      note: "Unofficial fan-made concept — not affiliated with Marvel.",
-    },
-  },
-
-  {
-    slug: "got-cinematic",
-    title: "Game of Thrones — A Cinematic Experience",
-    tags: ["Video Scrubbing", "GSAP", "Vite"],
-    year: "2026",
-    oneLiner:
-      "A scroll-scrubbed cinematic tribute that found its audience — 20.5K likes, 3,597 comments and 7,035 shares on one reel.",
-    contribution:
-      "Frame-perfect scroll cinema — 20.5K likes and 7K shares on one reel.",
-    coverLabel: "GAME OF THRONES",
-    cover: {
-      bg: "#0B0B0E",
-      ink: "light",
-      src: "/images/projects/got-cover.jpg",
-      variant: "photo",
-      focus: "center 34%", 
-    },
-    repo: "https://github.com/avdeshjadon/GoT",
-    study: {
-      role: "Full Stack & Engineering — solo",
-      timeline: "July 2026",
-      context:
-        "A scroll-driven cinematic website: a prologue flowing into a parallax hero, chapter videos for Jon Snow and Daenerys, and an atmosphere of particles, fog and dragons.",
-      problem:
-        "Video on the web is passive. The goal: cinema you drive — frame-perfect scrubbing forward and backward, at the speed of the reader's own attention.",
-      process: [
-        {
-          title: "A canvas scrubbing engine",
-          body: "Chapter videos decode to canvas with ffmpeg-optimised assets, so any scroll speed lands on a clean frame.",
+          title: "Distraction-Free Zen Mode",
+          why: "Minimal monochrome UI that fades non-essential elements during active typing sessions maximizes user focus.",
         },
         {
-          title: "Performance tiers",
-          body: "Device-capability detection serves lighter atmosphere to weaker hardware; reduced-motion gets a calm path.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Atmosphere layered, never baked in",
-          why: "Fog, embers and dragons live as separate layers above the film — the scene stays sharp at every viewport.",
+          title: "WPM Calculation Standard",
+          why: "Standardized calculation using 5-character word units divided by elapsed minutes guarantees comparable metrics.",
         },
       ],
       outcomes: [
-        "20.5K likes · 3,597 comments · 7,035 shares on the launch reel",
-        "4 stars on GitHub",
+        "Zero-latency keystroke response tested up to 140+ WPM typing speeds",
+        "Intuitive progression paths for beginners and competitive typists alike",
+        "Accurate live accuracy graphs and error breakdown heatmaps",
       ],
       reflection:
-        "The reel taught me more about hooks and pacing than any dashboard — an audience is the honest reviewer.",
-      note: "Unofficial fan-made concept — not affiliated with the rights-holders.",
+        "High-frequency user input demands minimal component re-renders and direct DOM/ref manipulation for the smoothest possible feel.",
     },
   },
 
   {
-    slug: "baahubali",
-    title: "Baahubali — A Legend Never Dies",
-    tags: ["Next.js", "Web Audio", "GSAP"],
-    year: "2026",
-    oneLiner:
-      "Four chapters of scroll-driven cinema with procedural light and synthesised sound — 56K views on the launch reel.",
-    contribution:
-      "Four chapters where scroll drives the emotion — 56K views in one reel.",
-    coverLabel: "BAAHUBALI",
-    cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/bahubali-cover.jpg", variant: "photo" },
-    repo: "https://github.com/avdeshjadon/Bahubali",
-    study: {
-      role: "Full Stack & Engineering — solo",
-      timeline: "July 2026",
-      context:
-        "An interactive tribute to Baahubali in four chapters — The Hero, The Duel, The Prophecy, The Finale — each a scroll-conducted scene with its own visual weather.",
-      problem:
-        "The brief I set myself: the scroll should control the emotion, not just the animation — pace, light and sound all riding a single gesture.",
-      process: [
-        {
-          title: "The frame under the visitor's hand",
-          body: "Frame-by-frame control of the video sequences, so the scene advances exactly at the visitor's pace.",
-        },
-        {
-          title: "Effects made, not filmed",
-          body: "Lightning, volumetric light, fog and embers generated procedurally on GPU-accelerated canvas, layered over the film.",
-        },
-        {
-          title: "A synthesised soundscape",
-          body: "The ambience comes from the Web Audio API — no audio files shipped; the sound is computed live.",
-        },
-      ],
-      decisions: [
-        {
-          title: "A 100% static export",
-          why: "The whole film ships as a client-rendered static site — zero infrastructure to maintain for a portfolio piece.",
-        },
-      ],
-      outcomes: ["56K views on the launch reel", "3 stars and 2 forks on GitHub"],
-      reflection:
-        "Emotion is buildable: when pace, light and sound follow the visitor's hand, the screen stops feeling like a screen.",
-      note: "Unofficial fan tribute — not affiliated with the rights-holders.",
-    },
-  },
-
-  {
-    slug: "ghost-rider",
-    title: "Ghost Rider — Spirit of Vengeance",
-    tags: ["WebGL", "GLSL", "Creative Dev"],
-    year: "2026",
-    oneLiner:
-      "A supernatural film you can touch — six chapters of scroll-directed cinema with procedural hellfire rendered in WebGL.",
-    contribution:
-      "Six chapters, procedural hellfire shaders, a chase you scroll through.",
-    coverLabel: "GHOST RIDER",
-    cover: {
-      bg: "#0B0B0E",
-      ink: "light",
-      src: "/images/projects/ghostrider-cover.jpg",
-      variant: "photo",
-      focus: "center 30%", 
-    },
-    repo: "https://github.com/avdeshjadon/Ghost-Rider-",
-    site: { url: "https://ghost-rider-orpin.vercel.app", label: "Live site" },
-    study: {
-      role: "Full Stack & Engineering — solo",
-      timeline: "August 2026",
-      context:
-        "A six-chapter cinematic experience: The Awakening with procedural hellfire, a scroll-directed 16-second chase, a 3D bike showcase, and an interactive cinematic wall with infinite column motion.",
-      problem:
-        "A trailer is watched. This one had to be driven — the visitor holding the film's pace, chapter by chapter.",
-      process: [
-        {
-          title: "Fire written in shaders",
-          body: "The hellfire and atmosphere come from procedural noise shaders in GLSL — nothing pre-rendered, everything reactive.",
-        },
-        {
-          title: "Encoding built for scrubbing",
-          body: "All-intra H.264 video so frame-seeking is instant, orchestrated by GSAP timelines.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Chapters, not sections",
-          why: "Naming the blocks 'Chapter I, II, III' imposes a narrative grammar — the visitor reads a film, not a page.",
-        },
-      ],
-      outcomes: ["Deployed and live on Vercel", "Six chapters, from hero to archive wall"],
-      reflection:
-        "WebGL isn't an effect, it's a material. When light is computed, the scene breathes with the visitor.",
-      note: "Unofficial fan-made concept — not affiliated with the rights-holders.",
-    },
-  },
-
-  {
-    slug: "habu",
-    title: "HABU — Deep-Ocean Exosuit",
-    tags: ["Next.js", "GSAP", "3D & Motion"],
-    year: "2026",
-    oneLiner:
-      "A product launch page for a deep-ocean exosuit — a AAA game intro crossed with Apple product storytelling.",
-    contribution:
-      "Product storytelling in one scroll — inspection rig, specs, scene stack.",
-    coverLabel: "HABU EXOSUIT",
-    cover: {
-      bg: "#06131C",
-      ink: "light",
-      src: "/images/projects/habu-cover.jpg",
-      variant: "photo",
-      focus: "center 45%", 
-    },
-    repo: "https://github.com/avdeshjadon/HABU-",
-    study: {
-      role: "Full Stack & Engineering — solo",
-      timeline: "July 2026",
-      context:
-        "A cinematic single-scroll landing page for a fictional deep-ocean exosuit — fully video-driven, with an interactive product-inspection section.",
-      problem:
-        "Product pages list features. This one had to make you feel the object before explaining it — the spec sheet arrives after the emotion.",
-      process: [
-        {
-          title: "A scene-stack architecture",
-          body: "Sticky scenes stack into film, so phase transitions flow instead of cutting.",
-        },
-        {
-          title: "Inspection as the product moment",
-          body: "A camera rig and spec panels let the visitor move around the object at their own pace.",
-        },
-        {
-          title: "Scroll-driven playback, damped",
-          body: "Inertial lerping on the scrubbing so video follows the hand without jitter.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Accessible hotspots",
-          why: "Interface hotspots stay keyboard-reachable and respect reduced motion — spectacle that excludes nobody.",
-        },
-      ],
-      outcomes: ["Seven of eight planned sections complete", "A functional footer with working hotspots"],
-      reflection:
-        "Product storytelling is sequencing: show it, let it land, and only then explain it.",
-    },
-  },
-
-  {
-    slug: "vistarail",
-    title: "VistaRail — Night-Train Travel, Imagined",
-    tags: ["Brand Concept", "Next.js", "Framer Motion"],
-    year: "2026",
-    oneLiner:
-      "A luxury scenic-rail brand conceived end to end — a cinematic video hero, glassmorphism UI and motion that sells a feeling, not a ticket.",
-    contribution:
-      "A luxury rail brand imagined end to end — video hero, glass UI, parallax.",
-    coverLabel: "VISTARAIL",
-    cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/vistarail-cover.jpg", variant: "photo" },
-    repo: "https://github.com/avdeshjadon/vistaRail",
-    study: {
-      role: "Full Stack & Engineering — solo",
-      timeline: "July 2026",
-      context:
-        "A concept brand for luxury night-rail travel — “discover the beauty that awakens after sunset” — designed and built as a complete landing experience.",
-      problem:
-        "Travel sites sell tickets; this one had to sell a feeling. Every element — the video, the glass, the motion — works for atmosphere first.",
-      process: [
-        {
-          title: "The video untouched at the centre",
-          body: "The hero video renders full-bleed with no cropping or re-encoding — the centrepiece stays exactly as it was created.",
-        },
-        {
-          title: "A glass interface system",
-          body: "Reusable glassmorphism components on Tailwind, with pointer and device-orientation parallax.",
-        },
-        {
-          title: "Timing centralised",
-          body: "Every animation duration and easing lives in one configuration — a single place to tune the feel.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Accessibility from the start",
-          why: "Reduced-motion respected and keyboard navigation kept first-class — atmosphere is never a barrier.",
-        },
-      ],
-      outcomes: ["4 stars and 2 forks on GitHub", "A day/night system planned into the architecture"],
-      reflection:
-        "Branding is motion engineering in slow motion: how a brand feels is the timing of how it moves.",
-    },
-  },
-
-  {
-    slug: "reverie",
-    title: "Rêverie — A Waking Dream",
-    tags: ["Creative Engineering", "Next.js", "Framer Motion"],
-    year: "2026",
-    oneLiner:
-      "An original cinematic concept — light, stillness and editorial motion — conceived, built and live on the web.",
-    contribution:
-      "An original dream, shipped — cinematic scroll, glass, live on the web.",
-    coverLabel: "RÊVERIE",
-    cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/reverie-cover.jpg", variant: "photo" },
-    site: { url: "https://musical-tanuki-680d11.netlify.app", label: "Live site" },
-    repo: "https://github.com/avdeshjadon/R-VERIE-A-Waking-Dream",
-    study: {
-      role: "Creative Engineering — solo",
-      timeline: "July 2026",
-      context:
-        "“Where the ordinary turns golden” — an original single-page reverie through light and stillness: hero, editorial, story, gallery, call.",
-      problem:
-        "No franchise, no brief — can pure concept hold a scroll for an entire page?",
-      process: [
-        {
-          title: "The film under the glass",
-          body: "Fullscreen video backgrounds under glass veils — the film's light passes through every component.",
-        },
-        {
-          title: "Editorial typography",
-          body: "Self-hosted Cormorant Garamond and Inter — the serif voice of the dream, the upright voice of the real.",
-        },
-        {
-          title: "Motion at breathing pace",
-          body: "Reveals and parallax on Lenis + Framer Motion, tuned slow — calm is the signature.",
-        },
-      ],
-      decisions: [
-        {
-          title: "Static and light",
-          why: "A fully static export at ~155 kB first-load JS — a dream needs no server.",
-        },
-      ],
-      outcomes: ["Deployed and live on Netlify", "The one fully original concept in the series — no licence to lean on"],
-      reflection:
-        "With no IP to borrow gravity from, every decision stands naked — this is the piece that looks most like me.",
-    },
-  },
-
-  {
-    slug: "workflow-automation",
-    title: "Supply Chain & Sales Marketing Automation System",
-    tags: ["Automation", "Systems", "n8n"],
+    slug: "cookies-extension",
+    title: "Cookies — Extractor & Inserter Chrome Extension",
+    tags: ["JavaScript", "Chrome Extension", "CSS", "QA & Testing"],
     year: "2025",
     oneLiner:
-      "Automating the invisible product — end-to-end workflows that removed manual effort across the whole funnel.",
+      "Cookies Extractor & Inserter is a lightweight Chrome browser extension that gives you full control over website cookies in just a few clicks.",
     contribution:
-      "The human process mapped, the robot work automated away — and inspectable.",
-    coverLabel: "AUTOMATION SYSTEM",
-    cover: { bg: "#101a12", ink: "light", mark: "FLOW" },
+      "Browser extension developer — Chrome Cookies API integration, JSON cookie import/export, and security sandbox testing.",
+    coverLabel: "COOKIES",
+    cover: {
+      bg: "#1C1917",
+      ink: "light",
+      src: "/images/projects/cookies.svg",
+      aspect: 1130 / 1014,
+      mark: "CK",
+    },
+    repo: "https://github.com/avdeshjadon/Cookies",
     study: {
-      role: "Automation & Systems Engineer",
-      timeline: "2025 · portfolio project",
+      role: "Chrome Extension & QA Tools Developer",
+      timeline: "2025",
       context:
-        "End-to-end automation across sales, marketing and operations — lead-generation pipelines, CRM updates, reporting dashboards and content-distribution flows, built on n8n, Zapier and REST integrations.",
+        "Testing cross-browser authentication states and user permissions often requires manipulating cookie states without tedious manual DevTools digging.",
       problem:
-        "A funnel full of competent people doing robot work: copying leads, updating fields, assembling the same weekly report. The problem was a systems one — where does human judgment actually add value, and what should disappear?",
+        "Standard DevTools cookie menus are cumbersome to export, transfer between testing environments, or restore during manual QA runs.",
       process: [
         {
-          title: "Map the human process first",
-          body: "Before any automation, the existing workflow was mapped end to end — every handoff, wait state and copy-paste surfaced as a candidate.",
+          title: "Chrome Cookies API Integration",
+          body: "Built permissions-scoped background scripts to query and manipulate cookie stores.",
         },
         {
-          title: "Automate handoffs, keep judgment",
-          body: "Flows were drawn around decision points: machines move information between decisions; people make them.",
+          title: "One-Click JSON Serialization",
+          body: "Implemented structured export/import formatting preserving domain, path, expiry, and HttpOnly flags.",
         },
         {
-          title: "Engineer the failure states",
-          body: "Every flow got an observable state and a failure path a non-technical owner could understand — automation you can't inspect is automation you can't trust.",
+          title: "Security Boundary Checks",
+          body: "Validated SameSite and Secure policy handling during dynamic cookie injection.",
         },
       ],
       decisions: [
         {
-          title: "Invisible until it breaks — then loud",
-          why: "Success is silence; failures alert with context. The inverse (noisy success, silent failure) is how automations die.",
+          title: "Scoped origin permissions",
+          why: "Restricting active cookie reading strictly to the currently focused tab domain prevents cross-site leaks.",
         },
         {
-          title: "Flows documented as diagrams, not code",
-          why: "The system outlives its author only if the next person can read it.",
+          title: "Quick preset manager",
+          why: "Allows QA engineers to save and swap authentication personas instantly across test cycles.",
         },
       ],
       outcomes: [
-        "Materially reduced manual effort across the funnel",
-        "Automated lead-gen, CRM hygiene, reporting and distribution running unattended",
+        "Saved up to 10 minutes per test scenario when swapping between QA authentication tokens",
+        "Clean, lightweight extension popup with zero background memory bloat",
+        "Reliable JSON import/export compatible with standard web test runners",
       ],
       reflection:
-        "The best interface for repetitive work is no interface — but engineering 'nothing' well takes the same rigor as building screens.",
+        "Building QA utility extensions deepened my understanding of browser security boundaries, SameSite attributes, and cookie lifecycles.",
     },
   },
 
   {
-    slug: "spider-man",
-    title: "Spider-Man — The Power Behind the Mask",
-    tags: ["Cinematic Web", "Concept", "Visual"],
-    year: "2026",
+    slug: "sessionid-extension",
+    title: "SessionID — Automated Auth Session Detector",
+    tags: ["JavaScript", "Chrome Extension", "Security", "Developer Tools"],
+    year: "2025",
     oneLiner:
-      "A cinematic fan experience about the person under the suit — built to see how far restraint carries an action property.",
+      "A powerful Chrome Extension that automatically detects when a user logs in, extracts their Session ID, and copies authentication tokens for rapid API testing and debugging.",
     contribution:
-      "Concept and cinematic build — the quiet frame, not the fight.",
-    coverLabel: "SPIDER-MAN",
-    cover: { bg: "#0B0B0E", ink: "light", src: "/images/projects/spiderman-cover.jpg", variant: "photo" },
+      "Extension architecture — webRequest and storage listeners for zero-latency session token interception.",
+    coverLabel: "SESSION ID",
+    cover: {
+      bg: "#0B1120",
+      ink: "light",
+      src: "/images/projects/session.png",
+      aspect: 1,
+      mark: "SID",
+    },
+    repo: "https://github.com/avdeshjadon/SessionID",
     study: {
-      role: "Creative Engineering — solo",
-      timeline: "June 2026",
+      role: "Extension Developer",
+      timeline: "2025",
       context:
-        "A cinematic fan experience built around a single idea — “the power behind the mask”: the torn mask, the face underneath, the person before the hero.",
+        "Testing backend endpoints in Postman or cURL requires constantly copying session tokens and bearer headers from browser network tabs.",
       problem:
-        "Action properties sell through movement. The inverse exercise: can one held, well-framed still carry further than a fight sequence?",
+        "Developers lose focus repeatedly inspecting network requests and decoding headers to find valid session keys.",
       process: [
         {
-          title: "One frame, held",
-          body: "The central shot — eyes to camera, mask torn — stays still; the whole composition works around it rather than over it.",
+          title: "Network Event Interception",
+          body: "Utilized Chrome webRequest APIs to observe auth header exchanges on successful login HTTP responses.",
         },
         {
-          title: "Typography that whispers",
-          body: "Thin, widely-tracked titling set low in the frame: the text accompanies the image instead of competing with it.",
+          title: "Pattern Matching Engine",
+          body: "Developed regex token detectors recognizing JWTs, Bearer strings, and session IDs.",
+        },
+        {
+          title: "One-Click Clipboard",
+          body: "Added instant clipboard copy with automated notification toasts.",
         },
       ],
       decisions: [
         {
-          title: "Restraint as the position",
-          why: "On a property built from spectacle, quiet is the most noticeable choice — and the hardest to hold.",
+          title: "Local-only storage",
+          why: "Strictly keeping extracted tokens in local volatile memory without telemetry protects developer credentials.",
+        },
+        {
+          title: "Whitelist domain filtering",
+          why: "Allows users to restrict token extraction strictly to localhost or selected staging domains.",
         },
       ],
       outcomes: [
-        "A visual piece that holds on a single directorial idea",
-        "The restraint exercise that fed the cinematic projects after it",
+        "Instantaneous token capture on successful login events",
+        "Accelerated Postman and automated test script preparation",
+        "Zero-friction developer ergonomics for backend and QA workflows",
       ],
       reflection:
-        "Knowing what to remove is a creative skill — this project is only about that.",
-      note: "Unofficial fan-made concept — not affiliated with the rights-holders. Visual piece: no public repository.",
+        "Handling authentication tokens in browser extensions reinforced the necessity of zero-telemetry architecture and strict user privacy.",
+    },
+  },
+
+  {
+    slug: "employee-management-system",
+    title: "Employee Management System — Hibernate ORM & JPA",
+    tags: ["Java", "Hibernate", "JPA", "MySQL", "Maven"],
+    year: "2024",
+    oneLiner:
+      "A Java console-based Employee Management System using Hibernate ORM, JPA, Maven, and MySQL with robust CRUD operations and relationship mapping.",
+    contribution:
+      "Backend architecture — entity mapping, transactional session management, and HQL query optimization.",
+    coverLabel: "EMPLOYEE SYSTEM",
+    cover: {
+      bg: "#F8FAFC",
+      ink: "dark",
+      src: "/images/projects/employeemanagementsystem.jpg",
+      aspect: 1920 / 1755,
+      mark: "EMS",
+    },
+    repo: "https://github.com/avdeshjadon/EmployeeManagementSystem",
+    study: {
+      role: "Backend Java Developer",
+      timeline: "2024",
+      context:
+        "Corporate HR systems depend on reliable entity persistence, transactional guarantees, and automated relational database mapping.",
+      problem:
+        "Traditional raw JDBC code suffers from boilerplate SQL strings, connection leakage risks, and difficult entity-relationship maintenance.",
+      process: [
+        {
+          title: "Hibernate ORM Configuration",
+          body: "Configured hibernate.cfg.xml and JPA entity annotations (@Entity, @Table, @Id).",
+        },
+        {
+          title: "DAO & Service Pattern",
+          body: "Separated business logic from data access layers with safe transactional boundaries (Session.beginTransaction()).",
+        },
+        {
+          title: "Console CLI Interface",
+          body: "Created a user-friendly console menu for managing departments, employee records, roles, and salaries.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Lazy loading strategy",
+          why: "Avoided N+1 query overhead by tuning fetch configurations for employee department relations.",
+        },
+        {
+          title: "Automated schema generation",
+          why: "Employed Hibernate hbm2ddl.auto for clean database table generation during initial setup.",
+        },
+      ],
+      outcomes: [
+        "Complete CRUD lifecycle with atomic transaction rollbacks on error",
+        "Clean relational mapping between employees, departments, and payroll records",
+        "Modular Maven project architecture ready for enterprise extension",
+      ],
+      reflection:
+        "Mastering Hibernate ORM and JPA provided fundamental insights into enterprise Java architectures and relational database abstractions.",
+    },
+  },
+
+  {
+    slug: "panda-login",
+    title: "Panda Login & Sign-Up — Interactive Micro-Interactions",
+    tags: ["HTML5", "CSS3", "JavaScript", "Animation", "UI/UX"],
+    year: "2024",
+    oneLiner:
+      "Cute, responsive login & signup page with animated panda UI — built with HTML, CSS & JS, featuring playful paw-covering eye interactions on password focus.",
+    contribution:
+      "Creative UI engineering — pure CSS keyframe animations, SVG rigging, and responsive DOM event coordination.",
+    coverLabel: "PANDA AUTH",
+    cover: {
+      bg: "#FFF1F2",
+      ink: "dark",
+      src: "/images/projects/panda.png",
+      aspect: 1628 / 1664,
+      mark: "🐼",
+    },
+    repo: "https://github.com/avdeshjadon/PandaLogin-SignUpPage",
+    study: {
+      role: "Creative Frontend Developer",
+      timeline: "2024",
+      context:
+        "User authentication is often cold and transactional; delightful micro-interactions increase user engagement and emotional resonance.",
+      problem:
+        "Standard authentication forms fail to create memorable first impressions for consumer web applications.",
+      process: [
+        {
+          title: "SVG Vector Rigging",
+          body: "Designed vector panda facial elements with isolated movable paws, eyes, and ears.",
+        },
+        {
+          title: "Focus Event Triggering",
+          body: "Linked input focus listeners to trigger paw movements over the panda's eyes when password field is active.",
+        },
+        {
+          title: "Responsive Card Layout",
+          body: "Structured responsive modal containers using CSS Flexbox and subtle box shadows.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Pure CSS Keyframe Animation",
+          why: "Minimizing JavaScript animation overhead by using hardware-accelerated CSS transforms guarantees 60fps responsiveness.",
+        },
+        {
+          title: "Form validation feedback",
+          why: "Added gentle shake animations on invalid submission attempts to provide clear, friendly error affordance.",
+        },
+      ],
+      outcomes: [
+        "High engagement and positive user sentiment across open-source showcase platforms",
+        "60fps smooth animation transitions across mobile and desktop browsers",
+        "Zero external CSS library dependencies for minimal bundle weight",
+      ],
+      reflection:
+        "Micro-interactions transform mundane tasks into memorable user moments when executed with performance and restraint.",
+    },
+  },
+
+  {
+    slug: "spotify-home",
+    title: "Spotify Home — Pixel-Perfect Responsive UI Clone",
+    tags: ["HTML5", "CSS3", "Responsive Design", "CSS Grid"],
+    year: "2024",
+    oneLiner:
+      "A pixel-perfect Spotify homepage UI clone built with pure HTML and CSS, replicating the complex multi-column layout, player bar, and card grid.",
+    contribution:
+      "CSS architecture — multi-pane responsive layout, dark-mode audio controls, and hover card micro-interactions.",
+    coverLabel: "SPOTIFY CLONE",
+    cover: {
+      bg: "#121212",
+      ink: "light",
+      src: "/images/projects/spotify.svg",
+      aspect: 496 / 512,
+      mark: "SP",
+    },
+    repo: "https://github.com/avdeshjadon/Spotify-Home",
+    study: {
+      role: "CSS / Frontend Developer",
+      timeline: "2024",
+      context:
+        "Replicating world-class applications like Spotify is an essential exercise in mastering advanced CSS layouts and design system nuances.",
+      problem:
+        "Recreating Spotify's sticky sidebar, scrollable content grid, sticky player bar, and dark theme gradients without relying on CSS frameworks.",
+      process: [
+        {
+          title: "Layout Grid Structure",
+          body: "Employed CSS Grid for the tri-pane layout (sidebar, main feed, right sidebar) and media player footer.",
+        },
+        {
+          title: "Card Hover Transformations",
+          body: "Implemented Spotify's signature green play button hover elevation with CSS transitions.",
+        },
+        {
+          title: "Responsive Media Breakpoints",
+          body: "Structured responsive adaptations for tablet and mobile viewport widths.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Pure Vanilla CSS",
+          why: "Zero utility framework dependencies allowed full mastery of fundamental cascade and positioning mechanics.",
+        },
+        {
+          title: "Custom scrollbar styling",
+          why: "Styled native webkit scrollbars to match Spotify's sleek dark theme aesthetic perfectly.",
+        },
+      ],
+      outcomes: [
+        "Faithful replication of Spotify's desktop web player aesthetic",
+        "Clean, maintainable CSS architecture with semantic naming conventions",
+        "Smooth fluid card wrapping and responsive viewport adaptation",
+      ],
+      reflection:
+        "Building this clone solidified my confidence in complex CSS Grid architectures and subtle aesthetic details.",
+    },
+  },
+
+  {
+    slug: "twitter-home",
+    title: "Twitter Home — Layout & Feed UI Replica",
+    tags: ["HTML5", "CSS3", "UI Replica", "Responsive Design"],
+    year: "2024",
+    oneLiner:
+      "A static, responsive replica of Twitter's Home page UI built purely with HTML and CSS. Designed to mimic the core layout and styling of the original platform.",
+    contribution:
+      "UI developer — sticky three-column responsive structure, infinite feed typography, and interaction states.",
+    coverLabel: "TWITTER CLONE",
+    cover: {
+      bg: "#000000",
+      ink: "light",
+      src: "/images/projects/X.svg",
+      aspect: 300 / 271,
+      mark: "TW",
+    },
+    repo: "https://github.com/avdeshjadon/Twitter-Home",
+    study: {
+      role: "Frontend Developer",
+      timeline: "2024",
+      context:
+        "Social feed interfaces require precise typographical hierarchies, border alignments, and responsive column management.",
+      problem:
+        "Replicating Twitter's sticky left navigation, center infinite timeline, and right-hand trending widget while preserving responsive proportions.",
+      process: [
+        {
+          title: "Three-Column Grid",
+          body: "Structured navigation, feed, and search/trends columns using modern CSS Flexbox and sticky positioning.",
+        },
+        {
+          title: "Tweet Card Components",
+          body: "Coded modular tweet card items with avatars, handles, timestamps, media embeds, and action bars.",
+        },
+        {
+          title: "Micro-State Styling",
+          body: "Added subtle hover backgrounds, active navigation pills, and verified badge alignments.",
+        },
+      ],
+      decisions: [
+        {
+          title: "Sticky sidebar columns",
+          why: "Maintained sticky viewports for navigation and search widgets while timeline scrolls independently.",
+        },
+        {
+          title: "SVG iconography",
+          why: "Integrated crisp SVG icons for repost, like, bookmark, and share actions without raster blurring.",
+        },
+      ],
+      outcomes: [
+        "Pixel-accurate replica of Twitter's core timeline layout",
+        "Adaptive column collapse for smaller display viewports",
+        "Crisp typography and spacing matching the production application",
+      ],
+      reflection:
+        "Dissecting Twitter's interface revealed how subtle borders and generous whitespace create effortless legibility in dense content feeds.",
     },
   },
 ];
+

@@ -115,6 +115,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   overflow: hidden;
+  padding: 24px;
 }
 .award {
   position: absolute;
@@ -139,9 +140,11 @@
 }
 
 .coverBrand {
-  width: min(66%, 200px);
+  width: min(66%, 170px);
+  max-height: 140px;
   height: auto;
   object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
 }
 
 .coverMark {
