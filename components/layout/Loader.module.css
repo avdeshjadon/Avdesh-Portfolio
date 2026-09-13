@@ -135,39 +135,3 @@
   text-transform: uppercase;
   color: var(--ink-3);
 }
-
-.row {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin: 24px auto 0;
-  width: 100%;
-}
-
-.bar {
-  flex: 1;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--ph);
-  overflow: hidden;
-}
-
-.fill {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 2px;
-  background: var(--accent);
-  transform-origin: left;
-  will-change: transform;
-}
-
-.pct {
-  font-size: 12px;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink-3);
-  min-width: 44px;
-  text-align: right;
-  letter-spacing: 0.06em;
-}

@@ -7,6 +7,8 @@ import styles from "./Loader.module.css";
 
 const LETTERS = ["A", "V", "D", "E", "S", "H"];
 
+const MIN_SHOW_MS = 4500;
+
 export default function Loader() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [gone, setGone] = useState(false);
@@ -26,6 +28,8 @@ export default function Loader() {
         reveal();
         return;
       }
+      if (el.dataset.avBoot) return;
+      el.dataset.avBoot = "1";
 
       tl = gsap.timeline({
         onComplete: () => {
@@ -38,12 +42,8 @@ export default function Loader() {
       const dot = el.querySelector<HTMLElement>(`.${styles.dot}`);
       const ring = el.querySelector<HTMLElement>(`.${styles.ring}`);
       const tag = el.querySelector<HTMLElement>(`.${styles.tag}`);
-      const fill = el.querySelector<HTMLElement>(`.${styles.fill}`);
-      const pct = el.querySelector<HTMLElement>(`.${styles.pct}`);
       const corners = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.cornerSlot}`));
       const cornerInners = Array.from(el.querySelectorAll<HTMLElement>(`.${styles.cornerInner}`));
-
-      const counter = { v: 0 };
 
       tl.fromTo(
         chars,
@@ -53,34 +53,30 @@ export default function Loader() {
         .fromTo(
           ring,
           { autoAlpha: 0, scale: 0.7 },
-          { autoAlpha: 1, scale: 1, rotate: 360, duration: 0.9, ease: "power2.out" },
+          { autoAlpha: 1, scale: 1, rotate: 360, duration: 0.95, ease: "power2.out" },
           0
         )
-        .fromTo(dot, { scale: 0.15 }, { scale: 1.2, duration: 0.65, ease: "back.out(2.5)" }, 0.85)
-        .fromTo(tag, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "expo.out" }, 1.55)
-        .fromTo(fill, { scaleX: 0 }, { scaleX: 1, duration: 1.25, ease: "power2.inOut" }, 1.8)
-        .to(counter, {
-          v: 100,
-          duration: 1.25,
-          ease: "power2.inOut",
-          onUpdate: () => {
-            if (pct) pct.textContent = `${Math.round(counter.v)}%`;
-          },
-        }, 1.8)
-        .fromTo(corners, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, stagger: 0.06 }, 1.95)
+        .fromTo(dot, { scale: 0.15 }, { scale: 1.2, duration: 0.65, ease: "back.out(2.5)" }, 0.9)
+        .fromTo(tag, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "expo.out" }, 1.5)
+        .fromTo(corners, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, stagger: 0.06 }, 1.7)
         .fromTo(
           cornerInners,
           { scaleX: 0, scaleY: 0 },
           { scaleX: 1, scaleY: 1, duration: 0.5, ease: "expo.out" },
-          1.95
+          1.7
         )
-        .to(ring, { autoAlpha: 0, duration: 0.45, ease: "power2.inOut" }, 3.2)
-        .to(el, { scale: 1.04, opacity: 0, duration: 1.1, ease: "power3.inOut" }, 3.85);
+        .to(chars, { scale: 1.025, duration: 0.55, ease: "power2.inOut", yoyo: true, repeat: 1 }, 2.35)
+        .to(ring, { autoAlpha: 0, duration: 0.45, ease: "power2.inOut" }, 2.7)
+        .to(el, { scale: 1.04, opacity: 0, duration: 1.2, ease: "power3.inOut" }, 3.3);
+
+      const now = tl.duration();
+      const extra = MIN_SHOW_MS / 1000 - now;
+      if (extra > 0) tl.to({}, { duration: extra, ease: "none" });
     };
 
     if (prefersReducedMotion()) {
-      reveal();
-      return;
+      const t = setTimeout(reveal, 2400);
+      return () => clearTimeout(t);
     }
 
     let t1: ReturnType<typeof setTimeout> | null = null;
@@ -91,13 +87,12 @@ export default function Loader() {
       }),
     ]).then(() => run());
 
-    const safety = setTimeout(reveal, 5800);
+    const safety = setTimeout(reveal, 6500);
 
     return () => {
       if (t1) clearTimeout(t1);
       clearTimeout(safety);
       tl?.kill();
-      reveal();
     };
   }, []);
 
@@ -124,12 +119,6 @@ export default function Loader() {
           </span>
         </p>
         <p className={styles.tag}>Software Developer &amp; Software Tester</p>
-        <div className={styles.row}>
-          <div className={styles.bar}>
-            <span className={styles.fill} />
-          </div>
-          <span className={styles.pct}>0%</span>
-        </div>
       </div>
     </div>
   );

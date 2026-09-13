@@ -83,7 +83,7 @@ export default function Nav() {
             const tw = gsap.to(nav, {
               opacity: 0,
               y: -14,
-              duration: 1,
+              duration: 0.7,
               ease: "power2.inOut",
               paused: true,
               onComplete: () => {
@@ -95,8 +95,8 @@ export default function Nav() {
             });
             return ScrollTrigger.create({
               trigger: about,
-              start: "top 80%",
-              end: "top 25%",
+              start: "top 100%",
+              end: "top 45%",
               onEnter: () => tw.play(),
               onLeaveBack: () => tw.reverse(),
             });
