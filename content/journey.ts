@@ -42,10 +42,10 @@ export const CHAPTERS: Chapter[] = [
   {
     id: "libranova",
     year: "2025",
-    title: "Engineering Systems — LibraNova LMS",
+    title: "Engineering Systems — LibraNova",
     place: "College",
     story:
-      "Stepping up to full-stack system architecture with LibraNova LMS — a complete Library Management System. Designed normalized relational database schemas, role-based authentication (Admin vs. Student), catalog search, book issue/return workflows, automated fine tracking, and end-to-end integration tests to guarantee reliability.",
+      "Stepping up to full-stack system architecture with LibraNova — a complete Library Management System. Designed normalized relational database schemas, role-based authentication (Admin vs. Student), catalog search, book issue/return workflows, automated fine tracking, and end-to-end integration tests to guarantee reliability.",
     bridge:
       "Building full-stack taught me that good software is defined by its tests and database integrity as much as its UI.",
   },
