@@ -73,6 +73,37 @@ export default function Work() {
       return () => st.kill();
     });
 
+    mm.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {
+      const track = el.querySelector<HTMLElement>(`.${styles.track}`);
+      const dots = gsap.utils.toArray<HTMLElement>(`.${styles.dot}`);
+      const counter = el.querySelector<HTMLElement>(`.${styles.count}`);
+      const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
+      const n = cards.length;
+      if (!track) return;
+
+      const setActive = (i: number) => {
+        if (counter) counter.textContent = `${pad(i + 1)} / ${pad(n)}`;
+        dots.forEach((dot, k) => dot.classList.toggle(styles.dotOn, k === i));
+      };
+
+      const st = ScrollTrigger.create({
+        trigger: el,
+        start: "top 80%",
+        end: "top -40%",
+        scrub: 0.4,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const max = Math.max(0, track.scrollWidth - track.clientWidth);
+          gsap.set(track, { x: -Math.round(self.progress * max) });
+          setActive(Math.round(gsap.utils.clamp(0, n - 1, self.progress * (n - 1))));
+        },
+      });
+      track.style.overflowX = "hidden";
+      setActive(0);
+
+      return () => st.kill();
+    });
+
     return () => mm.revert();
   }, []);
 

@@ -51,6 +51,7 @@ export default function Certifications() {
       };
 
       const place = (p: number) => {
+        const front = Math.round(gsap.utils.clamp(0, n - 1, p));
         for (let i = 0; i < n; i++) {
           const el2 = panels[i];
           const d = i - p; 
@@ -88,9 +89,9 @@ export default function Certifications() {
           el2.style.opacity = String(gsap.utils.clamp(0, 1, op));
           el2.style.filter = "";
 
-          el2.style.zIndex = String(200 - Math.round(Math.abs(d) * 20));
+          el2.style.zIndex = String(i === front ? 500 : 200 - Math.round(Math.abs(d) * 20));
         }
-        setActive(Math.round(gsap.utils.clamp(0, n - 1, p)));
+        setActive(front);
       };
 
       let target = 0;
@@ -149,14 +150,18 @@ export default function Certifications() {
     mm.add("(max-width: 1000px), (prefers-reduced-motion: reduce)", () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       gsap.utils.toArray<HTMLElement>(`.${styles.panel}`).forEach((p) => {
-        gsap.from(p, {
-          y: 40,
-          autoAlpha: 0,
-          duration: 0.85,
-          ease: EASE.outExpo,
-          immediateRender: false,
-          scrollTrigger: { trigger: p, start: "top 88%" },
-        });
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: p,
+            start: "top 92%",
+            end: "top 45%",
+            scrub: 0.4,
+          },
+        }).fromTo(
+          p,
+          { y: 54, rotateX: 14, autoAlpha: 0, transformOrigin: "50% 0%" },
+          { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 1 },
+        );
       });
     });
 

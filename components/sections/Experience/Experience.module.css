@@ -447,7 +447,7 @@
     padding: 0 24px;
   }
   .board {
-    position: relative !important;
+    position: relative;
     left: auto;
     right: auto;
     top: auto;
@@ -456,10 +456,10 @@
     gap: 14px;
     padding: 24px 24px;
     border-radius: 10px;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    filter: none !important;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    filter: none;
   }
   .strip {
     height: auto;

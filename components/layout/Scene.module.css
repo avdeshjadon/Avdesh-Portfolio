@@ -24,7 +24,7 @@
 
 @media (max-width: 1000px) {
   .hold {
-    position: static;
+    position: relative;
     height: auto;
     min-height: auto;
     overflow: visible;
@@ -49,6 +49,18 @@
   }
   .keepRunway {
     display: block;
+  }
+
+  /* On small screens the pinned runway drives every scroll-scrubbed
+     animation, so trim it to reduce the long dead scroll. */
+  .runway[data-runway="intro"] {
+    height: calc(4 * 100svh) !important;
+  }
+  .runway[data-runway="journey"] {
+    height: calc(4 * 100svh) !important;
+  }
+  .runway[data-runway="creative"] {
+    height: calc(5 * 100svh) !important;
   }
 }
 

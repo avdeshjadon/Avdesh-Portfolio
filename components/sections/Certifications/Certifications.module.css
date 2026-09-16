@@ -118,6 +118,8 @@
   transform-style: preserve-3d;
 
   will-change: transform;
+
+  pointer-events: none;
 }
 
 .panel {
@@ -133,6 +135,7 @@
   transform-style: preserve-3d;
   box-shadow: 0 34px 70px -28px rgba(20, 20, 20, 0.42);
   overflow: hidden;
+  pointer-events: auto;
 }
 
 .dark {
@@ -454,13 +457,13 @@
     margin-left: 0;
   }
   .panel {
-    position: relative !important;
+    position: relative;
     height: auto;
     min-height: 260px;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    filter: none !important;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    filter: none;
     padding: 0 24px 24px;
   }
   .detail {

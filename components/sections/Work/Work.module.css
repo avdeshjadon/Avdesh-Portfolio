@@ -218,6 +218,7 @@
   color: var(--ink-2);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -312,7 +313,7 @@
     display: block;
     margin-top: 40px;
   }
-  .track {
+.track {
     position: static;
     height: auto;
     display: flex;
@@ -321,7 +322,6 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding: 6px 24px 26px;
-    scrollbar-width: none;
   }
   .track::-webkit-scrollbar {
     display: none;

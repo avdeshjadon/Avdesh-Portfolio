@@ -116,6 +116,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`av-boot ${inter.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable}`}
     >
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{history.scrollRestoration="manual";if(!window.location.hash)window.scrollTo(0,0)}catch(e){}`,
+          }}
+        />
         <LanguageProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </LanguageProvider>

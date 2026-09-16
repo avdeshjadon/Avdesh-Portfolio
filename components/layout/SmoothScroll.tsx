@@ -11,6 +11,9 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     let lenis: Lenis | null = null;
     let raf: ((time: number) => void) | null = null;
 
+    history.scrollRestoration = "manual";
+    if (!window.location.hash) window.scrollTo(0, 0);
+
     if (!prefersReducedMotion()) {
       lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1 });
       lenis.on("scroll", ScrollTrigger.update);
