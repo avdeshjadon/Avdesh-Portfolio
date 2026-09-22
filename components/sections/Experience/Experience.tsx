@@ -27,7 +27,7 @@ export default function Experience() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1001px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       const boards = gsap.utils.toArray<HTMLElement>(`.${styles.board}`);
       const navItems = gsap.utils.toArray<HTMLElement>(`.${styles.navItem}`);
       const counter = el.querySelector<HTMLElement>(`.${styles.count}`);
@@ -36,6 +36,14 @@ export default function Experience() {
       let active = -1;
 
       el.classList.add(styles.deckMode);
+
+      const getScale = () => {
+        const w = window.innerWidth;
+        if (w <= 480) return 0.5;
+        if (w <= 768) return 0.65;
+        if (w <= 1000) return 0.8;
+        return 1;
+      };
 
       const setActive = (idx: number) => {
         if (idx === active) return;
@@ -47,6 +55,7 @@ export default function Experience() {
       };
 
       const place = (p: number) => {
+        const scale = getScale();
         for (let i = 0; i < n; i++) {
           const d = i - p;
           const b = boards[i];
@@ -61,14 +70,14 @@ export default function Experience() {
           if (d >= 0) {
             const k = Math.min(d, DEPTH);
             b.style.transform =
-              `translate3d(${(k * RIGHT).toFixed(1)}px, ${(-k * UP).toFixed(1)}px, ${(-k * BACK).toFixed(1)}px)` +
+              `translate3d(${(k * RIGHT * scale).toFixed(1)}px, ${(-k * UP * scale).toFixed(1)}px, ${(-k * BACK * scale).toFixed(1)}px)` +
               ` scale(${(1 - k * 0.028).toFixed(3)})`;
             b.style.opacity = String(Math.max(0, 1 - k * 0.16));
             b.style.zIndex = String(200 - Math.round(k * 10));
           } else {
             const t = Math.min(1, -d / 1.1);
             b.style.transform =
-              `translate3d(${(-t * 40).toFixed(1)}px, ${(t * 230).toFixed(1)}px, ${(-t * 320).toFixed(1)}px)` +
+              `translate3d(${(-t * 40 * scale).toFixed(1)}px, ${(t * 230 * scale).toFixed(1)}px, ${(-t * 320 * scale).toFixed(1)}px)` +
               ` scale(${(1 - t * 0.06).toFixed(3)})`;
             b.style.opacity = String(Math.max(0, 1 - t * 1.35));
             b.style.zIndex = "210";
@@ -121,21 +130,23 @@ export default function Experience() {
         handlers.push([elm, h]);
       });
 
+      const isDesktop = window.innerWidth > 1000;
       const stage = el.querySelector<HTMLElement>(`.${styles.stage}`);
       let rx: ReturnType<typeof gsap.quickTo> | null = null;
       let ry: ReturnType<typeof gsap.quickTo> | null = null;
-      if (stage) {
+      let onMove: ((e: PointerEvent) => void) | null = null;
+      if (stage && isDesktop) {
         rx = gsap.quickTo(stage, "rotationX", { duration: 1, ease: "power3.out" });
         ry = gsap.quickTo(stage, "rotationY", { duration: 1, ease: "power3.out" });
+        onMove = (e: PointerEvent) => {
+          const r = el.getBoundingClientRect();
+          const cx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+          const cy = ((e.clientY - r.top) / r.height - 0.5) * 2;
+          rx?.(TILT - cy * 2.2);
+          ry?.(cx * 2.6);
+        };
+        el.addEventListener("pointermove", onMove);
       }
-      const onMove = (e: PointerEvent) => {
-        const r = el.getBoundingClientRect();
-        const cx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-        const cy = ((e.clientY - r.top) / r.height - 0.5) * 2;
-        rx?.(TILT - cy * 2.2);
-        ry?.(cx * 2.6);
-      };
-      el.addEventListener("pointermove", onMove);
 
       gsap.from(`.${styles.header} > *`, {
         y: 34,
@@ -150,28 +161,10 @@ export default function Experience() {
       return () => {
         gsap.ticker.remove(tick);
         st.kill();
-        el.removeEventListener("pointermove", onMove);
+        if (onMove) el.removeEventListener("pointermove", onMove);
         handlers.forEach(([elm, h]) => elm.removeEventListener("click", h));
         el.classList.remove(styles.deckMode);
       };
-    });
-
-    mm.add("(max-width: 1000px), (prefers-reduced-motion: reduce)", () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.utils.toArray<HTMLElement>(`.${styles.board}`).forEach((b) => {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: b,
-            start: "top 92%",
-            end: "top 45%",
-            scrub: 0.4,
-          },
-        }).fromTo(
-          b,
-          { y: 54, rotateX: 14, autoAlpha: 0, transformOrigin: "50% 0%" },
-          { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 1 },
-        );
-      });
     });
 
     return () => mm.revert();

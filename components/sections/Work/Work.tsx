@@ -24,18 +24,27 @@ export default function Work() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1101px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
       const counter = el.querySelector<HTMLElement>(`.${styles.count}`);
       const dots = gsap.utils.toArray<HTMLElement>(`.${styles.dot}`);
       const n = cards.length;
 
+      const getSpread = () => {
+        const w = window.innerWidth;
+        if (w <= 480) return 200;
+        if (w <= 768) return 240;
+        if (w <= 1100) return 280;
+        return SPREAD;
+      };
+
       const render = (p: number) => {
+        const spread = getSpread();
         cards.forEach((card, i) => {
           const d = i - p;
           const ad = Math.abs(d);
           gsap.set(card, {
-            x: d * SPREAD,
+            x: d * spread,
             y: Math.min(ad * ad * 9, 110),
             rotationY: gsap.utils.clamp(-34, 34, -d * 10),
             scale: 1 - Math.min(ad * 0.065, 0.38),
@@ -69,37 +78,6 @@ export default function Work() {
         immediateRender: false,
         scrollTrigger: { trigger: el, start: "top 70%" },
       });
-
-      return () => st.kill();
-    });
-
-    mm.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {
-      const track = el.querySelector<HTMLElement>(`.${styles.track}`);
-      const dots = gsap.utils.toArray<HTMLElement>(`.${styles.dot}`);
-      const counter = el.querySelector<HTMLElement>(`.${styles.count}`);
-      const cards = gsap.utils.toArray<HTMLElement>(`.${styles.card}`);
-      const n = cards.length;
-      if (!track) return;
-
-      const setActive = (i: number) => {
-        if (counter) counter.textContent = `${pad(i + 1)} / ${pad(n)}`;
-        dots.forEach((dot, k) => dot.classList.toggle(styles.dotOn, k === i));
-      };
-
-      const st = ScrollTrigger.create({
-        trigger: el,
-        start: "top 80%",
-        end: "top -40%",
-        scrub: 0.4,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const max = Math.max(0, track.scrollWidth - track.clientWidth);
-          gsap.set(track, { x: -Math.round(self.progress * max) });
-          setActive(Math.round(gsap.utils.clamp(0, n - 1, self.progress * (n - 1))));
-        },
-      });
-      track.style.overflowX = "hidden";
-      setActive(0);
 
       return () => st.kill();
     });

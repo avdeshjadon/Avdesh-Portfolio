@@ -35,7 +35,7 @@ export default function Certifications() {
 
     const mm = gsap.matchMedia();
 
-    mm.add("(min-width: 1001px) and (prefers-reduced-motion: no-preference)", () => {
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
       const panels = gsap.utils.toArray<HTMLElement>(`.${styles.panel}`);
       const counter = el.querySelector<HTMLElement>(`.${styles.count}`);
       const n = panels.length;
@@ -145,24 +145,6 @@ export default function Certifications() {
         handlers.forEach(([e2, h]) => e2.removeEventListener("click", h));
         el.classList.remove(styles.deckMode);
       };
-    });
-
-    mm.add("(max-width: 1000px), (prefers-reduced-motion: reduce)", () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.utils.toArray<HTMLElement>(`.${styles.panel}`).forEach((p) => {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: p,
-            start: "top 92%",
-            end: "top 45%",
-            scrub: 0.4,
-          },
-        }).fromTo(
-          p,
-          { y: 54, rotateX: 14, autoAlpha: 0, transformOrigin: "50% 0%" },
-          { y: 0, rotateX: 0, autoAlpha: 1, ease: "none", duration: 1 },
-        );
-      });
     });
 
     return () => mm.revert();

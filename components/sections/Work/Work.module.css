@@ -299,7 +299,58 @@
   justify-self: end;
 }
 
-@media (max-width: 1100px), (prefers-reduced-motion: reduce) {
+@media (max-width: 1100px) {
+  .work {
+    padding: 80px 0 0;
+  }
+  .header {
+    padding: 0 24px;
+  }
+  .stage {
+    min-height: 320px;
+  }
+  .track {
+    height: 360px;
+  }
+  .card {
+    width: 240px;
+  }
+  .cover {
+    height: 200px;
+  }
+  .foot {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 6px 24px 30px;
+  }
+  .count,
+  .hint,
+  .dots {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .work {
+    padding: 64px 0 0;
+  }
+  .header {
+    padding: 0 16px;
+  }
+  .stage {
+    min-height: 280px;
+  }
+  .track {
+    height: 300px;
+  }
+  .card {
+    width: 200px;
+  }
+  .cover {
+    height: 170px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .work {
     min-height: 0;
     padding: 80px 0 0;
@@ -313,7 +364,7 @@
     display: block;
     margin-top: 40px;
   }
-.track {
+  .track {
     position: static;
     height: auto;
     display: flex;

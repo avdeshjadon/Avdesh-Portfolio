@@ -48,15 +48,15 @@ export default function Home() {
           <CreativeStory />
         </Scene>
 
-        <Scene order={7} runway={4.5} id="work">
+        <Scene order={7} runway={4.5} id="work" keepOnMobile>
           <Work />
         </Scene>
 
-        <Scene order={8} runway={4.4} id="experience">
+        <Scene order={8} runway={4.4} id="experience" keepOnMobile>
           <Experience />
         </Scene>
 
-        <Scene order={9} runway={4.8} id="credentials">
+        <Scene order={9} runway={4.8} id="credentials" keepOnMobile>
           <Certifications />
         </Scene>
 

@@ -422,49 +422,71 @@
 
 @media (max-width: 1000px) {
   .certs {
-    padding: 80px 0;
+    padding: 0;
   }
-  .head,
-  .foot {
+  .deckMode {
+    padding: 40px 0 0;
+  }
+  .head {
     padding-left: 24px;
     padding-right: 24px;
   }
+  .h2 {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+  .lede {
+    font-size: 13px;
+    max-width: 100%;
+  }
   .stageWrap {
-    display: block;
-    perspective: none;
-    margin-top: 28px;
+    perspective: 1400px;
+    perspective-origin: 50% 44%;
   }
   .stage {
-    position: static;
-    width: auto;
-    height: auto;
-    transform: none !important;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 24px;
-    --panel-w: 100%;
-  }
-
-  .band {
-    height: auto;
-    min-height: 40px;
-    flex-wrap: wrap;
-    gap: 8px 12px;
-    padding-top: 4px;
-  }
-  .status {
-    margin-left: 0;
+    width: 88vw;
+    height: calc(88vw * 0.625);
+    pointer-events: auto;
   }
   .panel {
-    position: relative;
-    height: auto;
-    min-height: 260px;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    filter: none;
-    padding: 0 24px 24px;
+    padding: 0 clamp(16px, 4vw, 28px) clamp(14px, 2vh, 22px);
+    border-radius: 8px;
+  }
+  .band {
+    height: 38px;
+    gap: 10px;
+    font-size: 10px;
+  }
+  .kind {
+    font-size: 9px;
+  }
+  .issuerRow {
+    margin-bottom: clamp(6px, 1vh, 12px);
+  }
+  .logoPlate {
+    height: clamp(24px, 4vh, 36px);
+    padding: 0 8px;
+    border-radius: 6px;
+  }
+  .logoPlate img {
+    height: clamp(11px, 2vh, 17px);
+  }
+  .issuerName {
+    font-size: clamp(12px, 3vw, 18px);
+  }
+  .title {
+    font-size: clamp(18px, 5vw, 32px);
+  }
+  .record {
+    grid-template-columns: repeat(3, minmax(0, auto));
+    gap: 0 clamp(10px, 2vw, 20px);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .record dt {
+    font-size: 8px;
+  }
+  .record dd {
+    font-size: 10px;
   }
   .detail {
     opacity: 1;
@@ -472,14 +494,32 @@
     pointer-events: auto;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
-    margin-top: 20px;
+    gap: 12px;
+  }
+  .metric {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .metricValue {
+    font-size: clamp(22px, 6vw, 36px);
+  }
+  .metricLabel {
+    font-size: 9px;
   }
   .cols {
     max-width: none;
+    font-size: 11.5px;
+  }
+  .colLbl {
+    font-size: 9px;
+  }
+  .skills li {
+    padding: 3px 0;
+    font-size: 10.5px;
   }
   .wordmark {
-    font-size: 64px;
+    font-size: 48px;
   }
   .vert {
     display: none;

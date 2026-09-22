@@ -426,66 +426,98 @@
 
 @media (max-width: 1000px) {
   .experience {
-    padding: 80px 0;
+    padding: 0;
+  }
+  .deckMode {
+    padding: 54px 0 0;
   }
   .header {
     padding: 0 24px;
   }
   .stageWrap {
-    display: block;
-    perspective: none;
-    margin-top: 32px;
+    perspective: 1200px;
+    perspective-origin: 50% 46%;
   }
   .stage {
-    position: static;
-    width: auto;
-    height: auto;
-    transform: none !important;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 24px;
+    width: 90vw;
+    --panel-h: clamp(220px, min(50vh, calc(100vh - 300px)), 400px);
+    height: calc(var(--panel-h) + 100px);
+    transform: rotateX(4deg);
   }
   .board {
-    position: relative;
-    left: auto;
-    right: auto;
-    top: auto;
-    margin-top: 0;
-    height: auto;
-    gap: 14px;
-    padding: 24px 24px;
+    padding: 0 20px clamp(16px, 2vh, 28px);
     border-radius: 10px;
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    filter: none;
   }
   .strip {
-    height: auto;
-    flex: 0 0 auto;
-    flex-wrap: wrap;
-    white-space: normal;
-    gap: 10px 14px;
+    height: 40px;
+    flex: 0 0 40px;
+    gap: 10px;
+  }
+  .year {
+    font-size: 11px;
+  }
+  .company {
+    font-size: 12px;
+  }
+  .type {
+    font-size: 9px;
+    padding: 4px 8px;
   }
   .role {
-    font-size: 24px;
-    max-width: none;
+    font-size: clamp(20px, 5vw, 30px);
+    max-width: 16ch;
+  }
+  .loc {
+    font-size: 10px;
   }
   .body {
     grid-template-columns: 1fr;
-    gap: 20px;
-    margin-top: 18px;
+    gap: 14px;
+    padding-top: clamp(12px, 2vh, 20px);
   }
-
+  .summary {
+    font-size: 13px;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .list {
+    font-size: 11.5px;
+    margin: 8px 0 0 14px;
+  }
+  .list li {
+    margin-bottom: 4px;
+  }
+  .outcome {
+    font-size: 14px;
+  }
+  .skills i {
+    font-size: 9.5px;
+    padding: 4px 8px;
+  }
   .detailCol {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 12px;
   }
   .logoCol {
     order: -1;
     justify-content: flex-start;
-    transform: none;
+    transform: translateZ(20px);
+  }
+  .logoWrap {
+    width: clamp(56px, 12vw, 80px);
+    height: clamp(56px, 12vw, 80px);
+    border-radius: 12px;
+  }
+  .plate {
+    height: clamp(44px, 8vw, 64px);
+  }
+  .mono {
+    width: clamp(56px, 12vw, 80px);
+    aspect-ratio: 1;
   }
   .type {
     margin-left: 0;
@@ -494,10 +526,6 @@
     opacity: 1;
     transform: none;
     pointer-events: auto;
-  }
-  .summary {
-    -webkit-line-clamp: unset;
-    display: block;
   }
   .foot {
     display: none;
