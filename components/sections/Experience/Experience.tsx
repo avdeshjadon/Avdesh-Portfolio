@@ -39,9 +39,9 @@ export default function Experience() {
 
       const getScale = () => {
         const w = window.innerWidth;
-        if (w <= 480) return 0.5;
-        if (w <= 768) return 0.65;
-        if (w <= 1000) return 0.8;
+        if (w <= 480) return 0.35;
+        if (w <= 768) return 0.45;
+        if (w <= 1000) return 0.6;
         return 1;
       };
 

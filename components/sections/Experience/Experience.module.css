@@ -440,13 +440,19 @@
   }
   .stage {
     width: 90vw;
-    --panel-h: clamp(220px, min(50vh, calc(100vh - 300px)), 400px);
-    height: calc(var(--panel-h) + 100px);
-    transform: rotateX(4deg);
+    --panel-h: clamp(500px, min(85vh, calc(100vh - 100px)), 680px);
+    height: calc(var(--panel-h) + 80px);
+    transform: rotateX(3deg);
   }
   .board {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--panel-h);
     padding: 0 20px clamp(16px, 2vh, 28px);
     border-radius: 10px;
+    overflow: hidden;
   }
   .strip {
     height: 40px;
